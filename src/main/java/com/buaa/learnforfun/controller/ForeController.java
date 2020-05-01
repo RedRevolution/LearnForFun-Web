@@ -25,6 +25,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class ForeController extends BaseController {
 
+    @GetMapping("hello")
+    public String hello() {
+        return "hello,red!";
+    }
+
     /**
      * 获取用户个人信息
      *
