@@ -24,18 +24,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class ForeController extends BaseController {
+
     /**
      * 获取用户个人信息
      *
      * @return
      */
     @ApiOperation("通过微信号获取个人基本信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "wechatId", value = "微信号", required = true, dataType = "String"),
-    })
     @GetMapping("user/{Id}")
     public User getUserInfoByWechatId(@PathVariable String Id) {
-        return null;
+        return userService.getUserByWechatId(Id);
     }
 
     /**
@@ -44,14 +42,9 @@ public class ForeController extends BaseController {
      * @return
      */
     @ApiOperation("用户注册")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "wechatId", value = "微信号", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "userId", value = "学号/工号", required = true, dataType = "int"),
-            @ApiImplicitParam(name = "userName", value = "姓名", required = true, dataType = "String"),
-    })
-    @PostMapping("user/register")
+    @PostMapping("user")
     public User register(@RequestBody User user) {
-        return null;
+        return userService.register(user);
     }
 
     /**
@@ -111,8 +104,6 @@ public class ForeController extends BaseController {
     public List<Group> getGroupInfoById(@PathVariable String id) {
         return null;
     }
-
-
 
 
 }

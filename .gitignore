@@ -14,6 +14,7 @@
 .idea
 *.iws
 *.iml
+src/docs/
 *.ipr
 
 ### NetBeans ###
