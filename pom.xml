@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
-
+r
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -99,6 +99,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+
+        <!--websocket依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

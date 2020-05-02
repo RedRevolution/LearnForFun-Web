@@ -32,7 +32,7 @@ public class Swagger2 {
         return new ApiInfoBuilder()
                 .title("趣学RESTful APIs")
                 .version("1.0")
-                .description("注意！！！在所有用户输入的地方，根据后端数据库字段去判断用户输入是否合法，是否过长！")
+                .description("注意！！！在所有用户输入的地方，根据后端数据库字段去判断用户输入是否合法，是否过长！提交表单时，未说明字段均采用默认值!")
                 .build();
     }
 

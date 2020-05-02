@@ -28,36 +28,52 @@ public class UserController extends BaseController {
 
     /**
      * 获取个人信息
+     *
      * @param code
      * @return
+     * response：
+     * user.userId!="unbound",用户存在，返回完整的User实例，请将userId,userName作为全局缓存;
+     * user.userId=="unbound",用户不存在，请保留user.openId用于后续绑定注册;
      */
     @ApiOperation(
             value = "获取个人信息",
-            notes = "若返回的User实例中userId为\"unbound\"，则用户未绑定个人信息；请保留实例中的openId用于后续绑定")
+            notes = "response：\n" +
+                    "     * user.userId!=\"unbound\",用户存在，返回完整的User实例，请将userId,userName作为全局缓存;\n" +
+                    "     * user.userId==\"unbound\",用户不存在，请保留user.openId用于后续绑定注册;")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code", value = "用户码", required = true, dataType = "string"),
     })
     @GetMapping("{code}")
     public User getUserInfoByCode(@PathVariable String code) {
-        String openId = WeChatOpenId.getOpenId("wxbe3bc73b7a961e66",code,"rjgc2020");
-        return userService.getUserByOpenId(openId);
+        return userService.getUserByCode(code);
     }
 
     /**
      * 绑定个人信息
+     *
      * @param user
      * @return
+     * post：openId，userId，userName；
+     * response：
+     * string=="duplicate",学号/工号重复，请用户重新输入;
+     * string=="success",绑定成功，请将用户userId作为全局缓存;
      */
     @ApiOperation(
             value = "绑定个人信息",
-            notes = "若返回User实例中的userId为\"duplicate\"，则学号/工号重复，让用户重新输入")
+            notes = "post：openId，userId，userName；\n" +
+                    "     * response：\n" +
+                    "     * string==\"duplicate\",学号/工号重复，请用户重新输入;\n" +
+                    "     * string==\"success\",绑定成功，请将用户userId作为全局缓存;")
     @PostMapping("")
-    public User userInfoBind(@RequestBody User user) {
-        return userService.bindUserInfo(user);
+    public String userInfoBind(@RequestBody User user) {
+        User tmp = userService.bindUserInfo(user);
+        if (tmp == null) return "success";
+        else return "duplicate";
     }
 
     /**
      * 获取个人收藏列表
+     *
      * @param userId
      * @return
      */
@@ -74,6 +90,7 @@ public class UserController extends BaseController {
 
     /**
      * 获取用户已加入的群组列表
+     *
      * @param userId
      * @return
      */
@@ -89,6 +106,7 @@ public class UserController extends BaseController {
 
     /**
      * 获取个人日程列表
+     *
      * @param userId
      * @return
      */
@@ -113,6 +131,7 @@ public class UserController extends BaseController {
 
     /**
      * 用户反馈
+     *
      * @param feedback
      * @return
      */

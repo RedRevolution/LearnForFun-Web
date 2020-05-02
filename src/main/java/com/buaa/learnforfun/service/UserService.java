@@ -3,6 +3,7 @@ package com.buaa.learnforfun.service;
 import com.buaa.learnforfun.dao.UserMapper;
 import com.buaa.learnforfun.entity.User;
 import com.buaa.learnforfun.entity.UserExample;
+import com.buaa.learnforfun.util.WeChatOpenId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +15,14 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public User getUserByOpenId(String id) {
+    public User getUserByCode(String code) {
+        String openId = WeChatOpenId.getOpenId("wxbe3bc73b7a961e66", code, "rjgc2020");
         UserExample example = new UserExample();
-        example.or().andOpenIdEqualTo(id);
+        example.or().andOpenIdEqualTo(openId);
         List<User> ans = userMapper.selectByExample(example);
         if (ans.size() == 0) {
             User temp = new User();
-            temp.setOpenId(id);
+            temp.setOpenId(openId);
             temp.setUserId("unbound");
             return temp;
         } else return ans.get(0);
@@ -32,11 +34,7 @@ public class UserService {
         example.or().andUserIdEqualTo(user.getUserId());
         List<User> tmp = userMapper.selectByExample(example);
         if (tmp.size() != 0) {  //userId有重复
-            User temp = new User();
-            temp.setOpenId(user.getOpenId());
-            temp.setUserId("duplicate");
-            temp.setUserName(user.getUserName());
-            return temp;
+            return null;
         } else {
             userMapper.insertSelective(user);
             return user;
