@@ -3,28 +3,28 @@ package com.buaa.learnforfun.entity;
 import java.util.Date;
 
 public class Timetable {
-    private Integer id;
+    private Long id;
 
-    private Integer userId;
+    private String userId;
 
     private String content;
 
     private Date deadline;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getContent() {

@@ -1,7 +1,7 @@
 package com.buaa.learnforfun.entity;
 
 public class Group {
-    private Integer id;
+    private Long id;
 
     private String groupId;
 
@@ -15,11 +15,11 @@ public class Group {
 
     private String courseCode;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

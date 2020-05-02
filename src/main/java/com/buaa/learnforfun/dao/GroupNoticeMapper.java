@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.GroupNoticeExample;
 import java.util.List;
 
 public interface GroupNoticeMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(GroupNotice record);
 
@@ -13,7 +13,7 @@ public interface GroupNoticeMapper {
 
     List<GroupNotice> selectByExample(GroupNoticeExample example);
 
-    GroupNotice selectByPrimaryKey(Integer id);
+    GroupNotice selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(GroupNotice record);
 

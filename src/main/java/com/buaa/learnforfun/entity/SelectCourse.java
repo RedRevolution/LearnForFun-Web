@@ -1,26 +1,26 @@
 package com.buaa.learnforfun.entity;
 
 public class SelectCourse {
-    private Integer id;
+    private Long id;
 
-    private Integer studentId;
+    private String studentId;
 
     private String courseCode;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId == null ? null : studentId.trim();
     }
 
     public String getCourseCode() {

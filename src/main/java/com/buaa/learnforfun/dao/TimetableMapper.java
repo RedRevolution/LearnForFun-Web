@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.TimetableExample;
 import java.util.List;
 
 public interface TimetableMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Timetable record);
 
@@ -13,7 +13,7 @@ public interface TimetableMapper {
 
     List<Timetable> selectByExample(TimetableExample example);
 
-    Timetable selectByPrimaryKey(Integer id);
+    Timetable selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Timetable record);
 

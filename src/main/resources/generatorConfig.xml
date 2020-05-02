@@ -102,7 +102,7 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
-        <table tableName="tbl_select_course_info" domainObjectName="SelectCourse" enableCountByExample="false"
+        <table tableName="tbl_select_course" domainObjectName="SelectCourse" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false">
             <property name="my.isgen.usekeys" value="true"/>
@@ -110,7 +110,7 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
-        <table tableName="tbl_timetable_info" domainObjectName="Timetable" enableCountByExample="false"
+        <table tableName="tbl_user_timetable" domainObjectName="Timetable" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false">
             <property name="my.isgen.usekeys" value="true"/>
@@ -126,7 +126,7 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
-        <table tableName="tbl_user_group_info" domainObjectName="UserGroup" enableCountByExample="false"
+        <table tableName="tbl_user_group" domainObjectName="UserGroup" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false">
             <property name="my.isgen.usekeys" value="true"/>

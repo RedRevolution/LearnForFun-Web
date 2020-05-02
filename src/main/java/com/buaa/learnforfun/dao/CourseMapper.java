@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.CourseExample;
 import java.util.List;
 
 public interface CourseMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Course record);
 
@@ -13,7 +13,7 @@ public interface CourseMapper {
 
     List<Course> selectByExample(CourseExample example);
 
-    Course selectByPrimaryKey(Integer id);
+    Course selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Course record);
 

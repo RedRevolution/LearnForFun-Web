@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.UserGroupExample;
 import java.util.List;
 
 public interface UserGroupMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(UserGroup record);
 
@@ -13,7 +13,7 @@ public interface UserGroupMapper {
 
     List<UserGroup> selectByExample(UserGroupExample example);
 
-    UserGroup selectByPrimaryKey(Integer id);
+    UserGroup selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(UserGroup record);
 

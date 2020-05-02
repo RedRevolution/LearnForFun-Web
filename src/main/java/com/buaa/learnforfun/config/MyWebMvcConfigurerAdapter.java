@@ -1,6 +1,6 @@
 package cn.wmyskxz.blog.config;
 
-//import cn.wmyskxz.blog.controller.ForeController;
+//import cn.wmyskxz.blog.controller.Fore;
 //import cn.wmyskxz.blog.interceptor.BackInterceptor;
 //import cn.wmyskxz.blog.interceptor.ForeInterceptor;
 import org.springframework.context.annotation.Bean;

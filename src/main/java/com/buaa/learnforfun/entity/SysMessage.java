@@ -3,7 +3,7 @@ package com.buaa.learnforfun.entity;
 import java.util.Date;
 
 public class SysMessage {
-    private Integer id;
+    private Long id;
 
     private String userId;
 
@@ -11,11 +11,11 @@ public class SysMessage {
 
     private Date createBy;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

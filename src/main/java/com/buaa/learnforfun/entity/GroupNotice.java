@@ -3,7 +3,7 @@ package com.buaa.learnforfun.entity;
 import java.util.Date;
 
 public class GroupNotice {
-    private Integer id;
+    private Long id;
 
     private String groupId;
 
@@ -15,11 +15,11 @@ public class GroupNotice {
 
     private Date createBy;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.GroupExample;
 import java.util.List;
 
 public interface GroupMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Group record);
 
@@ -13,7 +13,7 @@ public interface GroupMapper {
 
     List<Group> selectByExample(GroupExample example);
 
-    Group selectByPrimaryKey(Integer id);
+    Group selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Group record);
 

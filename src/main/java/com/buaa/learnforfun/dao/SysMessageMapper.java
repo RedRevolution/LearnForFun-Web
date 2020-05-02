@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.SysMessageExample;
 import java.util.List;
 
 public interface SysMessageMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(SysMessage record);
 
@@ -13,7 +13,7 @@ public interface SysMessageMapper {
 
     List<SysMessage> selectByExample(SysMessageExample example);
 
-    SysMessage selectByPrimaryKey(Integer id);
+    SysMessage selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(SysMessage record);
 

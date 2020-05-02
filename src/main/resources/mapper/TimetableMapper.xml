@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buaa.learnforfun.dao.TimetableMapper">
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.Timetable">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
   </resultMap>
@@ -46,7 +46,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from tbl_timetable_info
+    from tbl_user_timetable
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -54,24 +54,24 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tbl_timetable_info
-    where id = #{id,jdbcType=INTEGER}
+    from tbl_user_timetable
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tbl_timetable_info
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tbl_user_timetable
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Timetable" useGeneratedKeys="true">
-    insert into tbl_timetable_info (user_id, content, deadline
+    insert into tbl_user_timetable (user_id, content, deadline
       )
-    values (#{userId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{deadline,jdbcType=TIMESTAMP}
+    values (#{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{deadline,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Timetable" useGeneratedKeys="true">
-    insert into tbl_timetable_info
+    insert into tbl_user_timetable
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
         user_id,
@@ -85,7 +85,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
@@ -96,10 +96,10 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.Timetable">
-    update tbl_timetable_info
+    update tbl_user_timetable
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
@@ -108,13 +108,13 @@
         deadline = #{deadline,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.Timetable">
-    update tbl_timetable_info
-    set user_id = #{userId,jdbcType=INTEGER},
+    update tbl_user_timetable
+    set user_id = #{userId,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       deadline = #{deadline,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

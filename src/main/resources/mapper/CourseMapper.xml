@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buaa.learnforfun.dao.CourseMapper">
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.Course">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="course_code" jdbcType="VARCHAR" property="courseCode" />
     <result column="course_name" jdbcType="VARCHAR" property="courseName" />
     <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
@@ -55,15 +55,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_course_info
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tbl_course_info
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Course" useGeneratedKeys="true">
     insert into tbl_course_info (course_code, course_name, teacher_name, 
@@ -118,7 +118,7 @@
         class_info = #{classInfo,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.Course">
     update tbl_course_info
@@ -126,6 +126,6 @@
       course_name = #{courseName,jdbcType=VARCHAR},
       teacher_name = #{teacherName,jdbcType=VARCHAR},
       class_info = #{classInfo,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

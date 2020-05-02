@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.ResourceShareExample;
 import java.util.List;
 
 public interface ResourceShareMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(ResourceShare record);
 
@@ -13,7 +13,7 @@ public interface ResourceShareMapper {
 
     List<ResourceShare> selectByExample(ResourceShareExample example);
 
-    ResourceShare selectByPrimaryKey(Integer id);
+    ResourceShare selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(ResourceShare record);
 

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buaa.learnforfun.dao.SelectCourseMapper">
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.SelectCourse">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
     <result column="course_code" jdbcType="VARCHAR" property="courseCode" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -45,7 +45,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from tbl_select_course_info
+    from tbl_select_course
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -53,22 +53,22 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tbl_select_course_info
-    where id = #{id,jdbcType=INTEGER}
+    from tbl_select_course
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tbl_select_course_info
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tbl_select_course
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SelectCourse" useGeneratedKeys="true">
-    insert into tbl_select_course_info (student_id, course_code)
-    values (#{studentId,jdbcType=INTEGER}, #{courseCode,jdbcType=VARCHAR})
+    insert into tbl_select_course (student_id, course_code)
+    values (#{studentId,jdbcType=VARCHAR}, #{courseCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SelectCourse" useGeneratedKeys="true">
-    insert into tbl_select_course_info
+    insert into tbl_select_course
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
         student_id,
@@ -79,7 +79,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
-        #{studentId,jdbcType=INTEGER},
+        #{studentId,jdbcType=VARCHAR},
       </if>
       <if test="courseCode != null">
         #{courseCode,jdbcType=VARCHAR},
@@ -87,21 +87,21 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.SelectCourse">
-    update tbl_select_course_info
+    update tbl_select_course
     <set>
       <if test="studentId != null">
-        student_id = #{studentId,jdbcType=INTEGER},
+        student_id = #{studentId,jdbcType=VARCHAR},
       </if>
       <if test="courseCode != null">
         course_code = #{courseCode,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.SelectCourse">
-    update tbl_select_course_info
-    set student_id = #{studentId,jdbcType=INTEGER},
+    update tbl_select_course
+    set student_id = #{studentId,jdbcType=VARCHAR},
       course_code = #{courseCode,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

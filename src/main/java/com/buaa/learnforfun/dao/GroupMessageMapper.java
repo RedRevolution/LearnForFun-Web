@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.GroupMessageExample;
 import java.util.List;
 
 public interface GroupMessageMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(GroupMessage record);
 
@@ -13,7 +13,7 @@ public interface GroupMessageMapper {
 
     List<GroupMessage> selectByExample(GroupMessageExample example);
 
-    GroupMessage selectByPrimaryKey(Integer id);
+    GroupMessage selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(GroupMessage record);
 
