@@ -3,8 +3,8 @@
 <mapper namespace="com.buaa.learnforfun.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="wechat_account_id" jdbcType="VARCHAR" property="wechatAccountId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -37,7 +37,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, wechat_account_id, user_id, user_name
+    id, open_id, user_id, user_name
   </sql>
   <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -65,16 +65,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.User" useGeneratedKeys="true">
-    insert into tbl_user_info (wechat_account_id, user_id, user_name
+    insert into tbl_user_info (open_id, user_id, user_name
       )
-    values (#{wechatAccountId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}
+    values (#{openId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.User" useGeneratedKeys="true">
     insert into tbl_user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="wechatAccountId != null">
-        wechat_account_id,
+      <if test="openId != null">
+        open_id,
       </if>
       <if test="userId != null">
         user_id,
@@ -84,11 +84,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="wechatAccountId != null">
-        #{wechatAccountId,jdbcType=VARCHAR},
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -98,11 +98,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.User">
     update tbl_user_info
     <set>
-      <if test="wechatAccountId != null">
-        wechat_account_id = #{wechatAccountId,jdbcType=VARCHAR},
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
@@ -112,8 +112,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.User">
     update tbl_user_info
-    set wechat_account_id = #{wechatAccountId,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
+    set open_id = #{openId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.GroupNotice">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="group_id" jdbcType="VARCHAR" property="groupId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_by" jdbcType="TIMESTAMP" property="createBy" />
@@ -69,7 +69,7 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.GroupNotice" useGeneratedKeys="true">
     insert into tbl_group_notice (group_id, user_id, user_name, 
       content, create_by)
-    values (#{groupId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+    values (#{groupId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{createBy,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.GroupNotice" useGeneratedKeys="true">
@@ -96,7 +96,7 @@
         #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -116,7 +116,7 @@
         group_id = #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
@@ -133,7 +133,7 @@
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.GroupNotice">
     update tbl_group_notice
     set group_id = #{groupId,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=TIMESTAMP}

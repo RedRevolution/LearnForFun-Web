@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.CommentExample;
 import java.util.List;
 
 public interface CommentMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Comment record);
 
@@ -13,7 +13,7 @@ public interface CommentMapper {
 
     List<Comment> selectByExample(CommentExample example);
 
-    Comment selectByPrimaryKey(Integer id);
+    Comment selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Comment record);
 

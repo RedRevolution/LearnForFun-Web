@@ -3,9 +3,9 @@ package com.buaa.learnforfun.entity;
 public class User {
     private Integer id;
 
-    private String wechatAccountId;
+    private String openId;
 
-    private Integer userId;
+    private String userId;
 
     private String userName;
 
@@ -17,20 +17,20 @@ public class User {
         this.id = id;
     }
 
-    public String getWechatAccountId() {
-        return wechatAccountId;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setWechatAccountId(String wechatAccountId) {
-        this.wechatAccountId = wechatAccountId == null ? null : wechatAccountId.trim();
+    public void setOpenId(String openId) {
+        this.openId = openId == null ? null : openId.trim();
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getUserName() {

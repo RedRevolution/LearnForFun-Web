@@ -1,21 +1,21 @@
 package com.buaa.learnforfun.entity;
 
 public class Comment {
-    private Integer id;
+    private Long id;
 
     private String knowledgeShareId;
 
-    private Integer userId;
+    private String userId;
 
     private String userName;
 
     private String content;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -27,12 +27,12 @@ public class Comment {
         this.knowledgeShareId = knowledgeShareId == null ? null : knowledgeShareId.trim();
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getUserName() {

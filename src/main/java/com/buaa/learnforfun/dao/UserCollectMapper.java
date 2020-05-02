@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.UserCollectExample;
 import java.util.List;
 
 public interface UserCollectMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(UserCollect record);
 
@@ -13,7 +13,7 @@ public interface UserCollectMapper {
 
     List<UserCollect> selectByExample(UserCollectExample example);
 
-    UserCollect selectByPrimaryKey(Integer id);
+    UserCollect selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(UserCollect record);
 

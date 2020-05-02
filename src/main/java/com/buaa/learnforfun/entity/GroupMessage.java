@@ -7,7 +7,7 @@ public class GroupMessage {
 
     private String groupId;
 
-    private Integer userId;
+    private String userId;
 
     private String userName;
 
@@ -31,12 +31,12 @@ public class GroupMessage {
         this.groupId = groupId == null ? null : groupId.trim();
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getUserName() {

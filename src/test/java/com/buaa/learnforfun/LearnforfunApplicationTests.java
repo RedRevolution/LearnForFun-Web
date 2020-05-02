@@ -18,10 +18,10 @@ class LearnforfunApplicationTests {
     }
 
     @Test
-    void userServiceTest(){
+    void userServiceTest() {
         User user = new User();
-        user.setWechatAccountId("cth201401");
-        user.setUserId(17373291);
+        user.setOpenId("cth201401");
+        user.setUserId("17373291");
         user.setUserName("程添红");
 
 //        User tmp = userService.getUserByWechatId("cth201401");

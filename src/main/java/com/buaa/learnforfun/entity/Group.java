@@ -7,9 +7,9 @@ public class Group {
 
     private String groupName;
 
-    private Integer groupOwnerId;
+    private String groupOwnerId;
 
-    private Integer groupOwnerName;
+    private String groupOwnerName;
 
     private String groupIntrod;
 
@@ -39,20 +39,20 @@ public class Group {
         this.groupName = groupName == null ? null : groupName.trim();
     }
 
-    public Integer getGroupOwnerId() {
+    public String getGroupOwnerId() {
         return groupOwnerId;
     }
 
-    public void setGroupOwnerId(Integer groupOwnerId) {
-        this.groupOwnerId = groupOwnerId;
+    public void setGroupOwnerId(String groupOwnerId) {
+        this.groupOwnerId = groupOwnerId == null ? null : groupOwnerId.trim();
     }
 
-    public Integer getGroupOwnerName() {
+    public String getGroupOwnerName() {
         return groupOwnerName;
     }
 
-    public void setGroupOwnerName(Integer groupOwnerName) {
-        this.groupOwnerName = groupOwnerName;
+    public void setGroupOwnerName(String groupOwnerName) {
+        this.groupOwnerName = groupOwnerName == null ? null : groupOwnerName.trim();
     }
 
     public String getGroupIntrod() {

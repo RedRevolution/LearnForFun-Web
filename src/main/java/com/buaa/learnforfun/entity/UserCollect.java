@@ -1,18 +1,26 @@
 package com.buaa.learnforfun.entity;
 
 public class UserCollect {
-    private Integer id;
+    private Long id;
+
+    private String userId;
 
     private String knowledgeShareId;
 
-    private Integer userId;
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getKnowledgeShareId() {
@@ -21,13 +29,5 @@ public class UserCollect {
 
     public void setKnowledgeShareId(String knowledgeShareId) {
         this.knowledgeShareId = knowledgeShareId == null ? null : knowledgeShareId.trim();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 }

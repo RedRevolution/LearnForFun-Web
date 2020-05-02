@@ -314,52 +314,62 @@ public class GroupExample {
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdEqualTo(Integer value) {
+        public Criteria andGroupOwnerIdEqualTo(String value) {
             addCriterion("group_owner_id =", value, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdNotEqualTo(Integer value) {
+        public Criteria andGroupOwnerIdNotEqualTo(String value) {
             addCriterion("group_owner_id <>", value, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdGreaterThan(Integer value) {
+        public Criteria andGroupOwnerIdGreaterThan(String value) {
             addCriterion("group_owner_id >", value, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andGroupOwnerIdGreaterThanOrEqualTo(String value) {
             addCriterion("group_owner_id >=", value, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdLessThan(Integer value) {
+        public Criteria andGroupOwnerIdLessThan(String value) {
             addCriterion("group_owner_id <", value, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdLessThanOrEqualTo(Integer value) {
+        public Criteria andGroupOwnerIdLessThanOrEqualTo(String value) {
             addCriterion("group_owner_id <=", value, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdIn(List<Integer> values) {
+        public Criteria andGroupOwnerIdLike(String value) {
+            addCriterion("group_owner_id like", value, "groupOwnerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupOwnerIdNotLike(String value) {
+            addCriterion("group_owner_id not like", value, "groupOwnerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupOwnerIdIn(List<String> values) {
             addCriterion("group_owner_id in", values, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdNotIn(List<Integer> values) {
+        public Criteria andGroupOwnerIdNotIn(List<String> values) {
             addCriterion("group_owner_id not in", values, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdBetween(Integer value1, Integer value2) {
+        public Criteria andGroupOwnerIdBetween(String value1, String value2) {
             addCriterion("group_owner_id between", value1, value2, "groupOwnerId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andGroupOwnerIdNotBetween(String value1, String value2) {
             addCriterion("group_owner_id not between", value1, value2, "groupOwnerId");
             return (Criteria) this;
         }
@@ -374,52 +384,62 @@ public class GroupExample {
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameEqualTo(Integer value) {
+        public Criteria andGroupOwnerNameEqualTo(String value) {
             addCriterion("group_owner_name =", value, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameNotEqualTo(Integer value) {
+        public Criteria andGroupOwnerNameNotEqualTo(String value) {
             addCriterion("group_owner_name <>", value, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameGreaterThan(Integer value) {
+        public Criteria andGroupOwnerNameGreaterThan(String value) {
             addCriterion("group_owner_name >", value, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameGreaterThanOrEqualTo(Integer value) {
+        public Criteria andGroupOwnerNameGreaterThanOrEqualTo(String value) {
             addCriterion("group_owner_name >=", value, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameLessThan(Integer value) {
+        public Criteria andGroupOwnerNameLessThan(String value) {
             addCriterion("group_owner_name <", value, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameLessThanOrEqualTo(Integer value) {
+        public Criteria andGroupOwnerNameLessThanOrEqualTo(String value) {
             addCriterion("group_owner_name <=", value, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameIn(List<Integer> values) {
+        public Criteria andGroupOwnerNameLike(String value) {
+            addCriterion("group_owner_name like", value, "groupOwnerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupOwnerNameNotLike(String value) {
+            addCriterion("group_owner_name not like", value, "groupOwnerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupOwnerNameIn(List<String> values) {
             addCriterion("group_owner_name in", values, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameNotIn(List<Integer> values) {
+        public Criteria andGroupOwnerNameNotIn(List<String> values) {
             addCriterion("group_owner_name not in", values, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameBetween(Integer value1, Integer value2) {
+        public Criteria andGroupOwnerNameBetween(String value1, String value2) {
             addCriterion("group_owner_name between", value1, value2, "groupOwnerName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupOwnerNameNotBetween(Integer value1, Integer value2) {
+        public Criteria andGroupOwnerNameNotBetween(String value1, String value2) {
             addCriterion("group_owner_name not between", value1, value2, "groupOwnerName");
             return (Criteria) this;
         }

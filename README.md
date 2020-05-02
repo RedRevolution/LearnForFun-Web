@@ -13,6 +13,7 @@
 > 添加索引后面再考虑
 
 ```mysql
+drop database learnforfun;
 create database learnforfun;
 use learnforfun;
 ```
@@ -22,29 +23,37 @@ use learnforfun;
 ```mysql
 create table tbl_user_info(
     id int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
-    wechat_account_id varchar(30) NOT NULL COMMENT '微信账号',
-    user_id int(10) NOT NULL COMMENT '学号/工号',
-    user_name varchar(10) NOT NULL COMMENT '姓名',
+    open_id varchar(30) NOT NULL COMMENT '微信授权的用户唯一ID',
+    user_id varchar(12) NOT NULL COMMENT '学号/工号',
+    user_name varchar(20) NOT NULL COMMENT '姓名',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 用户登录操作较为频繁
+ALTER TABLE tbl_user_info ADD UNIQUE INDEX uni_open_id (open_id);
 ```
 
 日程
 
+> 删除某条日程记录的时候根据自增主键id去删除
+>
 > 定期删除记录：根据系统时间和deadline字段判断
 
 ```mysql
-create table tbl_timetable_info(
-    id int(10) NOT NULL AUTO_INCREMENT,
-    user_id int(10) NOT NULL COMMENT '学号/工号',
+create table tbl_user_timetable(
+    id bigint(20) NOT NULL AUTO_INCREMENT,
+    user_id varchar(12) NOT NULL COMMENT '学号/工号',
 	content varchar(50) NOT NULL COMMENT '日程内容',
     deadline datetime NOT NULL COMMENT '截止时间',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 查看日程的操作较为频繁
+ALTER TABLE tbl_user_timetable ADD INDEX idx (user_id);
 ```
 
 课程
 
+> 授课老师：xxx/xxx/...
+>
 > 上课时间地点格式：(周数/星期/节数/地点)(...)(...) 
 >
 > 如: (2-7/7/3,4/沙河J502)(...) 
@@ -54,45 +63,53 @@ create table tbl_timetable_info(
 ```mysql
 create table tbl_course_info(
 	id int(10) NOT NULL AUTO_INCREMENT,
-    course_code varchar(12) NOT NULL COMMENT '课程代码',
+    course_code varchar(20) NOT NULL COMMENT '课程代码',
     course_name varchar(20) NOT NULL COMMENT '课程名',
-    teacher_name varchar(10) NOT NULL COMMENT '授课教师(多位老师用:xxx等)',
+    teacher_name varchar(20) NOT NULL COMMENT '授课教师',
     class_info varchar(100) NOT NULL COMMENT '上课时间及地点',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 经常查询课程的信息
+ALTER TABLE tbl_course_info ADD INDEX idx (course_code);
 ```
 
 选课情况
 
 ```mysql
-create table tbl_select_course_info(
+create table tbl_select_course(
 	id int(10) NOT NULL AUTO_INCREMENT,
-    student_id int(10) NOT NULL COMMENT '学号',
+    student_id varchar(12) NOT NULL COMMENT '学号',
     course_code varchar(20) NOT NULL COMMENT '课程代码',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 经常查询学生的选课情况
+ALTER TABLE tbl_select_course ADD INDEX idx (student_id);
 ```
 
-系统消息
+系统/反馈
 
+> 消息源：00000000，表示该消息是系统消息，由后台发布，所有用户可见
+>
+> 消息源：其他，表示该消息是用户的反馈意见，由用户发布，后台可见
+>
 > 定期删除记录：create_by字段判断
 
 ```mysql
 create table sys_message(
 	id int(10) NOT NULL AUTO_INCREMENT,
+    user_id varchar(12) NOT NULL COMMENT '消息源',
     content varchar(200) NOT NULL COMMENT '消息内容',
     create_by datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+ALTER TABLE sys_message ADD INDEX idx (user_id);
 ```
 
 群组
 
-> 群组ID：[OI]创建人ID/创建时间	如：O17373291/20200521213252
+> 群组类型：0表示官方课程群组，1表示个人兴趣小组
 >
-> O表示官方课程群组，I 表示个人兴趣小组
->
-> 群组ID在创建群组时生成
+> 群组ID在创建群组时生成，格式：Q20200502134117373291	[QI]创建时间创建人ID
 >
 > 若为个人兴趣小组则课程代码处为空
 
@@ -101,66 +118,74 @@ create table tbl_group_info(
     id int(10) NOT NULL AUTO_INCREMENT,
 	group_id varchar(30) NOT NULL COMMENT '群组ID',
 	group_name varchar(20) NOT NULL COMMENT '群组名',
-    group_owner_id int(10) NOT NULL COMMENT '创建者学号/工号',
-    group_owner_name int(10) NOT NULL COMMENT '创建者姓名',
+    group_owner_id varchar(12) NOT NULL COMMENT '创建人ID',
+    group_owner_name varchar(20) NOT NULL COMMENT '创建人姓名',
 	group_introd varchar(50) NOT NULL DEFAULT '' COMMENT '群组介绍',
-    course_code varchar(12) NOT NULL DEFAULT '' COMMENT '课程代码',
+    course_code varchar(20) NOT NULL DEFAULT '' COMMENT '课程代码',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 经常查询群组的情况
+ALTER TABLE tbl_group_info ADD INDEX idx (group_id);
 ```
 
 用户群组关系表
 
 ```mysql
-create table tbl_user_group_info(
+create table tbl_user_group(
     id int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
-    user_id int(10) NOT NULL COMMENT '学号/工号',
+    user_id varchar(12) NOT NULL COMMENT '学号/工号',
     group_id varchar(30) NOT NULL COMMENT '群组ID',
     is_administrator tinyint(1) NOT NULL DEFAULT '0' COMMENT '1为管理员,0为成员',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 经常查询用户加入了哪些群组
+ALTER TABLE tbl_user_group ADD INDEX idx (user_id);
 ```
 
 知识分享
 
-> 知识分享ID：分享人ID/创建时间
+> 知识分享ID：20200502134117373291  分享时间分享人ID
 
 ```mysql
 create table tbl_knowledge_share(
-	id int(10) NOT NULL AUTO_INCREMENT,
+	id bigint(20) NOT NULL AUTO_INCREMENT,
     knowledge_share_id varchar(30) NOT NULL COMMENT '知识分享ID',
 	group_id varchar(30) NOT NULL COMMENT '群组ID',
-	user_id int(10) NOT NULL COMMENT '学号/工号',
-    user_name varchar(10) NOT NULL COMMENT '分享人姓名',
+    user_name varchar(20) NOT NULL COMMENT '分享人姓名',
 	title varchar(20) NOT NULL COMMENT '标题',
 	content varchar(5000) NOT NULL COMMENT '内容',
-	likes_num int(4) NOT NULL COMMENT '点赞数',
+	likes_num int(4) NOT NULL DEFAULT '0' COMMENT '点赞数',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 经常看知识分享
+ALTER TABLE tbl_knowledge_share ADD INDEX idx (knowledge_share_id);
 ```
 
 收藏列表
 
 ```mysql
 create table tbl_user_collect(
-	id int(10) NOT NULL AUTO_INCREMENT,
+	id bigint(20) NOT NULL AUTO_INCREMENT,
+    user_id varchar(12) NOT NULL COMMENT '学号/工号',
     knowledge_share_id varchar(30) NOT NULL COMMENT '知识分享ID',
-	user_id int(10) NOT NULL COMMENT '学号/工号',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 经常自己的收藏列表
+ALTER TABLE tbl_user_collect ADD INDEX idx (user_id);
 ```
 
 评论列表
 
 ```mysql
 create table tbl_comment(
-    id int(10) NOT NULL AUTO_INCREMENT,
+    id bigint(20) NOT NULL AUTO_INCREMENT,
     knowledge_share_id varchar(30) NOT NULL COMMENT '知识分享ID',
-    user_id int(10) NOT NULL COMMENT '评论人学号/工号',
-    user_name varchar(10) NOT NULL COMMENT '评论人姓名',
+    user_id varchar(12) NOT NULL COMMENT '评论人学号/工号',
+    user_name varchar(20) NOT NULL COMMENT '评论人姓名',
     content varchar(200) NOT NULL COMMENT '评论内容',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+ALTER TABLE tbl_comment ADD INDEX idx (knowledge_share_id);
 ```
 
 资料分享
@@ -169,13 +194,14 @@ create table tbl_comment(
 create table tbl_resource_share(
     id int(10) NOT NULL AUTO_INCREMENT,
     group_id varchar(30) NOT NULL COMMENT '群组ID',
-	user_id int(10) NOT NULL COMMENT '分享人学号/工号',
-    user_name varchar(10) NOT NULL COMMENT '分享人姓名',
-	title varchar(20) NOT NULL COMMENT '分享主题',
-    introd varchar(50) NOT NULL DEFAULT '分享内容简介',
+	user_id varchar(12) NOT NULL COMMENT '分享人学号/工号',
+    user_name varchar(20) NOT NULL COMMENT '分享人姓名',
+	title varchar(64) NOT NULL COMMENT '分享主题',
+    introd varchar(128) NOT NULL DEFAULT '分享内容简介',
 	link varchar(256) NOT NULL COMMENT '资源链接',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+ALTER TABLE tbl_resource_share ADD INDEX idx (group_id);
 ```
 
 群组消息
@@ -186,13 +212,13 @@ create table tbl_resource_share(
 create table tbl_group_message(
     id int(10) NOT NULL AUTO_INCREMENT,
     group_id varchar(30) NOT NULL COMMENT '群组ID',
-	user_id int(10) NOT NULL COMMENT '发言人学号/工号',
-    user_name varchar(10) NOT NULL COMMENT '发言人名字',
-	content varchar(100) NOT NULL COMMENT '发言内容',
+	user_id varchar(12) NOT NULL COMMENT '发言人学号/工号',
+    user_name varchar(20) NOT NULL COMMENT '发言人名字',
+	content varchar(128) NOT NULL COMMENT '发言内容',
 	create_by datetime DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '发言时间',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
+ALTER TABLE tbl_group_message ADD INDEX idx (group_id);
 ```
 
 群组公告
@@ -201,11 +227,12 @@ create table tbl_group_message(
 create table tbl_group_notice(
     id int(10) NOT NULL AUTO_INCREMENT,
 	group_id varchar(30) NOT NULL COMMENT '群组ID',
-	user_id int(10) NOT NULL COMMENT '发布公告者学号/工号',
-    user_name varchar(10) NOT NULL COMMENT '发布公告者姓名',
-	content varchar(500) NOT NULL COMMENT '公告内容',
+	user_id varchar(12) NOT NULL COMMENT '发布公告者学号/工号',
+    user_name varchar(20) NOT NULL COMMENT '发布公告者姓名',
+	content varchar(256) NOT NULL COMMENT '公告内容',
     create_by datetime DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '发布时间',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+ALTER TABLE tbl_group_notice ADD INDEX idx (group_id);
 ```
 

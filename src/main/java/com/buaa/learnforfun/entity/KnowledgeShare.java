@@ -1,13 +1,11 @@
 package com.buaa.learnforfun.entity;
 
 public class KnowledgeShare {
-    private Integer id;
+    private Long id;
 
     private String knowledgeShareId;
 
     private String groupId;
-
-    private Integer userId;
 
     private String userName;
 
@@ -17,11 +15,11 @@ public class KnowledgeShare {
 
     private Integer likesNum;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,14 +37,6 @@ public class KnowledgeShare {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId == null ? null : groupId.trim();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getUserName() {

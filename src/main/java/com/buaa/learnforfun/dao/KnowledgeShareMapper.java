@@ -5,7 +5,7 @@ import com.buaa.learnforfun.entity.KnowledgeShareExample;
 import java.util.List;
 
 public interface KnowledgeShareMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(KnowledgeShare record);
 
@@ -13,7 +13,7 @@ public interface KnowledgeShareMapper {
 
     List<KnowledgeShare> selectByExample(KnowledgeShareExample example);
 
-    KnowledgeShare selectByPrimaryKey(Integer id);
+    KnowledgeShare selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(KnowledgeShare record);
 

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.ResourceShare">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="group_id" jdbcType="VARCHAR" property="groupId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="introd" jdbcType="VARCHAR" property="introd" />
@@ -71,7 +71,7 @@
     insert into tbl_resource_share (group_id, user_id, user_name, 
       title, introd, link
       )
-    values (#{groupId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+    values (#{groupId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{introd,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}
       )
   </insert>
@@ -102,7 +102,7 @@
         #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -125,7 +125,7 @@
         group_id = #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
@@ -145,7 +145,7 @@
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.ResourceShare">
     update tbl_resource_share
     set group_id = #{groupId,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       introd = #{introd,jdbcType=VARCHAR},

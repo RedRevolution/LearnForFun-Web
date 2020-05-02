@@ -5,6 +5,8 @@ import java.util.Date;
 public class SysMessage {
     private Integer id;
 
+    private String userId;
+
     private String content;
 
     private Date createBy;
@@ -15,6 +17,14 @@ public class SysMessage {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getContent() {

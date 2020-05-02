@@ -3,6 +3,7 @@
 <mapper namespace="com.buaa.learnforfun.dao.SysMessageMapper">
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.SysMessage">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_by" jdbcType="TIMESTAMP" property="createBy" />
   </resultMap>
@@ -36,7 +37,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, content, create_by
+    id, user_id, content, create_by
   </sql>
   <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.SysMessageExample" resultMap="BaseResultMap">
     select
@@ -64,12 +65,17 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SysMessage" useGeneratedKeys="true">
-    insert into sys_message (content, create_by)
-    values (#{content,jdbcType=VARCHAR}, #{createBy,jdbcType=TIMESTAMP})
+    insert into sys_message (user_id, content, create_by
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createBy,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SysMessage" useGeneratedKeys="true">
     insert into sys_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
       <if test="content != null">
         content,
       </if>
@@ -78,6 +84,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
@@ -89,6 +98,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.SysMessage">
     update sys_message
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
@@ -100,7 +112,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.SysMessage">
     update sys_message
-    set content = #{content,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByWechatId(String id) {
         UserExample example = new UserExample();
-        example.or().andWechatAccountIdEqualTo(id);
+        example.or().andOpenIdEqualTo(id);
         List<User> ans = userMapper.selectByExample(example);
         if(ans.size() == 0)return null;
         else return ans.get(0);

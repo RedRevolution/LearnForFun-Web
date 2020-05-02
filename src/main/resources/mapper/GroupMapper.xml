@@ -5,8 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="group_id" jdbcType="VARCHAR" property="groupId" />
     <result column="group_name" jdbcType="VARCHAR" property="groupName" />
-    <result column="group_owner_id" jdbcType="INTEGER" property="groupOwnerId" />
-    <result column="group_owner_name" jdbcType="INTEGER" property="groupOwnerName" />
+    <result column="group_owner_id" jdbcType="VARCHAR" property="groupOwnerId" />
+    <result column="group_owner_name" jdbcType="VARCHAR" property="groupOwnerName" />
     <result column="group_introd" jdbcType="VARCHAR" property="groupIntrod" />
     <result column="course_code" jdbcType="VARCHAR" property="courseCode" />
   </resultMap>
@@ -71,8 +71,8 @@
     insert into tbl_group_info (group_id, group_name, group_owner_id, 
       group_owner_name, group_introd, course_code
       )
-    values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{groupOwnerId,jdbcType=INTEGER}, 
-      #{groupOwnerName,jdbcType=INTEGER}, #{groupIntrod,jdbcType=VARCHAR}, #{courseCode,jdbcType=VARCHAR}
+    values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{groupOwnerId,jdbcType=VARCHAR}, 
+      #{groupOwnerName,jdbcType=VARCHAR}, #{groupIntrod,jdbcType=VARCHAR}, #{courseCode,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Group" useGeneratedKeys="true">
@@ -105,10 +105,10 @@
         #{groupName,jdbcType=VARCHAR},
       </if>
       <if test="groupOwnerId != null">
-        #{groupOwnerId,jdbcType=INTEGER},
+        #{groupOwnerId,jdbcType=VARCHAR},
       </if>
       <if test="groupOwnerName != null">
-        #{groupOwnerName,jdbcType=INTEGER},
+        #{groupOwnerName,jdbcType=VARCHAR},
       </if>
       <if test="groupIntrod != null">
         #{groupIntrod,jdbcType=VARCHAR},
@@ -128,10 +128,10 @@
         group_name = #{groupName,jdbcType=VARCHAR},
       </if>
       <if test="groupOwnerId != null">
-        group_owner_id = #{groupOwnerId,jdbcType=INTEGER},
+        group_owner_id = #{groupOwnerId,jdbcType=VARCHAR},
       </if>
       <if test="groupOwnerName != null">
-        group_owner_name = #{groupOwnerName,jdbcType=INTEGER},
+        group_owner_name = #{groupOwnerName,jdbcType=VARCHAR},
       </if>
       <if test="groupIntrod != null">
         group_introd = #{groupIntrod,jdbcType=VARCHAR},
@@ -146,8 +146,8 @@
     update tbl_group_info
     set group_id = #{groupId,jdbcType=VARCHAR},
       group_name = #{groupName,jdbcType=VARCHAR},
-      group_owner_id = #{groupOwnerId,jdbcType=INTEGER},
-      group_owner_name = #{groupOwnerName,jdbcType=INTEGER},
+      group_owner_id = #{groupOwnerId,jdbcType=VARCHAR},
+      group_owner_name = #{groupOwnerName,jdbcType=VARCHAR},
       group_introd = #{groupIntrod,jdbcType=VARCHAR},
       course_code = #{courseCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

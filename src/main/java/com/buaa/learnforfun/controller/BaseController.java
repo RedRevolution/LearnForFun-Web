@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class BaseController {
     @Autowired
     UserService userService;
-
+    
 }
