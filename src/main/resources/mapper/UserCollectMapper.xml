@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.UserCollect">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="knowledge_share_id" jdbcType="VARCHAR" property="knowledgeShareId" />
+    <result column="share_id" jdbcType="VARCHAR" property="shareId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -36,7 +36,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, knowledge_share_id
+    id, user_id, share_id
   </sql>
   <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.UserCollectExample" resultMap="BaseResultMap">
     select
@@ -64,8 +64,8 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.UserCollect" useGeneratedKeys="true">
-    insert into tbl_user_collect (user_id, knowledge_share_id)
-    values (#{userId,jdbcType=VARCHAR}, #{knowledgeShareId,jdbcType=VARCHAR})
+    insert into tbl_user_collect (user_id, share_id)
+    values (#{userId,jdbcType=VARCHAR}, #{shareId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.UserCollect" useGeneratedKeys="true">
     insert into tbl_user_collect
@@ -73,16 +73,16 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="knowledgeShareId != null">
-        knowledge_share_id,
+      <if test="shareId != null">
+        share_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="knowledgeShareId != null">
-        #{knowledgeShareId,jdbcType=VARCHAR},
+      <if test="shareId != null">
+        #{shareId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -92,8 +92,8 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="knowledgeShareId != null">
-        knowledge_share_id = #{knowledgeShareId,jdbcType=VARCHAR},
+      <if test="shareId != null">
+        share_id = #{shareId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -101,7 +101,7 @@
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.UserCollect">
     update tbl_user_collect
     set user_id = #{userId,jdbcType=VARCHAR},
-      knowledge_share_id = #{knowledgeShareId,jdbcType=VARCHAR}
+      share_id = #{shareId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

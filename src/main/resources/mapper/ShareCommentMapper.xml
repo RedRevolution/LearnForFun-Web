@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.buaa.learnforfun.dao.KnowledgeShareMapper">
-  <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.KnowledgeShare">
+<mapper namespace="com.buaa.learnforfun.dao.ShareCommentMapper">
+  <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.ShareComment">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="knowledge_share_id" jdbcType="VARCHAR" property="knowledgeShareId" />
-    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="share_id" jdbcType="VARCHAR" property="shareId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="likes_num" jdbcType="INTEGER" property="likesNum" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -40,16 +38,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, knowledge_share_id, group_id, user_name, title, content, likes_num
+    id, share_id, user_id, user_name, content
   </sql>
-  <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.KnowledgeShareExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.ShareCommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from tbl_knowledge_share
+    from tbl_share_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -60,96 +58,74 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tbl_knowledge_share
+    from tbl_share_comment
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tbl_knowledge_share
+    delete from tbl_share_comment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.KnowledgeShare" useGeneratedKeys="true">
-    insert into tbl_knowledge_share (knowledge_share_id, group_id, user_name, 
-      title, content, likes_num
-      )
-    values (#{knowledgeShareId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{likesNum,jdbcType=INTEGER}
-      )
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.ShareComment" useGeneratedKeys="true">
+    insert into tbl_share_comment (share_id, user_id, user_name, 
+      content)
+    values (#{shareId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.KnowledgeShare" useGeneratedKeys="true">
-    insert into tbl_knowledge_share
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.ShareComment" useGeneratedKeys="true">
+    insert into tbl_share_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="knowledgeShareId != null">
-        knowledge_share_id,
+      <if test="shareId != null">
+        share_id,
       </if>
-      <if test="groupId != null">
-        group_id,
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="userName != null">
         user_name,
       </if>
-      <if test="title != null">
-        title,
-      </if>
       <if test="content != null">
         content,
       </if>
-      <if test="likesNum != null">
-        likes_num,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="knowledgeShareId != null">
-        #{knowledgeShareId,jdbcType=VARCHAR},
+      <if test="shareId != null">
+        #{shareId,jdbcType=VARCHAR},
       </if>
-      <if test="groupId != null">
-        #{groupId,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="likesNum != null">
-        #{likesNum,jdbcType=INTEGER},
-      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.KnowledgeShare">
-    update tbl_knowledge_share
+  <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.ShareComment">
+    update tbl_share_comment
     <set>
-      <if test="knowledgeShareId != null">
-        knowledge_share_id = #{knowledgeShareId,jdbcType=VARCHAR},
+      <if test="shareId != null">
+        share_id = #{shareId,jdbcType=VARCHAR},
       </if>
-      <if test="groupId != null">
-        group_id = #{groupId,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="likesNum != null">
-        likes_num = #{likesNum,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.KnowledgeShare">
-    update tbl_knowledge_share
-    set knowledge_share_id = #{knowledgeShareId,jdbcType=VARCHAR},
-      group_id = #{groupId,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.ShareComment">
+    update tbl_share_comment
+    set share_id = #{shareId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      likes_num = #{likesNum,jdbcType=INTEGER}
+      content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

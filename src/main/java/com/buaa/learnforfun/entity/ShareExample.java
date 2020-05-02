@@ -3,14 +3,14 @@ package com.buaa.learnforfun.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentExample {
+public class ShareExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CommentExample() {
+    public ShareExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -164,73 +164,213 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIsNull() {
-            addCriterion("knowledge_share_id is null");
+        public Criteria andShareIdIsNull() {
+            addCriterion("share_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIsNotNull() {
-            addCriterion("knowledge_share_id is not null");
+        public Criteria andShareIdIsNotNull() {
+            addCriterion("share_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdEqualTo(String value) {
-            addCriterion("knowledge_share_id =", value, "knowledgeShareId");
+        public Criteria andShareIdEqualTo(String value) {
+            addCriterion("share_id =", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotEqualTo(String value) {
-            addCriterion("knowledge_share_id <>", value, "knowledgeShareId");
+        public Criteria andShareIdNotEqualTo(String value) {
+            addCriterion("share_id <>", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdGreaterThan(String value) {
-            addCriterion("knowledge_share_id >", value, "knowledgeShareId");
+        public Criteria andShareIdGreaterThan(String value) {
+            addCriterion("share_id >", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdGreaterThanOrEqualTo(String value) {
-            addCriterion("knowledge_share_id >=", value, "knowledgeShareId");
+        public Criteria andShareIdGreaterThanOrEqualTo(String value) {
+            addCriterion("share_id >=", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLessThan(String value) {
-            addCriterion("knowledge_share_id <", value, "knowledgeShareId");
+        public Criteria andShareIdLessThan(String value) {
+            addCriterion("share_id <", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLessThanOrEqualTo(String value) {
-            addCriterion("knowledge_share_id <=", value, "knowledgeShareId");
+        public Criteria andShareIdLessThanOrEqualTo(String value) {
+            addCriterion("share_id <=", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLike(String value) {
-            addCriterion("knowledge_share_id like", value, "knowledgeShareId");
+        public Criteria andShareIdLike(String value) {
+            addCriterion("share_id like", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotLike(String value) {
-            addCriterion("knowledge_share_id not like", value, "knowledgeShareId");
+        public Criteria andShareIdNotLike(String value) {
+            addCriterion("share_id not like", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIn(List<String> values) {
-            addCriterion("knowledge_share_id in", values, "knowledgeShareId");
+        public Criteria andShareIdIn(List<String> values) {
+            addCriterion("share_id in", values, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotIn(List<String> values) {
-            addCriterion("knowledge_share_id not in", values, "knowledgeShareId");
+        public Criteria andShareIdNotIn(List<String> values) {
+            addCriterion("share_id not in", values, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdBetween(String value1, String value2) {
-            addCriterion("knowledge_share_id between", value1, value2, "knowledgeShareId");
+        public Criteria andShareIdBetween(String value1, String value2) {
+            addCriterion("share_id between", value1, value2, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotBetween(String value1, String value2) {
-            addCriterion("knowledge_share_id not between", value1, value2, "knowledgeShareId");
+        public Criteria andShareIdNotBetween(String value1, String value2) {
+            addCriterion("share_id not between", value1, value2, "shareId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdIsNull() {
+            addCriterion("group_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdIsNotNull() {
+            addCriterion("group_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdEqualTo(String value) {
+            addCriterion("group_id =", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdNotEqualTo(String value) {
+            addCriterion("group_id <>", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdGreaterThan(String value) {
+            addCriterion("group_id >", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdGreaterThanOrEqualTo(String value) {
+            addCriterion("group_id >=", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdLessThan(String value) {
+            addCriterion("group_id <", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdLessThanOrEqualTo(String value) {
+            addCriterion("group_id <=", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdLike(String value) {
+            addCriterion("group_id like", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdNotLike(String value) {
+            addCriterion("group_id not like", value, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdIn(List<String> values) {
+            addCriterion("group_id in", values, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdNotIn(List<String> values) {
+            addCriterion("group_id not in", values, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdBetween(String value1, String value2) {
+            addCriterion("group_id between", value1, value2, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupIdNotBetween(String value1, String value2) {
+            addCriterion("group_id not between", value1, value2, "groupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameIsNull() {
+            addCriterion("group_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameIsNotNull() {
+            addCriterion("group_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameEqualTo(String value) {
+            addCriterion("group_name =", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotEqualTo(String value) {
+            addCriterion("group_name <>", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameGreaterThan(String value) {
+            addCriterion("group_name >", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameGreaterThanOrEqualTo(String value) {
+            addCriterion("group_name >=", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameLessThan(String value) {
+            addCriterion("group_name <", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameLessThanOrEqualTo(String value) {
+            addCriterion("group_name <=", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameLike(String value) {
+            addCriterion("group_name like", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotLike(String value) {
+            addCriterion("group_name not like", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameIn(List<String> values) {
+            addCriterion("group_name in", values, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotIn(List<String> values) {
+            addCriterion("group_name not in", values, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameBetween(String value1, String value2) {
+            addCriterion("group_name between", value1, value2, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotBetween(String value1, String value2) {
+            addCriterion("group_name not between", value1, value2, "groupName");
             return (Criteria) this;
         }
 
@@ -371,6 +511,196 @@ public class CommentExample {
 
         public Criteria andUserNameNotBetween(String value1, String value2) {
             addCriterion("user_name not between", value1, value2, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIsNull() {
+            addCriterion("topic is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIsNotNull() {
+            addCriterion("topic is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicEqualTo(String value) {
+            addCriterion("topic =", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNotEqualTo(String value) {
+            addCriterion("topic <>", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicGreaterThan(String value) {
+            addCriterion("topic >", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicGreaterThanOrEqualTo(String value) {
+            addCriterion("topic >=", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicLessThan(String value) {
+            addCriterion("topic <", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicLessThanOrEqualTo(String value) {
+            addCriterion("topic <=", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicLike(String value) {
+            addCriterion("topic like", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNotLike(String value) {
+            addCriterion("topic not like", value, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIn(List<String> values) {
+            addCriterion("topic in", values, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNotIn(List<String> values) {
+            addCriterion("topic not in", values, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicBetween(String value1, String value2) {
+            addCriterion("topic between", value1, value2, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNotBetween(String value1, String value2) {
+            addCriterion("topic not between", value1, value2, "topic");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumIsNull() {
+            addCriterion("likes_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumIsNotNull() {
+            addCriterion("likes_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumEqualTo(Integer value) {
+            addCriterion("likes_num =", value, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumNotEqualTo(Integer value) {
+            addCriterion("likes_num <>", value, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumGreaterThan(Integer value) {
+            addCriterion("likes_num >", value, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("likes_num >=", value, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumLessThan(Integer value) {
+            addCriterion("likes_num <", value, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumLessThanOrEqualTo(Integer value) {
+            addCriterion("likes_num <=", value, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumIn(List<Integer> values) {
+            addCriterion("likes_num in", values, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumNotIn(List<Integer> values) {
+            addCriterion("likes_num not in", values, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumBetween(Integer value1, Integer value2) {
+            addCriterion("likes_num between", value1, value2, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikesNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("likes_num not between", value1, value2, "likesNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumIsNull() {
+            addCriterion("comment_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumIsNotNull() {
+            addCriterion("comment_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumEqualTo(Integer value) {
+            addCriterion("comment_num =", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumNotEqualTo(Integer value) {
+            addCriterion("comment_num <>", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumGreaterThan(Integer value) {
+            addCriterion("comment_num >", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("comment_num >=", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumLessThan(Integer value) {
+            addCriterion("comment_num <", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumLessThanOrEqualTo(Integer value) {
+            addCriterion("comment_num <=", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumIn(List<Integer> values) {
+            addCriterion("comment_num in", values, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumNotIn(List<Integer> values) {
+            addCriterion("comment_num not in", values, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumBetween(Integer value1, Integer value2) {
+            addCriterion("comment_num between", value1, value2, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("comment_num not between", value1, value2, "commentNum");
             return (Criteria) this;
         }
 

@@ -2,11 +2,10 @@ package com.buaa.learnforfun.controller.Fore;
 
 import com.buaa.learnforfun.controller.BaseController;
 import com.buaa.learnforfun.entity.Group;
-import com.buaa.learnforfun.entity.KnowledgeShare;
+import com.buaa.learnforfun.entity.Share;
 import com.buaa.learnforfun.entity.SysMessage;
 import com.buaa.learnforfun.entity.Timetable;
 import com.buaa.learnforfun.entity.User;
-import com.buaa.learnforfun.entity.UserCollect;
 import com.buaa.learnforfun.util.WeChatOpenId;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,7 +43,6 @@ public class UserController extends BaseController {
         return userService.getUserByOpenId(openId);
     }
 
-
     /**
      * 绑定个人信息
      * @param user
@@ -60,47 +58,47 @@ public class UserController extends BaseController {
 
     /**
      * 获取个人收藏列表
-     * @param id
+     * @param userId
      * @return
      */
     @ApiOperation(
             value = "获取个人收藏列表",
             notes = "后端仅实现了知识分享的收藏")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "学号/工号", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "userId", value = "学号/工号", required = true, dataType = "string"),
     })
-    @GetMapping("collect/{id}")
-    public List<KnowledgeShare> getUserCollectById(@PathVariable String id) {
+    @GetMapping("collect/{userId}")
+    public List<Share> getUserCollectById(@PathVariable String userId) {
         return null;
     }
 
     /**
      * 获取用户已加入的群组列表
-     * @param id
+     * @param userId
      * @return
      */
     @ApiOperation(
             value = "获取已加入群组列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "学号/工号", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "userId", value = "学号/工号", required = true, dataType = "string"),
     })
-    @GetMapping("group/{id}")
-    public List<Group> getUserGroupById(@PathVariable String id) {
+    @GetMapping("group/{userId}")
+    public List<Group> getUserGroupById(@PathVariable String userId) {
         return null;
     }
 
     /**
      * 获取个人日程列表
-     * @param id
+     * @param userId
      * @return
      */
     @ApiOperation(
             value = "获取个人日程列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "学号/工号", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "userId", value = "学号/工号", required = true, dataType = "string"),
     })
-    @GetMapping("timetable/{id}")
-    public List<Timetable> getUserTimetableById(@PathVariable String id) {
+    @GetMapping("timetable/{userId}")
+    public List<Timetable> getUserTimetableById(@PathVariable String userId) {
         return null;
     }
 
@@ -121,7 +119,7 @@ public class UserController extends BaseController {
     @ApiOperation(
             value = "用户反馈",
             notes = "返回\"success\"成功，\"failure\"失败")
-    @GetMapping("feedback")
+    @PostMapping("feedback")
     public String userFeedback(@RequestBody SysMessage feedback) {
         return null;
     }

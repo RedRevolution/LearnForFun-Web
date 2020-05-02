@@ -234,73 +234,73 @@ public class UserCollectExample {
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIsNull() {
-            addCriterion("knowledge_share_id is null");
+        public Criteria andShareIdIsNull() {
+            addCriterion("share_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIsNotNull() {
-            addCriterion("knowledge_share_id is not null");
+        public Criteria andShareIdIsNotNull() {
+            addCriterion("share_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdEqualTo(String value) {
-            addCriterion("knowledge_share_id =", value, "knowledgeShareId");
+        public Criteria andShareIdEqualTo(String value) {
+            addCriterion("share_id =", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotEqualTo(String value) {
-            addCriterion("knowledge_share_id <>", value, "knowledgeShareId");
+        public Criteria andShareIdNotEqualTo(String value) {
+            addCriterion("share_id <>", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdGreaterThan(String value) {
-            addCriterion("knowledge_share_id >", value, "knowledgeShareId");
+        public Criteria andShareIdGreaterThan(String value) {
+            addCriterion("share_id >", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdGreaterThanOrEqualTo(String value) {
-            addCriterion("knowledge_share_id >=", value, "knowledgeShareId");
+        public Criteria andShareIdGreaterThanOrEqualTo(String value) {
+            addCriterion("share_id >=", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLessThan(String value) {
-            addCriterion("knowledge_share_id <", value, "knowledgeShareId");
+        public Criteria andShareIdLessThan(String value) {
+            addCriterion("share_id <", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLessThanOrEqualTo(String value) {
-            addCriterion("knowledge_share_id <=", value, "knowledgeShareId");
+        public Criteria andShareIdLessThanOrEqualTo(String value) {
+            addCriterion("share_id <=", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLike(String value) {
-            addCriterion("knowledge_share_id like", value, "knowledgeShareId");
+        public Criteria andShareIdLike(String value) {
+            addCriterion("share_id like", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotLike(String value) {
-            addCriterion("knowledge_share_id not like", value, "knowledgeShareId");
+        public Criteria andShareIdNotLike(String value) {
+            addCriterion("share_id not like", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIn(List<String> values) {
-            addCriterion("knowledge_share_id in", values, "knowledgeShareId");
+        public Criteria andShareIdIn(List<String> values) {
+            addCriterion("share_id in", values, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotIn(List<String> values) {
-            addCriterion("knowledge_share_id not in", values, "knowledgeShareId");
+        public Criteria andShareIdNotIn(List<String> values) {
+            addCriterion("share_id not in", values, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdBetween(String value1, String value2) {
-            addCriterion("knowledge_share_id between", value1, value2, "knowledgeShareId");
+        public Criteria andShareIdBetween(String value1, String value2) {
+            addCriterion("share_id between", value1, value2, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotBetween(String value1, String value2) {
-            addCriterion("knowledge_share_id not between", value1, value2, "knowledgeShareId");
+        public Criteria andShareIdNotBetween(String value1, String value2) {
+            addCriterion("share_id not between", value1, value2, "shareId");
             return (Criteria) this;
         }
     }

@@ -142,23 +142,28 @@ create table tbl_user_group(
 ALTER TABLE tbl_user_group ADD INDEX idx (user_id);
 ```
 
-知识分享
+分享
 
-> 知识分享ID：20200502134117373291  分享时间分享人ID
+> 分享ID：K20200502134117373291  类型[KZ]分享时间分享人ID
+>
+> 可按点赞数排序
 
 ```mysql
-create table tbl_knowledge_share(
+create table tbl_group_share(
 	id bigint(20) NOT NULL AUTO_INCREMENT,
-    knowledge_share_id varchar(32) NOT NULL COMMENT '知识分享ID',
+    share_id varchar(32) NOT NULL COMMENT '分享ID',
 	group_id varchar(32) NOT NULL COMMENT '群组ID',
+    group_name varchar(16) NOT NULL COMMENT '群组名',
+    user_id varchar(16) NOT NULL COMMENT '分享人ID',
     user_name varchar(16) NOT NULL COMMENT '分享人姓名',
-	title varchar(16) NOT NULL COMMENT '标题',
-	content varchar(5000) NOT NULL COMMENT '内容',
-	likes_num int(4) NOT NULL DEFAULT '0' COMMENT '点赞数',
+	topic varchar(64) NOT NULL COMMENT '主题',
+    likes_num int(4) NOT NULL DEFAULT '0' COMMENT '点赞数',
+    comment_num int(4) NOT NULL DEFAULT '0' COMMENT '评论数',
+	content varchar(5000) NOT NULL COMMENT '知识内容/资源链接',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-# 经常看知识分享
-ALTER TABLE tbl_knowledge_share ADD INDEX idx (knowledge_share_id);
+# 经常查看分享内容
+ALTER TABLE tbl_group_share ADD INDEX idx (share_id);
 ```
 
 收藏列表
@@ -167,7 +172,7 @@ ALTER TABLE tbl_knowledge_share ADD INDEX idx (knowledge_share_id);
 create table tbl_user_collect(
 	id bigint(20) NOT NULL AUTO_INCREMENT,
     user_id varchar(16) NOT NULL COMMENT '学号/工号',
-    knowledge_share_id varchar(32) NOT NULL COMMENT '知识分享ID',
+    share_id varchar(32) NOT NULL COMMENT '分享ID',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 # 经常自己的收藏列表
@@ -177,31 +182,15 @@ ALTER TABLE tbl_user_collect ADD INDEX idx (user_id);
 评论列表
 
 ```mysql
-create table tbl_comment(
+create table tbl_share_comment(
     id bigint(20) NOT NULL AUTO_INCREMENT,
-    knowledge_share_id varchar(32) NOT NULL COMMENT '知识分享ID',
-    user_id varchar(16) NOT NULL COMMENT '评论人学号/工号',
+    share_id varchar(32) NOT NULL COMMENT '分享ID',
+    user_id varchar(16) NOT NULL COMMENT '评论人ID',
     user_name varchar(16) NOT NULL COMMENT '评论人姓名',
-    content varchar(200) NOT NULL COMMENT '评论内容',
+    content varchar(256) NOT NULL COMMENT '评论内容',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-ALTER TABLE tbl_comment ADD INDEX idx (knowledge_share_id);
-```
-
-资料分享
-
-```mysql
-create table tbl_resource_share(
-    id bigint(20) NOT NULL AUTO_INCREMENT,
-    group_id varchar(32) NOT NULL COMMENT '群组ID',
-	user_id varchar(16) NOT NULL COMMENT '分享人学号/工号',
-    user_name varchar(16) NOT NULL COMMENT '分享人姓名',
-	title varchar(64) NOT NULL COMMENT '分享主题',
-    introd varchar(256) NOT NULL DEFAULT '分享内容简介',
-	link varchar(256) NOT NULL COMMENT '资源链接',
-	primary key(id)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-ALTER TABLE tbl_resource_share ADD INDEX idx (group_id);
+ALTER TABLE tbl_share_comment ADD INDEX idx (share_id);
 ```
 
 群组消息
@@ -213,7 +202,7 @@ create table tbl_group_message(
     id bigint(20) NOT NULL AUTO_INCREMENT,
     group_id varchar(32) NOT NULL COMMENT '群组ID',
 	user_id varchar(16) NOT NULL COMMENT '发言人学号/工号',
-    user_name varchar(16) NOT NULL COMMENT '发言人名字',
+    user_name varchar(16) NOT NULL COMMENT '发言人姓名',
 	content varchar(256) NOT NULL COMMENT '发言内容',
 	create_by datetime DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '发言时间',
     primary key(id)

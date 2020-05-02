@@ -5,7 +5,7 @@ public class UserCollect {
 
     private String userId;
 
-    private String knowledgeShareId;
+    private String shareId;
 
     public Long getId() {
         return id;
@@ -23,11 +23,11 @@ public class UserCollect {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getKnowledgeShareId() {
-        return knowledgeShareId;
+    public String getShareId() {
+        return shareId;
     }
 
-    public void setKnowledgeShareId(String knowledgeShareId) {
-        this.knowledgeShareId = knowledgeShareId == null ? null : knowledgeShareId.trim();
+    public void setShareId(String shareId) {
+        this.shareId = shareId == null ? null : shareId.trim();
     }
 }

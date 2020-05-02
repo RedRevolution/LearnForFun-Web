@@ -1,9 +1,9 @@
 package com.buaa.learnforfun.entity;
 
-public class Comment {
+public class ShareComment {
     private Long id;
 
-    private String knowledgeShareId;
+    private String shareId;
 
     private String userId;
 
@@ -19,12 +19,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getKnowledgeShareId() {
-        return knowledgeShareId;
+    public String getShareId() {
+        return shareId;
     }
 
-    public void setKnowledgeShareId(String knowledgeShareId) {
-        this.knowledgeShareId = knowledgeShareId == null ? null : knowledgeShareId.trim();
+    public void setShareId(String shareId) {
+        this.shareId = shareId == null ? null : shareId.trim();
     }
 
     public String getUserId() {

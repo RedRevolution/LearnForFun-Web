@@ -3,14 +3,14 @@ package com.buaa.learnforfun.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeShareExample {
+public class ShareCommentExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public KnowledgeShareExample() {
+    public ShareCommentExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -164,143 +164,143 @@ public class KnowledgeShareExample {
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIsNull() {
-            addCriterion("knowledge_share_id is null");
+        public Criteria andShareIdIsNull() {
+            addCriterion("share_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIsNotNull() {
-            addCriterion("knowledge_share_id is not null");
+        public Criteria andShareIdIsNotNull() {
+            addCriterion("share_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdEqualTo(String value) {
-            addCriterion("knowledge_share_id =", value, "knowledgeShareId");
+        public Criteria andShareIdEqualTo(String value) {
+            addCriterion("share_id =", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotEqualTo(String value) {
-            addCriterion("knowledge_share_id <>", value, "knowledgeShareId");
+        public Criteria andShareIdNotEqualTo(String value) {
+            addCriterion("share_id <>", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdGreaterThan(String value) {
-            addCriterion("knowledge_share_id >", value, "knowledgeShareId");
+        public Criteria andShareIdGreaterThan(String value) {
+            addCriterion("share_id >", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdGreaterThanOrEqualTo(String value) {
-            addCriterion("knowledge_share_id >=", value, "knowledgeShareId");
+        public Criteria andShareIdGreaterThanOrEqualTo(String value) {
+            addCriterion("share_id >=", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLessThan(String value) {
-            addCriterion("knowledge_share_id <", value, "knowledgeShareId");
+        public Criteria andShareIdLessThan(String value) {
+            addCriterion("share_id <", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLessThanOrEqualTo(String value) {
-            addCriterion("knowledge_share_id <=", value, "knowledgeShareId");
+        public Criteria andShareIdLessThanOrEqualTo(String value) {
+            addCriterion("share_id <=", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdLike(String value) {
-            addCriterion("knowledge_share_id like", value, "knowledgeShareId");
+        public Criteria andShareIdLike(String value) {
+            addCriterion("share_id like", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotLike(String value) {
-            addCriterion("knowledge_share_id not like", value, "knowledgeShareId");
+        public Criteria andShareIdNotLike(String value) {
+            addCriterion("share_id not like", value, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdIn(List<String> values) {
-            addCriterion("knowledge_share_id in", values, "knowledgeShareId");
+        public Criteria andShareIdIn(List<String> values) {
+            addCriterion("share_id in", values, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotIn(List<String> values) {
-            addCriterion("knowledge_share_id not in", values, "knowledgeShareId");
+        public Criteria andShareIdNotIn(List<String> values) {
+            addCriterion("share_id not in", values, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdBetween(String value1, String value2) {
-            addCriterion("knowledge_share_id between", value1, value2, "knowledgeShareId");
+        public Criteria andShareIdBetween(String value1, String value2) {
+            addCriterion("share_id between", value1, value2, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowledgeShareIdNotBetween(String value1, String value2) {
-            addCriterion("knowledge_share_id not between", value1, value2, "knowledgeShareId");
+        public Criteria andShareIdNotBetween(String value1, String value2) {
+            addCriterion("share_id not between", value1, value2, "shareId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdIsNull() {
-            addCriterion("group_id is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdIsNotNull() {
-            addCriterion("group_id is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdEqualTo(String value) {
-            addCriterion("group_id =", value, "groupId");
+        public Criteria andUserIdEqualTo(String value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdNotEqualTo(String value) {
-            addCriterion("group_id <>", value, "groupId");
+        public Criteria andUserIdNotEqualTo(String value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdGreaterThan(String value) {
-            addCriterion("group_id >", value, "groupId");
+        public Criteria andUserIdGreaterThan(String value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdGreaterThanOrEqualTo(String value) {
-            addCriterion("group_id >=", value, "groupId");
+        public Criteria andUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdLessThan(String value) {
-            addCriterion("group_id <", value, "groupId");
+        public Criteria andUserIdLessThan(String value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdLessThanOrEqualTo(String value) {
-            addCriterion("group_id <=", value, "groupId");
+        public Criteria andUserIdLessThanOrEqualTo(String value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdLike(String value) {
-            addCriterion("group_id like", value, "groupId");
+        public Criteria andUserIdLike(String value) {
+            addCriterion("user_id like", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdNotLike(String value) {
-            addCriterion("group_id not like", value, "groupId");
+        public Criteria andUserIdNotLike(String value) {
+            addCriterion("user_id not like", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdIn(List<String> values) {
-            addCriterion("group_id in", values, "groupId");
+        public Criteria andUserIdIn(List<String> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdNotIn(List<String> values) {
-            addCriterion("group_id not in", values, "groupId");
+        public Criteria andUserIdNotIn(List<String> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdBetween(String value1, String value2) {
-            addCriterion("group_id between", value1, value2, "groupId");
+        public Criteria andUserIdBetween(String value1, String value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andGroupIdNotBetween(String value1, String value2) {
-            addCriterion("group_id not between", value1, value2, "groupId");
+        public Criteria andUserIdNotBetween(String value1, String value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
@@ -374,76 +374,6 @@ public class KnowledgeShareExample {
             return (Criteria) this;
         }
 
-        public Criteria andTitleIsNull() {
-            addCriterion("title is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleIsNotNull() {
-            addCriterion("title is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleEqualTo(String value) {
-            addCriterion("title =", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleNotEqualTo(String value) {
-            addCriterion("title <>", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleGreaterThan(String value) {
-            addCriterion("title >", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleGreaterThanOrEqualTo(String value) {
-            addCriterion("title >=", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleLessThan(String value) {
-            addCriterion("title <", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleLessThanOrEqualTo(String value) {
-            addCriterion("title <=", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleLike(String value) {
-            addCriterion("title like", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleNotLike(String value) {
-            addCriterion("title not like", value, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleIn(List<String> values) {
-            addCriterion("title in", values, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleNotIn(List<String> values) {
-            addCriterion("title not in", values, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleBetween(String value1, String value2) {
-            addCriterion("title between", value1, value2, "title");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitleNotBetween(String value1, String value2) {
-            addCriterion("title not between", value1, value2, "title");
-            return (Criteria) this;
-        }
-
         public Criteria andContentIsNull() {
             addCriterion("content is null");
             return (Criteria) this;
@@ -511,66 +441,6 @@ public class KnowledgeShareExample {
 
         public Criteria andContentNotBetween(String value1, String value2) {
             addCriterion("content not between", value1, value2, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumIsNull() {
-            addCriterion("likes_num is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumIsNotNull() {
-            addCriterion("likes_num is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumEqualTo(Integer value) {
-            addCriterion("likes_num =", value, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumNotEqualTo(Integer value) {
-            addCriterion("likes_num <>", value, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumGreaterThan(Integer value) {
-            addCriterion("likes_num >", value, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("likes_num >=", value, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumLessThan(Integer value) {
-            addCriterion("likes_num <", value, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumLessThanOrEqualTo(Integer value) {
-            addCriterion("likes_num <=", value, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumIn(List<Integer> values) {
-            addCriterion("likes_num in", values, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumNotIn(List<Integer> values) {
-            addCriterion("likes_num not in", values, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumBetween(Integer value1, Integer value2) {
-            addCriterion("likes_num between", value1, value2, "likesNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesNumNotBetween(Integer value1, Integer value2) {
-            addCriterion("likes_num not between", value1, value2, "likesNum");
             return (Criteria) this;
         }
     }
