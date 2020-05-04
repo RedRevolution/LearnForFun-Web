@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class LearnforfunApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(LearnforfunApplication.class, args);
     }
 

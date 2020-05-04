@@ -29,7 +29,6 @@ public class WeChatOpenId {
             while ((line = in.readLine()) != null) {
                 sb.append(line);
             }
-
             String json = sb.toString();
             JSONObject jsonobject = JSON.parseObject(json);
             String openid = jsonobject.getString("openid");

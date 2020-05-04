@@ -1,4 +1,7 @@
-package com.buaa.learnforfun.controller.Fore;
+package com.buaa.learnforfun.controller.Fore.Group;
+
+import com.buaa.learnforfun.service.GroupMessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -9,24 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 @Component
-@ServerEndpoint("/webSocket/{groupId}/{userId}")
+@ServerEndpoint("/webSocket/{groupId}/{userId}/{userName}")
 public class WebSocketController {
-    // 保存 组id->组成员 的映射关系
+
+    //参考博文，这里注入的时候只能注入static对象
+    private static GroupMessageService groupMessageService;
+
+    @Autowired
+    public void setGroupMessageService(GroupMessageService groupMessageService) {
+        WebSocketController.groupMessageService = groupMessageService;
+    }
+
     private static ConcurrentHashMap<String, List<Session>> groupMemberInfoMap = new ConcurrentHashMap<>();
 
     // 收到消息调用的方法，群成员发送消息
     @OnMessage
     public void onMessage(@PathParam("groupId") String groupId,
-                          @PathParam("userId") String userId, String message) {
+                          @PathParam("userId") String userId,
+                          @PathParam("userName") String userName, String message) {
+        groupMessageService.addGroupMessage(groupId, userId, userName, message);
         //得到当前群的所有会话，也就是所有用户
         List<Session> sessionList = groupMemberInfoMap.get(groupId);
         // 遍历Session集合给每个会话发送文本消息
         sessionList.forEach(item -> {
             try {
-                //todo.. 把userId+message封装到后台,并返回userName
-                String userName = "";
                 String text = userName + ": " + message;
                 item.getBasicRemote().sendText(text);
             } catch (IOException e) {

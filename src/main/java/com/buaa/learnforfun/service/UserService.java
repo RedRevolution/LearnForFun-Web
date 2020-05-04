@@ -1,6 +1,8 @@
 package com.buaa.learnforfun.service;
 
+import com.buaa.learnforfun.dao.GroupMessageMapper;
 import com.buaa.learnforfun.dao.UserMapper;
+import com.buaa.learnforfun.entity.GroupMessage;
 import com.buaa.learnforfun.entity.User;
 import com.buaa.learnforfun.entity.UserExample;
 import com.buaa.learnforfun.util.WeChatOpenId;
@@ -16,7 +18,7 @@ public class UserService {
     UserMapper userMapper;
 
     public User getUserByCode(String code) {
-        String openId = WeChatOpenId.getOpenId("wxbe3bc73b7a961e66", code, "rjgc2020");
+        String openId = WeChatOpenId.getOpenId("wxbe3bc73b7a961e66", code, "b3351f7d2fe64e7ea3a8392bbeeb2fea");
         UserExample example = new UserExample();
         example.or().andOpenIdEqualTo(openId);
         List<User> ans = userMapper.selectByExample(example);
@@ -40,4 +42,5 @@ public class UserService {
             return user;
         }
     }
+
 }

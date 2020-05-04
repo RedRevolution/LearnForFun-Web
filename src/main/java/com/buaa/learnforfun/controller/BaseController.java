@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("")
 public class BaseController {
-    @GetMapping("hello")
-    public String hello() {
-        return "hello,red!";
-    }
-
     @Autowired
     public UserService userService;
 

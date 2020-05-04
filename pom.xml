@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
-r
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,12 +79,12 @@ r
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-        <!-- 导出文档 -->
-        <dependency>
-            <groupId>io.github.swagger2markup</groupId>
-            <artifactId>swagger2markup</artifactId>
-            <version>1.3.3</version>
-        </dependency>
+        <!--&lt;!&ndash; 导出文档 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>io.github.swagger2markup</groupId>-->
+            <!--<artifactId>swagger2markup</artifactId>-->
+            <!--<version>1.3.3</version>-->
+        <!--</dependency>-->
 
 
         <!-- SpringBoot测试支持 -->
@@ -99,7 +99,6 @@ r
                 </exclusion>
             </exclusions>
         </dependency>
-
 
         <!--websocket依赖-->
         <dependency>
@@ -116,75 +115,75 @@ r
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
-                <groupId>io.github.swagger2markup</groupId>
-                <artifactId>swagger2markup-maven-plugin</artifactId>
-                <version>1.2.0</version>
-                <configuration>
-                    <!--此处端口一定要是当前项目启动所用的端口-->
-                    <swaggerInput>http://localhost:80/v2/api-docs</swaggerInput>
-                    <outputDir>src/docs/asciidoc/generated</outputDir>
-                    <config>
-                        <!-- 除了ASCIIDOC之外，还有MARKDOWN和CONFLUENCE_MARKUP可选 -->
-                        <swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
-                    </config>
-                </configuration>
-            </plugin>
-            <!--此插件生成HTML和PDF-->
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.3</version>
-                <!-- Include Asciidoctor PDF for pdf generation -->
-                <dependencies>
-                    <dependency>
-                        <groupId>org.asciidoctor</groupId>
-                        <artifactId>asciidoctorj-pdf</artifactId>
-                        <version>1.5.0-alpha.10.1</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jruby</groupId>
-                        <artifactId>jruby-complete</artifactId>
-                        <version>1.7.21</version>
-                    </dependency>
-                </dependencies>
-                <!-- Configure generic document generation settings -->
-                <configuration>
-                    <sourceDirectory>src/docs/asciidoc/generated</sourceDirectory>
-                    <sourceHighlighter>coderay</sourceHighlighter>
-                    <attributes>
-                        <toc>left</toc>
-                    </attributes>
-                </configuration>
-                <!-- Since each execution can only handle one backend, run
-                     separate executions for each desired output type -->
-                <executions>
-                    <execution>
-                        <id>output-html</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <backend>html5</backend>
-                            <outputDirectory>src/docs/asciidoc/html</outputDirectory>
-                        </configuration>
-                    </execution>
+            <!--<plugin>-->
+                <!--<groupId>io.github.swagger2markup</groupId>-->
+                <!--<artifactId>swagger2markup-maven-plugin</artifactId>-->
+                <!--<version>1.2.0</version>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash;此处端口一定要是当前项目启动所用的端口&ndash;&gt;-->
+                    <!--<swaggerInput>http://localhost:80/v2/api-docs</swaggerInput>-->
+                    <!--<outputDir>src/docs/asciidoc/generated</outputDir>-->
+                    <!--<config>-->
+                        <!--&lt;!&ndash; 除了ASCIIDOC之外，还有MARKDOWN和CONFLUENCE_MARKUP可选 &ndash;&gt;-->
+                        <!--<swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>-->
+                    <!--</config>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!--&lt;!&ndash;此插件生成HTML和PDF&ndash;&gt;-->
+            <!--<plugin>-->
+                <!--<groupId>org.asciidoctor</groupId>-->
+                <!--<artifactId>asciidoctor-maven-plugin</artifactId>-->
+                <!--<version>1.5.3</version>-->
+                <!--&lt;!&ndash; Include Asciidoctor PDF for pdf generation &ndash;&gt;-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>org.asciidoctor</groupId>-->
+                        <!--<artifactId>asciidoctorj-pdf</artifactId>-->
+                        <!--<version>1.5.0-alpha.10.1</version>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>org.jruby</groupId>-->
+                        <!--<artifactId>jruby-complete</artifactId>-->
+                        <!--<version>1.7.21</version>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+                <!--&lt;!&ndash; Configure generic document generation settings &ndash;&gt;-->
+                <!--<configuration>-->
+                    <!--<sourceDirectory>src/docs/asciidoc/generated</sourceDirectory>-->
+                    <!--<sourceHighlighter>coderay</sourceHighlighter>-->
+                    <!--<attributes>-->
+                        <!--<toc>left</toc>-->
+                    <!--</attributes>-->
+                <!--</configuration>-->
+                <!--&lt;!&ndash; Since each execution can only handle one backend, run-->
+                     <!--separate executions for each desired output type &ndash;&gt;-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>output-html</id>-->
+                        <!--<phase>generate-resources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>process-asciidoc</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<backend>html5</backend>-->
+                            <!--<outputDirectory>src/docs/asciidoc/html</outputDirectory>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
 
-                    <execution>
-                        <id>output-pdf</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <backend>pdf</backend>
-                            <outputDirectory>src/docs/asciidoc/pdf</outputDirectory>
-                        </configuration>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>output-pdf</id>-->
+                        <!--<phase>generate-resources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>process-asciidoc</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<backend>pdf</backend>-->
+                            <!--<outputDirectory>src/docs/asciidoc/pdf</outputDirectory>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
 
-                </executions>
-            </plugin>
+                <!--</executions>-->
+            <!--</plugin>-->
 
         </plugins>
     </build>
