@@ -19,7 +19,7 @@ import java.util.List;
  * @author:wmyskxz
  * @create:2018-06-19-上午 10:49
  */
-@Configuration
+//@Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     @Bean
     public HttpMessageConverter<String> responseBodyConverter() {
