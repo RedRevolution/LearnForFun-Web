@@ -1,8 +1,5 @@
 package com.buaa.learnforfun.config;
 
-import com.buaa.learnforfun.controller.Fore.Group.WebSocketController;
-import com.buaa.learnforfun.service.GroupMessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;

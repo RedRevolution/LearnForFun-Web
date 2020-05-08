@@ -27,11 +27,11 @@ public class UserGroupController extends BaseController {
      *
      * @param userId
      * @return
-     *
      * response:
      * Group.groupId[0]=='O'表示这是一个官方群组，courseCode字段为课程代码；
      * Group.groupId[0]=='I'表示这是一个兴趣小组，courseCode字段为空；
      * 点进一个群组时请缓存该群组的groupId，用于群组聊天；
+     * 注意返回的List<Group>的size可能为0，就是未加入任何群组
      */
     @ApiOperation(
             value = "获取用户已加入的群组列表",
@@ -44,22 +44,20 @@ public class UserGroupController extends BaseController {
     })
     @GetMapping("{userId}")
     public List<Group> getUserGroupById(@PathVariable String userId) {
-        return null;
+        return userGroupService.getUserGroupById(userId);
     }
 
     /**
      * 用户创建群组
      *
      * @param group
-     * @return
-     *
-     * need:
+     * @return need:
      * 官方群组:groupName,groupOwnerId,groupOwnerName,courseCode;
      * 兴趣小组:groupName,groupOwnerId,groupOwnerName,courseCode=="unofficial";
      * (groupIntrod为可选字段，用户填写了就加上，没填写就置"")
      * response:
-     * group.groupId!="failure",创建成功,将返回的group实例添进缓存列表,更新界面;
-     * group.groupId=="failure"||502,创建失败,友好提示;
+     * String=="success",创建成功,重新查询用户已加入群组列表,更新界面;
+     * String=="failure"||502,创建失败,友好提示;
      */
     @ApiOperation(
             value = "用户创建群组",
@@ -68,24 +66,22 @@ public class UserGroupController extends BaseController {
                     "     * 兴趣小组:groupName,groupOwnerId,groupOwnerName,courseCode==\"unofficial\";\n" +
                     "     * (groupIntrod为可选字段，用户填写了就加上，没填写就置\"\")\n" +
                     "     * response:\n" +
-                    "     * group.groupId!=\"failure\",创建成功,将返回的group实例添进缓存列表,更新界面;\n" +
-                    "     * group.groupId==\"failure\"||502,创建失败,友好提示;"
+                    "     * String==\"success\",创建成功,重新查询用户已加入群组列表,更新界面;\n" +
+                    "     * String==\"failure\"||502,创建失败,友好提示;"
     )
     @PostMapping("")
-    public Group createGroup(@RequestBody Group group) {
-        return null;
+    public String createGroup(@RequestBody Group group) {
+        Group temp = userGroupService.createGroup(group);
+        return temp == null ? "failure" : "success";
     }
 
     /**
      * 用户搜索群组
      *
      * @param key
-     * @return
-     *
-     * pre:暂支持群组名、创建者名、课程代码查找群组
+     * @return pre:暂支持群组名、创建者名、课程代码查找群组
      * response:
      * 搜索到的有相关记录的group列表
-     *
      */
     @ApiOperation(
             value = "用户搜索群组",
@@ -105,11 +101,9 @@ public class UserGroupController extends BaseController {
      * 用户加入群组
      *
      * @param groupId
-     * @return
-     * response:
+     * @return response:
      * string=="success",成功入群,更新列表;
      * string=="error"||502,失败,友好提示;
-     *
      */
     @ApiOperation(
             value = "用户加入群组",
@@ -130,11 +124,9 @@ public class UserGroupController extends BaseController {
      * 用户退出群组
      *
      * @param groupId
-     * @return
-     * response:
+     * @return response:
      * string=="success",成功退群,更新列表;
      * string=="error"||502,失败,友好提示;
-     *
      */
     @ApiOperation(
             value = "用户退出群组",
