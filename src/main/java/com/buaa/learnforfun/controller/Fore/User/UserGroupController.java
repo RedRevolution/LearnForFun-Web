@@ -26,8 +26,7 @@ public class UserGroupController extends BaseController {
      * 获取用户已加入的群组列表
      *
      * @param userId
-     * @return
-     * response:
+     * @return response:
      * Group.groupId[0]=='O'表示这是一个官方群组，courseCode字段为课程代码；
      * Group.groupId[0]=='I'表示这是一个兴趣小组，courseCode字段为空；
      * 点进一个群组时请缓存该群组的groupId，用于群组聊天；
@@ -81,20 +80,20 @@ public class UserGroupController extends BaseController {
      * @param key
      * @return pre:暂支持群组名、创建者名、课程代码查找群组
      * response:
-     * 搜索到的有相关记录的group列表
+     * 搜索到的有相关记录的group列表,size可能为空
      */
     @ApiOperation(
             value = "用户搜索群组",
             notes = "pre:暂支持群组名、创建者名、课程代码查找群组\n" +
                     "     * response:\n" +
-                    "     * 搜索到的有相关记录的group列表"
+                    "     * 搜索到的有相关记录的group列表,size可能为空"
     )
     @ApiImplicitParams({
             @ApiImplicitParam(name = "key", value = "索引关键词", required = true, dataType = "string"),
     })
     @GetMapping("search/{key}")
     public List<Group> searchGroupByKey(@PathVariable String key) {
-        return null;
+        return userGroupService.searchGroup(key);
     }
 
     /**
@@ -103,12 +102,14 @@ public class UserGroupController extends BaseController {
      * @param groupId
      * @return response:
      * string=="success",成功入群,更新列表;
+     * string=="exist",用户已经加入过该群组;
      * string=="error"||502,失败,友好提示;
      */
     @ApiOperation(
             value = "用户加入群组",
             notes = "response:\n" +
                     "     * string==\"success\",成功入群,更新列表;\n" +
+                    "     * string==\"exist\",用户已经加入过该群组;\n" +
                     "     * string==\"error\"||502,失败,友好提示;"
     )
     @ApiImplicitParams({
@@ -117,7 +118,7 @@ public class UserGroupController extends BaseController {
     })
     @GetMapping("join/{groupId}/{userId}")
     public String joinGroupById(@PathVariable String groupId, String userId) {
-        return null;
+        return userGroupService.joinGroup(groupId, userId);
     }
 
     /**
@@ -126,12 +127,14 @@ public class UserGroupController extends BaseController {
      * @param groupId
      * @return response:
      * string=="success",成功退群,更新列表;
+     * string=="quit",用户已经不在该群组内;
      * string=="error"||502,失败,友好提示;
      */
     @ApiOperation(
             value = "用户退出群组",
             notes = "response:\n" +
                     "     * string==\"success\",成功退群,更新列表;\n" +
+                    "     * string==\"quit\",用户已经不在该群组内;\n" +
                     "     * string==\"error\"||502,失败,友好提示;"
     )
     @ApiImplicitParams({
@@ -140,7 +143,7 @@ public class UserGroupController extends BaseController {
     })
     @GetMapping("exit/{groupId}/{userId}")
     public String exitGroupById(@PathVariable String groupId, String userId) {
-        return null;
+        return userGroupService.exitGroup(groupId, userId);
     }
 
 

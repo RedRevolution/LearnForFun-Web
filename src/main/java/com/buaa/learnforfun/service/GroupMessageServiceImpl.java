@@ -17,8 +17,6 @@ public class GroupMessageServiceImpl implements GroupMessageService {
         groupMessage.setUserId(userId);
         groupMessage.setUserName(userName);
         groupMessage.setContent(message);
-        System.out.println("before\n\n\n\n\n\n");
         groupMessageMapper.insertSelective(groupMessage);
-        System.out.println("\n\n\n\n\n\n");
     }
 }

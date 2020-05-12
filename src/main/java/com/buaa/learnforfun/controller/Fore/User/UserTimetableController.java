@@ -33,15 +33,14 @@ public class UserTimetableController extends BaseController {
     })
     @GetMapping("{userId}")
     public List<Timetable> getUserTimetableById(@PathVariable String userId) {
-        return null;
+        return timetableService.findTimetable(userId);
     }
 
     /**
      * 添加一条日程
      *
      * @param timetable
-     * @return
-     * need:userId,content,deadline
+     * @return need:userId,content,deadline
      * response:
      * string=="success",添加成功刷新页面;
      * string=="error"||502,添加失败友好提示;
@@ -55,15 +54,15 @@ public class UserTimetableController extends BaseController {
     )
     @PostMapping("add")
     public String addTimetable(@RequestBody Timetable timetable) {
-        return null;
+        timetableService.create(timetable);
+        return "success";
     }
 
     /**
      * 删除一条日程
      *
      * @param timetableId
-     * @return
-     * need:timetable.id
+     * @return need:timetable.id
      * response:
      * string=="success",已删除请刷新页面;
      * string=="error"||502,删除失败友好提示;
@@ -79,16 +78,15 @@ public class UserTimetableController extends BaseController {
             @ApiImplicitParam(name = "timetableId", value = "日程id", required = true, dataType = "long"),
     })
     @GetMapping("delete/{timetableId}")
-    public String deleteTimetableById(@PathVariable String timetableId) {
-        return null;
+    public String deleteTimetableById(@PathVariable long timetableId) {
+        return timetableService.deleteTimetable(timetableId);
     }
 
     /**
      * 修改一条日程
      *
      * @param timetable
-     * @return
-     * need:id,userId,content,deadline
+     * @return need:id,userId,content,deadline
      * response:
      * string=="success",修改成功刷新页面;
      * string=="error"||502,修改失败友好提示;
@@ -102,7 +100,7 @@ public class UserTimetableController extends BaseController {
     )
     @PostMapping("modify")
     public String modifyTimetable(@RequestBody Timetable timetable) {
-        return null;
+        return timetableService.modifyTimetable(timetable);
     }
 
 }

@@ -35,15 +35,14 @@ public class GroupManageController extends BaseController {
     })
     @GetMapping("{groupId}")
     public Group getGroupInfoById(@PathVariable String groupId) {
-        return null;
+        return groupService.getGroupInfo(groupId);
     }
 
     /**
      * 查询群组成员权限
      *
      * @param groupId
-     * @return
-     * pre:拥有管理员权限的用户可以修改群组信息，添加删除群成员，发布群公告；
+     * @return pre:拥有管理员权限的用户可以修改群组信息，添加删除群成员，发布群公告；
      * 建议在用户点进群组时进行查询，缓存权限
      * response:
      * string=="nongroupmember",该用户非该群成员;
@@ -53,18 +52,18 @@ public class GroupManageController extends BaseController {
     @ApiOperation(
             value = "查询群组成员权限",
             notes = "pre:拥有管理员权限的用户可以修改群组信息，添加删除群成员，发布群公告；\n" +
-            "     * 建议在用户点进群组时进行查询，缓存权限\n" +
-            "     * response:\n" +
-            "     * string==\"nongroupmember\",该用户非该群成员;\n" +
-            "     * string==\"administrator\",该用户为该群的管理员;\n" +
-            "     * string==\"groupmember\",该用户为该群的普通成员;"
+                    "     * 建议在用户点进群组时进行查询，缓存权限\n" +
+                    "     * response:\n" +
+                    "     * string==\"nongroupmember\",该用户非该群成员;\n" +
+                    "     * string==\"administrator\",该用户为该群的管理员;\n" +
+                    "     * string==\"groupmember\",该用户为该群的普通成员;"
     )
     @ApiImplicitParams({
             @ApiImplicitParam(name = "groupId", value = "群组ID", required = true, dataType = "string"),
             @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "string"),
     })
     @GetMapping("authority/{groupId}/{userId}")
-    public String isAdministrator(@PathVariable String groupId,String userId) {
+    public String isAdministrator(@PathVariable String groupId, String userId) {
         return null;
     }
 
@@ -72,8 +71,7 @@ public class GroupManageController extends BaseController {
      * 修改群组信息
      *
      * @param group
-     * @return
-     * pre:执行该操作的用户是该群管理员，且仅可修改groupName,groupIntrod字段
+     * @return pre:执行该操作的用户是该群管理员，且仅可修改groupName,groupIntrod字段
      * need:group的所有字段
      */
     @ApiOperation(
@@ -90,8 +88,7 @@ public class GroupManageController extends BaseController {
      * 添加群成员
      *
      * @param groupId
-     * @return
-     * pre:执行该操作的用户是该群管理员
+     * @return pre:执行该操作的用户是该群管理员
      * response:
      * string=="success",添加成功;
      * string=="exist",成员已存在该群;
@@ -118,8 +115,7 @@ public class GroupManageController extends BaseController {
      * 删除群成员
      *
      * @param groupId
-     * @return
-     * pre:执行该操作的用户是该群管理员
+     * @return pre:执行该操作的用户是该群管理员
      * response:
      * string=="success",删除成功;
      * string=="nonexist",成员已不在该群;
@@ -146,8 +142,7 @@ public class GroupManageController extends BaseController {
      * 解散群组
      *
      * @param groupId
-     * @return
-     * pre:执行该操作的用户必须是该群的创建者！执行前应将当前userId与group中的
+     * @return pre:执行该操作的用户必须是该群的创建者！执行前应将当前userId与group中的
      * groupOwnerId进行对比，并提示："解散后将删除所有记录！"
      * response:
      * string=="success",解散成功请刷新页面;

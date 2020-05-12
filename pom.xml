@@ -112,6 +112,19 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+
+        <!-- selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>27.0-jre</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -127,7 +140,7 @@
                 <!--<version>1.2.0</version>-->
                 <!--<configuration>-->
                     <!--&lt;!&ndash;此处端口一定要是当前项目启动所用的端口&ndash;&gt;-->
-                    <!--<swaggerInput>http://localhost:80/v2/api-docs</swaggerInput>-->
+                    <!--<swaggerInput>http://localhost:8080/v2/api-docs</swaggerInput>-->
                     <!--<outputDir>src/docs/asciidoc/generated</outputDir>-->
                     <!--<config>-->
                         <!--&lt;!&ndash; 除了ASCIIDOC之外，还有MARKDOWN和CONFLUENCE_MARKUP可选 &ndash;&gt;-->

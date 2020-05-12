@@ -35,7 +35,7 @@ public class GroupShareController extends BaseController {
     })
     @GetMapping("{groupId}")
     public List<Share> getShareById(@PathVariable String groupId) {
-        return null;
+        return shareService.listShare(groupId);
     }
 
     /**
@@ -43,7 +43,8 @@ public class GroupShareController extends BaseController {
      *
      * @param share
      * @return
-     * need:groupId,groupName,userId,userName,topic,content;
+     * need:shareId,groupId,groupName,userId,userName,topic,content;
+     * 这里的shareId=='K'或者shareId=='R',分别代表知识和资料
      * response:
      * string=="success",发布成功刷新页面;
      * string=="error"||502,发布失败友好提示;
@@ -57,15 +58,14 @@ public class GroupShareController extends BaseController {
     )
     @PostMapping("post")
     public String postShare(@RequestBody Share share) {
-        return null;
+        return shareService.postShare(share);
     }
 
     /**
      * 修改一条分享
      *
      * @param share
-     * @return
-     * pre:进行该操作的userId==share.userId,仅可修改topic和content;
+     * @return pre:进行该操作的userId==share.userId,仅可修改topic和content;
      * need:shareId,topic,content;
      * response:
      * string=="success",修改成功刷新页面;
@@ -86,9 +86,9 @@ public class GroupShareController extends BaseController {
 
     /**
      * 删除一条分享
+     *
      * @param shareId
-     * @return
-     * pre:进行该操作的userId==share.userId
+     * @return pre:进行该操作的userId==share.userId
      * response:
      * string=="success",删除成功刷新页面;
      * string=="error"||502,删除失败友好提示;
@@ -113,8 +113,7 @@ public class GroupShareController extends BaseController {
      *
      * @param shareId
      * @param userId
-     * @return
-     * response:
+     * @return response:
      * string=="success",收藏成功刷新页面;
      * string=="exist",已经收藏过了;
      * string=="error"||502,收藏失败友好提示;
@@ -132,15 +131,14 @@ public class GroupShareController extends BaseController {
     })
     @GetMapping("collect/{shareId}/{userId}")
     public String collectShare(@PathVariable String shareId, String userId) {
-        return null;
+        return shareService.collectShare(shareId,userId);
     }
 
     /**
      * 点赞一条分享
      *
      * @param shareId
-     * @return
-     * response:
+     * @return response:
      * string=="success",点赞成功刷新页面;
      * string=="error"||502,点赞失败友好提示;
      */
@@ -177,8 +175,7 @@ public class GroupShareController extends BaseController {
      * 新增一条评论
      *
      * @param comment
-     * @return
-     * need:shareId,userId,userName,content;
+     * @return need:shareId,userId,userName,content;
      * response:
      * string=="success",添加成功刷新页面;
      * string=="error"||502,添加失败友好提示;
@@ -192,15 +189,14 @@ public class GroupShareController extends BaseController {
     )
     @PostMapping("comment")
     public String addComment(@RequestBody ShareComment comment) {
-        return null;
+        return shareService.addComment(comment);
     }
 
     /**
      * 删除一条评论
      *
      * @param commentId
-     * @return
-     * need:commentId(实例中的id字段，查看评论列表时已获取)
+     * @return need:commentId(实例中的id字段，查看评论列表时已获取)
      * response:
      * string=="success",删除成功刷新页面;
      * string=="error"||502,删除失败友好提示;

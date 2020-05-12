@@ -23,8 +23,7 @@ public class UserCollectController extends BaseController {
      * 获取个人收藏的分享列表
      *
      * @param userId
-     * @return
-     * pre:包含知识分享和资料分享
+     * @return pre:包含知识分享和资料分享
      * response:
      * Share.groupName和Share.userName对应分享群和分享人；
      * Share.shareId[0]=='K'表示这是一个知识分享，content字段是知识分享内容；
@@ -43,17 +42,15 @@ public class UserCollectController extends BaseController {
     })
     @GetMapping("{userId}")
     public List<Share> getUserCollectById(@PathVariable String userId) {
-        return null;
+        return shareService.getCollectShare(userId);
     }
 
     /**
      * 取消收藏
      *
      * @param shareId
-     * @param userId
-     * @return
-     *
-     * response:
+     * @param userId;
+     * @return response:
      * string=="success",操作成功；
      * string=="error"||502,发生错误；
      */
@@ -68,7 +65,7 @@ public class UserCollectController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "学号/工号", required = true, dataType = "string"),
     })
     @GetMapping("cancel/{shareId}/{userId}")
-    public String cancelCollectById(@PathVariable String shareId,String userId) {
+    public String cancelCollectById(@PathVariable String shareId, String userId) {
         return null;
     }
 
