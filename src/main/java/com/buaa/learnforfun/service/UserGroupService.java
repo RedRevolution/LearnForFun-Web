@@ -105,4 +105,11 @@ public class UserGroupService {
         return ans;
     }
 
+    public List<UserGroup> listGroupMember(String groupId) {
+        UserGroupExample example = new UserGroupExample();
+        example.or().andGroupIdEqualTo(groupId);
+        List<UserGroup> userGroups = userGroupMapper.selectByExample(example);
+        return userGroups;
+    }
+
 }
