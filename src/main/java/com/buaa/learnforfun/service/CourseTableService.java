@@ -118,7 +118,7 @@ public class CourseTableService {
         for (SelectCourse i : temp) {
             String courseCode = i.getCourseCode();
             CourseExample example1 = new CourseExample();
-            example.or().andCourseCodeEqualTo(courseCode);
+            example1.or().andCourseCodeEqualTo(courseCode);
             ans.addAll(courseMapper.selectByExample(example1));
         }
         return ans;

@@ -11,6 +11,8 @@ import com.buaa.learnforfun.entity.Group;
 import com.buaa.learnforfun.entity.GroupExample;
 import com.buaa.learnforfun.entity.GroupNotice;
 import com.buaa.learnforfun.entity.SelectCourse;
+import com.buaa.learnforfun.entity.UserGroup;
+import com.buaa.learnforfun.entity.UserGroupExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +46,7 @@ public class GroupService {
 //        groupMapper.deleteByPrimaryKey(group.getId())
 //
 //    }
+
+
 
 }

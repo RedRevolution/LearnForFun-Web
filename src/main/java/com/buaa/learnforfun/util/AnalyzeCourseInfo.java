@@ -71,7 +71,7 @@ public class AnalyzeCourseInfo {
         if (hasTime == false) return null;
         String ans = "";
         for (List<String> i : courseList) {
-            ans += "(";
+            ans += "[";
             ans += i.get(0);
             ans += "/";
             ans += i.get(1);
@@ -81,7 +81,7 @@ public class AnalyzeCourseInfo {
             String loc = hasLocation ? i.get(3) : location;
             loc = area + loc;
             ans += loc;
-            ans += ")";
+            ans += "]";
         }
         return ans;
     }
