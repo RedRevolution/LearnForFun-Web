@@ -3,6 +3,7 @@ package com.buaa.learnforfun.controller;
 import com.buaa.learnforfun.entity.Group;
 import com.buaa.learnforfun.entity.Timetable;
 import com.buaa.learnforfun.service.CourseTableService;
+import com.buaa.learnforfun.service.GroupNoticeService;
 import com.buaa.learnforfun.service.GroupService;
 import com.buaa.learnforfun.service.ShareService;
 import com.buaa.learnforfun.service.TimetableService;
@@ -43,4 +44,6 @@ public class BaseController {
     @Autowired
     public XiaoQuService xiaoQuService;
 
+    @Autowired
+    public GroupNoticeService groupNoticeService;
 }

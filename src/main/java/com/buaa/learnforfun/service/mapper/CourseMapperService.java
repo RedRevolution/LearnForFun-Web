@@ -15,10 +15,19 @@ public class CourseMapperService {
 
     public List<Course> find(Course template) {
         CourseExample example = new CourseExample();
-        
-        example.or().andCourseCodeEqualTo(template.getCourseCode()).andTeacherNameEqualTo(template.getTeacherName());
-        //template.or().andCourseCodeEqualTo(template.getCourseCode());
-        //template.or().andTeacherNameEqualTo(template.getTeacherName());
+
+        if (template.getCourseCode() != null) {
+            example.or().andCourseCodeEqualTo(template.getCourseCode());
+        }
+        if (template.getCourseName() != null) {
+            example.or().andCourseNameEqualTo(template.getCourseName());
+        }
+        if (template.getTeacherName() != null) {
+            example.or().andTeacherNameEqualTo(template.getTeacherName());
+        }
+        if (template.getClassInfo() != null) {
+            example.or().andClassInfoEqualTo(template.getClassInfo());
+        }
         List<Course> temp = courseMapper.selectByExample(example);
         return temp;
     }

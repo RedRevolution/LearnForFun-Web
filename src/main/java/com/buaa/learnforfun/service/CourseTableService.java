@@ -1,10 +1,8 @@
 package com.buaa.learnforfun.service;
 
 import com.buaa.learnforfun.entity.Course;
-import com.buaa.learnforfun.entity.CourseExample;
 import com.buaa.learnforfun.entity.Group;
 import com.buaa.learnforfun.entity.SelectCourse;
-import com.buaa.learnforfun.entity.SelectCourseExample;
 import com.buaa.learnforfun.entity.UserGroup;
 import com.buaa.learnforfun.service.mapper.CourseMapperService;
 import com.buaa.learnforfun.service.mapper.GroupMapperService;
@@ -77,7 +75,7 @@ public class CourseTableService {
             Group group = new Group();
             group.setGroupName(courseName + "(" + teacherName + ")");
             group.setCourseCode(courseCode);
-            Group tmp = groupMapperService.findByCourse(group);
+            Group tmp = groupMapperService.find(group).get(0);
             //加入官方群组
             UserGroup userGroup = new UserGroup();
             userGroup.setUserId(userId);
@@ -90,15 +88,15 @@ public class CourseTableService {
 
     public List<Course> getCourseTable(String userId) {
         List<Course> ans = new ArrayList<>();
-//        SelectCourseExample example = new SelectCourseExample();
-//        example.or().andStudentIdEqualTo(userId);
-//        List<SelectCourse> temp = selectCourseMapper.selectByExample(example);
-//        for (SelectCourse i : temp) {
-//            String courseCode = i.getCourseCode();
-//            CourseExample example1 = new CourseExample();
-//            example1.or().andCourseCodeEqualTo(courseCode);
-//            ans.addAll(courseMapper.selectByExample(example1));
-//        }
+        SelectCourse template = new SelectCourse();
+        template.setStudentId(userId);
+        List<SelectCourse> temp = selectCourseMapperService.find(template);
+        for (SelectCourse i : temp) {
+            Course courseT = new Course();
+            courseT.setCourseCode(i.getCourseCode());
+            courseT.setTeacherName(i.getTeacherName());
+            ans.addAll(courseMapperService.find(courseT));
+        }
         return ans;
     }
 

@@ -23,8 +23,8 @@ public class GroupNoticeController extends BaseController {
      * 获取群公告
      *
      * @param groupId
-     * @return
-     * pre:每个群暂时只有一条群公告
+     * @return pre:每个群暂时只有一条群公告
+     * response:
      */
     @ApiOperation(
             value = "获取群公告",
@@ -35,15 +35,14 @@ public class GroupNoticeController extends BaseController {
     })
     @GetMapping("{groupId}")
     public GroupNotice getGroupNoticeById(@PathVariable String groupId) {
-        return null;
+        return groupNoticeService.getGroupNoticeById(groupId);
     }
 
     /**
-     * 发布群公告
+     * 发布/修改群公告
      *
      * @param groupNotice
-     * @return
-     * pre:进行该操作的用户是该群的管理员
+     * @return pre:进行该操作的用户是该群的管理员
      * need:groupId,userId,userName,content
      * response:
      * string=="success",发布成功刷新页面;
@@ -58,31 +57,31 @@ public class GroupNoticeController extends BaseController {
                     "     * string==\"error\"||502,发布失败友好提示;")
     @PostMapping("announce")
     public String announceGroupNotice(@RequestBody GroupNotice groupNotice) {
-        return null;
+        return groupNoticeService.announceGroupNotice(groupNotice);
     }
 
-    /**
-     * 修改群公告
-     *
-     * @param groupNotice
-     * @return
-     * pre:进行该操作的用户是该群的管理员
-     * need:id,groupId,userId,userName,content
-     * response:
-     * string=="success",修改成功刷新页面;
-     * string=="error"||502,修改失败友好提示;
-     */
-    @ApiOperation(
-            value = "修改群公告",
-            notes = "pre:进行该操作的用户是该群的管理员\n" +
-                    "     * need:id,groupId,userId,userName,content\n" +
-                    "     * response:\n" +
-                    "     * string==\"success\",修改成功刷新页面;\n" +
-                    "     * string==\"error\"||502,修改失败友好提示;")
-    @PostMapping("modify")
-    public String modifyGroupNotice(@RequestBody GroupNotice groupNotice) {
-        return null;
-    }
+//    /**
+//     * 修改群公告
+//     *
+//     * @param groupNotice
+//     * @return
+//     * pre:进行该操作的用户是该群的管理员
+//     * need:id,groupId,userId,userName,content
+//     * response:
+//     * string=="success",修改成功刷新页面;
+//     * string=="error"||502,修改失败友好提示;
+//     */
+//    @ApiOperation(
+//            value = "修改群公告",
+//            notes = "pre:进行该操作的用户是该群的管理员\n" +
+//                    "     * need:id,groupId,userId,userName,content\n" +
+//                    "     * response:\n" +
+//                    "     * string==\"success\",修改成功刷新页面;\n" +
+//                    "     * string==\"error\"||502,修改失败友好提示;")
+//    @PostMapping("modify")
+//    public String modifyGroupNotice(@RequestBody GroupNotice groupNotice) {
+//        return null;
+//    }
 
 
 }

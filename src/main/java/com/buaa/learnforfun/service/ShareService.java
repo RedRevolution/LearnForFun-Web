@@ -8,7 +8,7 @@ import com.buaa.learnforfun.entity.ShareComment;
 import com.buaa.learnforfun.entity.ShareExample;
 import com.buaa.learnforfun.entity.UserCollect;
 import com.buaa.learnforfun.entity.UserCollectExample;
-import com.sun.javafx.UnmodifiableArrayList;
+import com.buaa.learnforfun.service.mapper.ShareMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,9 @@ public class ShareService {
     ShareCommentMapper shareCommentMapper;
     @Autowired
     UserCollectMapper userCollectMapper;
+    @Autowired
+    ShareMapperService shareMapperService;
+
 
     public List<Share> listShare(String groupId) {
         ShareExample example = new ShareExample();
@@ -38,6 +41,13 @@ public class ShareService {
         String shareId = share.getShareId() + dtf.format(LocalDateTime.now()) + share.getUserId();
         share.setShareId(shareId);
         shareMapper.insertSelective(share);
+        return "success";
+    }
+
+    public String deleteShare(String shareId) {
+        Share share = new Share();
+        share.setShareId(shareId);
+        shareMapperService.delete(share);
         return "success";
     }
 

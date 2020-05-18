@@ -2,6 +2,8 @@ package com.buaa.learnforfun.controller.Fore.Group;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.buaa.learnforfun.entity.Group;
+import com.buaa.learnforfun.entity.GroupMessage;
 import com.buaa.learnforfun.service.GroupMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +37,12 @@ public class WebSocketController {
         String userId = (String) jsonObject.get("userId");
         String userName = (String) jsonObject.get("userName");
         String content = (String) jsonObject.get("content");
-        groupMessageService.addGroupMessage(groupId, userId, userName, content);
+        GroupMessage groupMessage = new GroupMessage();
+        groupMessage.setGroupId(groupId);
+        groupMessage.setUserId(userId);
+        groupMessage.setUserName(userName);
+        groupMessage.setContent(content);
+        groupMessageService.addGroupMessage(groupMessage);
         //得到当前群的所有会话，也就是所有用户
         List<Session> sessionList = groupMemberInfoMap.get(groupId);
         // 遍历Session集合给每个会话发送文本消息

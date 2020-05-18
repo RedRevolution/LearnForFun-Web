@@ -39,6 +39,10 @@ public class GroupManageController extends BaseController {
     }
 
     /**
+     * 查看群成员列表以及相应的管理权限
+     */
+
+    /**
      * 查询群组成员权限
      *
      * @param groupId
@@ -64,8 +68,13 @@ public class GroupManageController extends BaseController {
     })
     @GetMapping("authority/{groupId}/{userId}")
     public String isAdministrator(@PathVariable String groupId, String userId) {
-        return null;
+        return groupService.isAdministrator(groupId, userId);
     }
+
+
+    /**
+     * 修改群组成员权限
+     */
 
     /**
      * 修改群组信息
@@ -108,8 +117,7 @@ public class GroupManageController extends BaseController {
     })
     @GetMapping("add/{groupId}/{userId}")
     public String addGroupMemberById(@PathVariable String groupId, String userId) {
-
-        return null;
+        return groupService.addGroupMember(groupId, userId);
     }
 
     /**
@@ -136,8 +144,7 @@ public class GroupManageController extends BaseController {
     })
     @GetMapping("delete/{groupId}/{userId}")
     public String delelteGroupMemberById(@PathVariable String groupId, String userId) {
-
-        return null;
+        return groupService.delelteGroupMember(groupId, userId);
     }
 
     /**
@@ -163,7 +170,7 @@ public class GroupManageController extends BaseController {
     })
     @GetMapping("dismiss/{groupId}")
     public String dismissGroupById(@PathVariable String groupId) {
-        return null;
+        return groupService.dismissGroup(groupId);
     }
 
 }
