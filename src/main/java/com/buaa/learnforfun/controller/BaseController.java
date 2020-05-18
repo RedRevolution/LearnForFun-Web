@@ -8,6 +8,7 @@ import com.buaa.learnforfun.service.ShareService;
 import com.buaa.learnforfun.service.TimetableService;
 import com.buaa.learnforfun.service.UserGroupService;
 import com.buaa.learnforfun.service.UserService;
+import com.buaa.learnforfun.service.XiaoQuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,5 +39,8 @@ public class BaseController {
 
     @Autowired
     public CourseTableService courseTableService;
+
+    @Autowired
+    public XiaoQuService xiaoQuService;
 
 }

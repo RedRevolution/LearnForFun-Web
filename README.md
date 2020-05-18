@@ -103,6 +103,7 @@ create table tbl_select_course(
 	id bigint(20) NOT NULL AUTO_INCREMENT,
     student_id varchar(16) NOT NULL COMMENT '学号',
     course_code varchar(16) NOT NULL COMMENT '课程代码',
+    teacher_name varchar(16) NOT NULL COMMENT '授课教师',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 # 经常查询学生的选课情况
@@ -138,7 +139,7 @@ ALTER TABLE sys_message ADD INDEX idx (user_id);
 create table tbl_group_info(
     id bigint(20) NOT NULL AUTO_INCREMENT,
 	group_id varchar(32) NOT NULL COMMENT '群组ID',
-	group_name varchar(16) NOT NULL COMMENT '群组名',
+	group_name varchar(32) NOT NULL COMMENT '群组名',
     group_owner_id varchar(16) NOT NULL COMMENT '创建人ID',
     group_owner_name varchar(16) NOT NULL COMMENT '创建人姓名',
 	group_introd varchar(256) NOT NULL DEFAULT '' COMMENT '群组介绍',

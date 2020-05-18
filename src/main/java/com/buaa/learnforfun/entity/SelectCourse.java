@@ -7,6 +7,8 @@ public class SelectCourse {
 
     private String courseCode;
 
+    private String teacherName;
+
     public Long getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class SelectCourse {
 
     public void setCourseCode(String courseCode) {
         this.courseCode = courseCode == null ? null : courseCode.trim();
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 }

@@ -1,37 +1,53 @@
 package com.buaa.learnforfun.util;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.springframework.web.context.request.RequestScope;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class XiaoAi {
-    Cookie cookies = new Cookie("cnonce","808116");
-    CookieStore cookieStore = new BasicCookieStore();
-    BasicCookieStore cookie = new BasicCookieStore().addCookies();
-
-    //1.打开浏览器
-    CloseableHttpClient httpClient = HttpClients.createDefault();
-    //2.声明get请求
-    HttpGet httpGet = new HttpGet("http://www.baidu.com/s?wd=java");
-    //3.发送请求
-    CloseableHttpResponse response = httpClient.execute(httpGet);
-    //4.判断状态码
-        if(response.getStatusLine().getStatusCode()==200){
-        HttpEntity entity = response.getEntity();
-        //使用工具类EntityUtils，从响应中取出实体表示的内容并转换成字符串
-        String string = EntityUtils.toString(entity, "utf-8");
-        System.out.println(string);
+    public static String getResponse(String question) {
+        BufferedReader in = null;
+        try {
+            String ini = "{'sessionId':'09e2aca4d0a541f88eecc77c03a8b393','robotId':'webbot','userId':'462d49d3742745bb98f7538c42f9f874','body':{'content':'" + question + "'},'type':'txt'}&ts=1529917589648";
+            String url = "http://i.xiaoi.com/robot/webrobot?&callback=__webrobot_processMsg&data=" + URLEncoder.encode(ini, "UTF-8");
+            String cookieString = "cnonce:808116;nonce:273765;" +
+                    "sig:0c3021aa5552fe597bb55448b40ad2a90d2dead5;" +
+                    "XISESSIONID:hlbnd1oiwar01dfje825gavcn;" +
+                    "hibext_instdsigdip2:1";
+            URL xiaoAiurl = new URL(url);
+            // 打开和URL之间的连接
+            URLConnection connection = xiaoAiurl.openConnection();
+            connection.setRequestProperty("Cookie", cookieString);
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+            connection.connect();
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuffer sb = new StringBuffer();
+            String line;
+            while ((line = in.readLine()) != null) sb.append(line);
+            String response = sb.toString();
+            System.out.println(response);
+            Pattern p = Pattern.compile("\"fontColor\":0,\"content\":\"(.*?)\"");
+            Matcher m = p.matcher(response);
+            m.find();m.find();
+            String ans = m.group(1);
+            return ans.substring(0,ans.length()-4);
+        } catch (Exception e1) {
+            throw new RuntimeException(e1);
+        } finally {   // 使用finally块来关闭输入流
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
-    //5.关闭资源
-        response.close();
-        httpClient.close();
-
 
 }

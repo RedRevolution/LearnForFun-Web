@@ -2,9 +2,6 @@ package com.buaa.learnforfun.dao;
 
 import com.buaa.learnforfun.entity.User;
 import com.buaa.learnforfun.entity.UserExample;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 public interface UserMapper {
