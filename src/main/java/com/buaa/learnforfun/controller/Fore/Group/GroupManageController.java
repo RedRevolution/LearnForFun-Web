@@ -2,7 +2,7 @@ package com.buaa.learnforfun.controller.Fore.Group;
 
 import com.buaa.learnforfun.controller.BaseController;
 import com.buaa.learnforfun.entity.Group;
-import com.buaa.learnforfun.entity.GroupNotice;
+import com.buaa.learnforfun.entity.UserGroup;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 
 /**
  * 前台群组管理功能控制器
@@ -28,8 +29,7 @@ public class GroupManageController extends BaseController {
      * @param groupId
      * @return
      */
-    @ApiOperation(
-            value = "获取群组基本信息")
+    @ApiOperation(value = "获取群组基本信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "groupId", value = "群组ID", required = true, dataType = "string"),
     })
@@ -39,8 +39,36 @@ public class GroupManageController extends BaseController {
     }
 
     /**
-     * 查看群成员列表以及相应的管理权限
+     * 修改群组基本信息*
+     *
+     * @param group
+     * @return
+     * pre:执行该操作的用户是该群管理员，且仅可修改groupName,groupIntrod字段
+     * need:post的group实体应该包含所有字段的完整信息
      */
+    @ApiOperation(
+            value = "修改群组基本信息*",
+            notes = "pre:执行该操作的用户是该群管理员，且仅可修改groupName,groupIntrod字段\n" +
+                    "     * need:post的group实体应该包含所有字段的完整信息"
+    )
+    @PostMapping("modify")
+    public String modifyGroupInfo(@RequestBody Group group) {
+        return groupService.modifyGroupInfo(group);
+    }
+
+    /**
+     * 查看群成员列表(包含相应的管理权限)*
+     */
+    @ApiOperation(
+            value = "查看群成员列表(包含相应的管理权限)*"
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "groupId", value = "群组ID", required = true, dataType = "string"),
+    })
+    @GetMapping("member/{groupId}")
+    public List<UserGroup> getGroupMember(@PathVariable String groupId) {
+        return groupService.getGroupMember(groupId);
+    }
 
     /**
      * 查询群组成员权限
@@ -71,53 +99,30 @@ public class GroupManageController extends BaseController {
         return groupService.isAdministrator(groupId, userId);
     }
 
-
     /**
-     * 修改群组成员权限
-     */
-
-    /**
-     * 修改群组信息
+     * 添加群成员*
      *
-     * @param group
-     * @return pre:执行该操作的用户是该群管理员，且仅可修改groupName,groupIntrod字段
-     * need:group的所有字段
-     */
-    @ApiOperation(
-            value = "修改群组信息",
-            notes = "pre:执行该操作的用户是该群管理员，且仅可修改groupName,groupIntrod字段\n" +
-                    "     * need:group的所有字段"
-    )
-    @PostMapping("modify")
-    public String modifyGroupInfoById(@RequestBody Group group) {
-        return null;
-    }
-
-    /**
-     * 添加群成员
-     *
-     * @param groupId
-     * @return pre:执行该操作的用户是该群管理员
+     * @param
+     * @return
+     * pre:执行该操作的用户是该群管理员
+     * need:UserGroup的所有字段,isAdmin一般默认为false
      * response:
      * string=="success",添加成功;
      * string=="exist",成员已存在该群;
      * string=="error"||502,添加失败友好提示;
      */
     @ApiOperation(
-            value = "添加群成员",
+            value = "添加群成员*",
             notes = "pre:执行该操作的用户是该群管理员\n" +
+                    "     * need:UserGroup的所有字段,isAdmin一般默认为false\n" +
                     "     * response:\n" +
                     "     * string==\"success\",添加成功;\n" +
                     "     * string==\"exist\",成员已存在该群;\n" +
                     "     * string==\"error\"||502,添加失败友好提示;"
     )
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "groupId", value = "群组ID", required = true, dataType = "string"),
-            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "string"),
-    })
-    @GetMapping("add/{groupId}/{userId}")
-    public String addGroupMemberById(@PathVariable String groupId, String userId) {
-        return groupService.addGroupMember(groupId, userId);
+    @PostMapping("member/add")
+    public String addGroupMemberById(@RequestBody UserGroup userGroup) {
+        return groupService.addGroupMember(userGroup);
     }
 
     /**
@@ -142,7 +147,7 @@ public class GroupManageController extends BaseController {
             @ApiImplicitParam(name = "groupId", value = "群组ID", required = true, dataType = "string"),
             @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "string"),
     })
-    @GetMapping("delete/{groupId}/{userId}")
+    @GetMapping("member/delete/{groupId}/{userId}")
     public String delelteGroupMemberById(@PathVariable String groupId, String userId) {
         return groupService.delelteGroupMember(groupId, userId);
     }

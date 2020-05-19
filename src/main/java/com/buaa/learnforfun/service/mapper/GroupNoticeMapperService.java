@@ -40,7 +40,7 @@ public class GroupNoticeMapperService {
         } else {
             List<GroupNotice> temp = find(groupNotice);
             for (GroupNotice i : temp) {
-                groupNoticeMapper.deleteByPrimaryKey(i.getId());
+                delete(i);
             }
         }
     }

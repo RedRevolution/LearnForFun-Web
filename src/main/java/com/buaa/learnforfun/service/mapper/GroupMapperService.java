@@ -61,6 +61,9 @@ public class GroupMapperService {
 
     public void delete(Group group) {
         if (group.getId() != null) {
+            //官方群组不能被删除
+            if (group.getGroupId().charAt(0) == 'O') return;
+            //从群组列表中删除
             groupMapper.deleteByPrimaryKey(group.getId());
             //删除群消息记录
             GroupMessage groupMessage = new GroupMessage();
@@ -84,6 +87,10 @@ public class GroupMapperService {
                 delete(i);
             }
         }
+    }
+
+    public void update(Group group) {
+        groupMapper.updateByPrimaryKeySelective(group);
     }
 
 }

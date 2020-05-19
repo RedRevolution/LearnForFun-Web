@@ -60,7 +60,7 @@ public class CourseTableService {
                 Group group = new Group();
                 group.setGroupId(groupId);
                 group.setGroupName(courseName + "(" + teacherName + ")");
-                group.setCourseCode(courseCode);
+               // group.setCourseCode(courseCode);
                 group.setGroupOwnerId(adminId);
                 group.setGroupOwnerName("趣学管理员");
                 groupMapperService.add(group);
@@ -68,8 +68,8 @@ public class CourseTableService {
             //学生选课
             SelectCourse selectCourse = new SelectCourse();
             selectCourse.setStudentId(userId);
-            selectCourse.setCourseCode(courseCode);
-            selectCourse.setTeacherName(teacherName);
+//            selectCourse.setCourseCode(courseCode);
+//            selectCourse.setTeacherName(teacherName);
             selectCourseMapperService.add(selectCourse);
             //查找官方群组
             Group group = new Group();
@@ -93,8 +93,8 @@ public class CourseTableService {
         List<SelectCourse> temp = selectCourseMapperService.find(template);
         for (SelectCourse i : temp) {
             Course courseT = new Course();
-            courseT.setCourseCode(i.getCourseCode());
-            courseT.setTeacherName(i.getTeacherName());
+//            courseT.setCourseCode(i.getCourseCode());
+//            courseT.setTeacherName(i.getTeacherName());
             ans.addAll(courseMapperService.find(courseT));
         }
         return ans;

@@ -66,7 +66,7 @@ public class UserCollectController extends BaseController {
     })
     @GetMapping("cancel/{shareId}/{userId}")
     public String cancelCollectById(@PathVariable String shareId, String userId) {
-        return null;
+        return shareService.cancelCollectById(shareId, userId);
     }
 
 }

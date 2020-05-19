@@ -5,9 +5,7 @@ public class SelectCourse {
 
     private String studentId;
 
-    private String courseCode;
-
-    private String teacherName;
+    private String courseId;
 
     public Long getId() {
         return id;
@@ -25,19 +23,11 @@ public class SelectCourse {
         this.studentId = studentId == null ? null : studentId.trim();
     }
 
-    public String getCourseCode() {
-        return courseCode;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode == null ? null : courseCode.trim();
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName == null ? null : teacherName.trim();
+    public void setCourseId(String courseId) {
+        this.courseId = courseId == null ? null : courseId.trim();
     }
 }

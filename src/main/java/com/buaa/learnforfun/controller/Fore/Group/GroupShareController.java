@@ -42,8 +42,7 @@ public class GroupShareController extends BaseController {
      * 发布一条分享
      *
      * @param share
-     * @return
-     * need:shareId,groupId,groupName,userId,userName,topic,content;
+     * @return need:shareId,groupId,groupName,userId,userName,topic,content;
      * 这里的shareId=='K'或者shareId=='R',分别代表知识和资料
      * response:
      * string=="success",发布成功刷新页面;
@@ -105,7 +104,7 @@ public class GroupShareController extends BaseController {
     })
     @GetMapping("delete/{shareId}")
     public String deleteShare(@PathVariable String shareId) {
-        return null;
+        return shareService.deleteShare(shareId);
     }
 
     /**
@@ -131,7 +130,7 @@ public class GroupShareController extends BaseController {
     })
     @GetMapping("collect/{shareId}/{userId}")
     public String collectShare(@PathVariable String shareId, String userId) {
-        return shareService.collectShare(shareId,userId);
+        return shareService.collectShare(shareId, userId);
     }
 
     /**
@@ -143,7 +142,7 @@ public class GroupShareController extends BaseController {
      * string=="error"||502,点赞失败友好提示;
      */
     @ApiOperation(
-            value = "",
+            value = "点赞一条分享",
             notes = "response:\n" +
                     "     * string==\"success\",点赞成功刷新页面;\n" +
                     "     * string==\"error\"||502,点赞失败友好提示;"
@@ -153,7 +152,7 @@ public class GroupShareController extends BaseController {
     })
     @GetMapping("favor/{shareId}")
     public String favorShare(@PathVariable String shareId) {
-        return null;
+        return shareService.favorShare(shareId);
     }
 
     /**
@@ -168,7 +167,7 @@ public class GroupShareController extends BaseController {
     })
     @GetMapping("comment/{shareId}")
     public List<ShareComment> getCommentByshareId(@PathVariable String shareId) {
-        return null;
+        return shareService.getCommentByshareId(shareId);
     }
 
     /**
@@ -213,7 +212,31 @@ public class GroupShareController extends BaseController {
     })
     @GetMapping("comment/delete/{commentId}")
     public String deleteComment(@PathVariable long commentId) {
-        return null;
+        return shareService.deleteComment(commentId);
+    }
+
+    /**
+     * 查看是否收藏该分享*
+     *
+     * @param shareId
+     * @param userId
+     * @return response:
+     * string=="collected",收藏过;
+     * string=="uncollected",没有收藏过;
+     */
+    @ApiOperation(
+            value = "查看是否收藏该分享*",
+            notes = "response:\n" +
+                    "     * string==\"collected\",收藏过;\n" +
+                    "     * string==\"uncollected\",没有收藏过;"
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "shareId", value = "分享ID", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "userId", value = "收藏人ID", required = true, dataType = "string"),
+    })
+    @GetMapping("collect/check/{shareId}/{userId}")
+    public String checkCollect(@PathVariable String shareId, String userId) {
+        return shareService.checkCollect(shareId, userId);
     }
 
 }

@@ -4,12 +4,15 @@ import com.buaa.learnforfun.dao.GroupMessageMapper;
 import com.buaa.learnforfun.entity.Group;
 import com.buaa.learnforfun.entity.GroupMessage;
 import com.buaa.learnforfun.entity.Share;
+import com.buaa.learnforfun.entity.User;
 import com.buaa.learnforfun.entity.UserCollect;
 import com.buaa.learnforfun.entity.UserGroup;
 import com.buaa.learnforfun.service.mapper.GroupMapperService;
 import com.buaa.learnforfun.service.mapper.GroupMessageMapperService;
 import com.buaa.learnforfun.service.mapper.ShareMapperService;
 import com.buaa.learnforfun.service.mapper.UserGroupMapperService;
+import com.buaa.learnforfun.service.mapper.UserMapperService;
+import org.omg.CORBA.portable.ValueOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +43,28 @@ public class GroupService {
         return groupMapperService.find(template).get(0);
     }
 
+    public String modifyGroupInfo(Group group) {
+        groupMapperService.update(group);
+        return "success";
+    }
+
+    public List<UserGroup> getGroupMember(String groupId) {
+        UserGroup userGroup = new UserGroup();
+        userGroup.setGroupId(groupId);
+        return userGroupMapperService.find(userGroup);
+    }
+
+    //管理台用于设置或修改管理权限
+    public void modifyPri(String groupId, String userId, boolean isAdmin) {
+        UserGroup userGroup = new UserGroup();
+        userGroup.setGroupId(groupId);
+        userGroup.setUserId(userId);
+        List<UserGroup> temp = userGroupMapperService.find(userGroup);
+        UserGroup ug = temp.get(0);
+        ug.setIsAdministrator(isAdmin);
+        userGroupMapperService.update(ug);
+    }
+
     public String isAdministrator(String groupId, String userId) {
         UserGroup userGroup = new UserGroup();
         userGroup.setUserId(userId);
@@ -50,13 +75,9 @@ public class GroupService {
         else return "groupmember";
     }
 
-    public String addGroupMember(String groupId, String userId) {
-        UserGroup userGroup = new UserGroup();
-        userGroup.setUserId(userId);
-        userGroup.setGroupId(groupId);
+    public String addGroupMember(UserGroup userGroup) {
         List<UserGroup> temp = userGroupMapperService.find(userGroup);
         if (temp.size() != 0) return "exist";
-        userGroup.setIsAdministrator(false);
         userGroupMapperService.add(userGroup);
         return "success";
     }

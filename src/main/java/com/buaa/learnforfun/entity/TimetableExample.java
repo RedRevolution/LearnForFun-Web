@@ -1,7 +1,6 @@
 package com.buaa.learnforfun.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TimetableExample {
@@ -315,52 +314,62 @@ public class TimetableExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineEqualTo(Date value) {
+        public Criteria andDeadlineEqualTo(String value) {
             addCriterion("deadline =", value, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineNotEqualTo(Date value) {
+        public Criteria andDeadlineNotEqualTo(String value) {
             addCriterion("deadline <>", value, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineGreaterThan(Date value) {
+        public Criteria andDeadlineGreaterThan(String value) {
             addCriterion("deadline >", value, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineGreaterThanOrEqualTo(Date value) {
+        public Criteria andDeadlineGreaterThanOrEqualTo(String value) {
             addCriterion("deadline >=", value, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineLessThan(Date value) {
+        public Criteria andDeadlineLessThan(String value) {
             addCriterion("deadline <", value, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineLessThanOrEqualTo(Date value) {
+        public Criteria andDeadlineLessThanOrEqualTo(String value) {
             addCriterion("deadline <=", value, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineIn(List<Date> values) {
+        public Criteria andDeadlineLike(String value) {
+            addCriterion("deadline like", value, "deadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeadlineNotLike(String value) {
+            addCriterion("deadline not like", value, "deadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeadlineIn(List<String> values) {
             addCriterion("deadline in", values, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineNotIn(List<Date> values) {
+        public Criteria andDeadlineNotIn(List<String> values) {
             addCriterion("deadline not in", values, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineBetween(Date value1, Date value2) {
+        public Criteria andDeadlineBetween(String value1, String value2) {
             addCriterion("deadline between", value1, value2, "deadline");
             return (Criteria) this;
         }
 
-        public Criteria andDeadlineNotBetween(Date value1, Date value2) {
+        public Criteria andDeadlineNotBetween(String value1, String value2) {
             addCriterion("deadline not between", value1, value2, "deadline");
             return (Criteria) this;
         }

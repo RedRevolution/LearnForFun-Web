@@ -19,6 +19,10 @@ public class ShareMapperService {
     @Autowired
     UserCollectMapperService userCollectMapperService;
 
+    public void add(Share share){
+        shareMapper.insertSelective(share);
+    }
+
     public List<Share> find(Share template) {
         ShareExample example = new ShareExample();
         if (template.getShareId() != null) {
@@ -62,6 +66,10 @@ public class ShareMapperService {
                 delete(i);
             }
         }
+    }
+
+    public void update(Share share) {
+        shareMapper.updateByPrimaryKeySelective(share);
     }
 
 }

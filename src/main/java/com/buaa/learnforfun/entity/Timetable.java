@@ -1,7 +1,5 @@
 package com.buaa.learnforfun.entity;
 
-import java.util.Date;
-
 public class Timetable {
     private Long id;
 
@@ -9,7 +7,7 @@ public class Timetable {
 
     private String content;
 
-    private Date deadline;
+    private String deadline;
 
     public Long getId() {
         return id;
@@ -35,11 +33,11 @@ public class Timetable {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getDeadline() {
+    public String getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
+    public void setDeadline(String deadline) {
+        this.deadline = deadline == null ? null : deadline.trim();
     }
 }

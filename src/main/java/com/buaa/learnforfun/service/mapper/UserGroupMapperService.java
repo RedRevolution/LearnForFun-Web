@@ -22,6 +22,9 @@ public class UserGroupMapperService {
         if (template.getUserId() != null) {
             example.or().andUserIdEqualTo(template.getUserId());
         }
+        if (template.getUserName() != null) {
+            example.or().andUserNameEqualTo(template.getUserName());
+        }
         if (template.getGroupId() != null) {
             example.or().andGroupIdEqualTo(template.getGroupId());
         }
@@ -34,9 +37,13 @@ public class UserGroupMapperService {
         } else {
             List<UserGroup> temp = find(template);
             for (UserGroup i : temp) {
-                userGroupMapper.deleteByPrimaryKey(i.getId());
+                delete(i);
             }
         }
+    }
+
+    public void update(UserGroup userGroup) {
+        userGroupMapper.updateByPrimaryKeySelective(userGroup);
     }
 
 }

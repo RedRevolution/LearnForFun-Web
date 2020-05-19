@@ -22,12 +22,8 @@ public class SelectCourseMapperService {
         if (template.getStudentId() != null) {
             example.or().andStudentIdEqualTo(template.getStudentId());
         }
-        if (template.getCourseCode() != null) {
-            example.or().andCourseCodeEqualTo(template.getCourseCode());
-
-        }
-        if (template.getTeacherName() != null) {
-            example.or().andTeacherNameEqualTo(template.getTeacherName());
+        if (template.getCourseId() != null) {
+            example.or().andCourseIdEqualTo(template.getCourseId());
         }
         return selectCourseMapper.selectByExample(example);
     }

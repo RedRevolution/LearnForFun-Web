@@ -4,8 +4,7 @@
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.SelectCourse">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="student_id" jdbcType="VARCHAR" property="studentId" />
-    <result column="course_code" jdbcType="VARCHAR" property="courseCode" />
-    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="course_id" jdbcType="VARCHAR" property="courseId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -37,7 +36,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, student_id, course_code, teacher_name
+    id, student_id, course_id
   </sql>
   <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.SelectCourseExample" resultMap="BaseResultMap">
     select
@@ -65,10 +64,8 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SelectCourse" useGeneratedKeys="true">
-    insert into tbl_select_course (student_id, course_code, teacher_name
-      )
-    values (#{studentId,jdbcType=VARCHAR}, #{courseCode,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}
-      )
+    insert into tbl_select_course (student_id, course_id)
+    values (#{studentId,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SelectCourse" useGeneratedKeys="true">
     insert into tbl_select_course
@@ -76,22 +73,16 @@
       <if test="studentId != null">
         student_id,
       </if>
-      <if test="courseCode != null">
-        course_code,
-      </if>
-      <if test="teacherName != null">
-        teacher_name,
+      <if test="courseId != null">
+        course_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
         #{studentId,jdbcType=VARCHAR},
       </if>
-      <if test="courseCode != null">
-        #{courseCode,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherName != null">
-        #{teacherName,jdbcType=VARCHAR},
+      <if test="courseId != null">
+        #{courseId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,11 +92,8 @@
       <if test="studentId != null">
         student_id = #{studentId,jdbcType=VARCHAR},
       </if>
-      <if test="courseCode != null">
-        course_code = #{courseCode,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherName != null">
-        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -113,8 +101,7 @@
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.SelectCourse">
     update tbl_select_course
     set student_id = #{studentId,jdbcType=VARCHAR},
-      course_code = #{courseCode,jdbcType=VARCHAR},
-      teacher_name = #{teacherName,jdbcType=VARCHAR}
+      course_id = #{courseId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

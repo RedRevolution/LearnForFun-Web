@@ -22,8 +22,7 @@ public class GroupMessageController extends BaseController {
      * 获取群组最新的count条聊天记录
      *
      * @param groupId
-     * @return
-     * response:
+     * @return response:
      * 可能不够count条，以返回的JSON中实际数目为准
      */
     @ApiOperation(
@@ -37,7 +36,7 @@ public class GroupMessageController extends BaseController {
     })
     @GetMapping("{groupId}/{count}")
     public List<GroupMessage> getGroupMessageRecord(@PathVariable String groupId, int count) {
-        return null;
+        return groupMessageService.getGroupMessageRecord(groupId, count);
     }
 
     /**
@@ -46,8 +45,7 @@ public class GroupMessageController extends BaseController {
      * @param groupId
      * @param messageId
      * @param count
-     * @return
-     * need:groupId,messageId(就是实例中的id字段),count
+     * @return need:groupId,messageId(就是实例中的id字段),count
      * response:
      * 可能不够count条，以返回的JSON中实际数目为准
      */
@@ -64,7 +62,7 @@ public class GroupMessageController extends BaseController {
     })
     @GetMapping("{groupId}/{messageId}/{count}")
     public List<GroupMessage> getRecordByMessageId(@PathVariable String groupId, long messageId, int count) {
-        return null;
+        return groupMessageService.getRecordByMessageId(groupId, messageId, count);
     }
 
 }

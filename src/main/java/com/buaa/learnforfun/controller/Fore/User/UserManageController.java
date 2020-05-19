@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/user")
 public class UserManageController extends BaseController {
-    @GetMapping("hello")
-    public String hello() {
-        return "hello,red!";
-    }
 
     /**
      * 获取个人信息

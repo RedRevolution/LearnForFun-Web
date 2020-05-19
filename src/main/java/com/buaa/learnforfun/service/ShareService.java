@@ -8,7 +8,9 @@ import com.buaa.learnforfun.entity.ShareComment;
 import com.buaa.learnforfun.entity.ShareExample;
 import com.buaa.learnforfun.entity.UserCollect;
 import com.buaa.learnforfun.entity.UserCollectExample;
+import com.buaa.learnforfun.service.mapper.ShareCommentMapperService;
 import com.buaa.learnforfun.service.mapper.ShareMapperService;
+import com.buaa.learnforfun.service.mapper.UserCollectMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,27 +22,23 @@ import java.util.List;
 @Service
 public class ShareService {
     @Autowired
-    ShareMapper shareMapper;
-    @Autowired
-    ShareCommentMapper shareCommentMapper;
-    @Autowired
-    UserCollectMapper userCollectMapper;
-    @Autowired
     ShareMapperService shareMapperService;
-
+    @Autowired
+    UserCollectMapperService userCollectMapperService;
+    @Autowired
+    ShareCommentMapperService shareCommentMapperService;
 
     public List<Share> listShare(String groupId) {
-        ShareExample example = new ShareExample();
-        example.or().andGroupIdEqualTo(groupId);
-        List<Share> ans = shareMapper.selectByExample(example);
-        return ans;
+        Share share = new Share();
+        share.setGroupId(groupId);
+        return shareMapperService.find(share);
     }
 
     public String postShare(Share share) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         String shareId = share.getShareId() + dtf.format(LocalDateTime.now()) + share.getUserId();
         share.setShareId(shareId);
-        shareMapper.insertSelective(share);
+        shareMapperService.add(share);
         return "success";
     }
 
@@ -52,19 +50,32 @@ public class ShareService {
     }
 
     public String addComment(ShareComment shareComment) {
-        shareCommentMapper.insertSelective(shareComment);
+        shareCommentMapperService.add(shareComment);
         return "success";
     }
 
+    public String favorShare(String shareId) {
+        Share share = new Share();
+        share.setShareId(shareId);
+        List<Share> temp = shareMapperService.find(share);
+        Share tmp = temp.get(0);
+        int count = tmp.getLikesNum();
+        tmp.setLikesNum(count + 1);
+        shareMapperService.update(tmp);
+        return "success";
+    }
+
+
     public String collectShare(String shareId, String userId) {
-        UserCollectExample example = new UserCollectExample();
-        example.or().andUserIdEqualTo(userId).andShareIdEqualTo(shareId);
-        List<UserCollect> temp = userCollectMapper.selectByExample(example);
+        UserCollect userCollect = new UserCollect();
+        userCollect.setShareId(shareId);
+        userCollect.setUserId(userId);
+        List<UserCollect> temp = userCollectMapperService.find(userCollect);
         if (temp.size() == 0) {
-            UserCollect userCollect = new UserCollect();
-            userCollect.setUserId(userId);
-            userCollect.setShareId(shareId);
-            userCollectMapper.insertSelective(userCollect);
+            UserCollect tmp = new UserCollect();
+            tmp.setUserId(userId);
+            tmp.setShareId(shareId);
+            userCollectMapperService.add(tmp);
             return "success";
         } else {
             return "exist";
@@ -72,16 +83,48 @@ public class ShareService {
     }
 
     public List<Share> getCollectShare(String userId) {
-        UserCollectExample example = new UserCollectExample();
-        example.or().andUserIdEqualTo(userId);
-        List<UserCollect> collects = userCollectMapper.selectByExample(example);
+        UserCollect userCollect = new UserCollect();
+        userCollect.setUserId(userId);
+        List<UserCollect> temp = userCollectMapperService.find(userCollect);
         List<Share> ans = new ArrayList<>();
-        for (UserCollect i : collects) {
-            ShareExample example1 = new ShareExample();
-            example1.or().andShareIdEqualTo(i.getShareId());
-            ans.addAll(shareMapper.selectByExample(example1));
+        for (UserCollect i : temp) {
+            Share share = new Share();
+            share.setShareId(i.getShareId());
+            ans.addAll(shareMapperService.find(share));
         }
         return ans;
+    }
+
+    public String cancelCollectById(String shareId, String userId) {
+        UserCollect userCollect = new UserCollect();
+        userCollect.setShareId(shareId);
+        userCollect.setUserId(userId);
+        userCollectMapperService.delete(userCollect);
+        return "success";
+    }
+
+    public List<ShareComment> getCommentByshareId(String shareId) {
+        ShareComment shareComment = new ShareComment();
+        shareComment.setShareId(shareId);
+        return shareCommentMapperService.find(shareComment);
+    }
+
+    public String deleteComment(long commentId) {
+        ShareComment shareComment = new ShareComment();
+        shareComment.setId(commentId);
+        shareCommentMapperService.delete(shareComment);
+        return "success";
+    }
+
+    public String checkCollect(String shareId, String userId) {
+        UserCollect userCollect = new UserCollect();
+        userCollect.setUserId(userId);
+        userCollect.setShareId(shareId);
+        if (userCollectMapperService.find(userCollect).size() == 0) {
+            return "uncollected";
+        } else {
+            return "collected";
+        }
     }
 
 }

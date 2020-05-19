@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.buaa.learnforfun.dao.TimetableMapper">
-  <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.Timetable">
+<mapper namespace="com.buaa.learnforfun.dao.ChatbotMapper">
+  <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.Chatbot">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="deadline" jdbcType="VARCHAR" property="deadline" />
+    <result column="ask" jdbcType="VARCHAR" property="ask" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -37,16 +36,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, content, deadline
+    id, ask, answer
   </sql>
-  <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.TimetableExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.ChatbotExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from tbl_user_timetable
+    from sys_chatbot
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -57,64 +56,52 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tbl_user_timetable
+    from sys_chatbot
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tbl_user_timetable
+    delete from sys_chatbot
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Timetable" useGeneratedKeys="true">
-    insert into tbl_user_timetable (user_id, content, deadline
-      )
-    values (#{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{deadline,jdbcType=VARCHAR}
-      )
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Chatbot" useGeneratedKeys="true">
+    insert into sys_chatbot (ask, answer)
+    values (#{ask,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Timetable" useGeneratedKeys="true">
-    insert into tbl_user_timetable
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Chatbot" useGeneratedKeys="true">
+    insert into sys_chatbot
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
+      <if test="ask != null">
+        ask,
       </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="deadline != null">
-        deadline,
+      <if test="answer != null">
+        answer,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+      <if test="ask != null">
+        #{ask,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="deadline != null">
-        #{deadline,jdbcType=VARCHAR},
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.Timetable">
-    update tbl_user_timetable
+  <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.Chatbot">
+    update sys_chatbot
     <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
+      <if test="ask != null">
+        ask = #{ask,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="deadline != null">
-        deadline = #{deadline,jdbcType=VARCHAR},
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.Timetable">
-    update tbl_user_timetable
-    set user_id = #{userId,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      deadline = #{deadline,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.Chatbot">
+    update sys_chatbot
+    set ask = #{ask,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

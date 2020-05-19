@@ -3,10 +3,12 @@
 <mapper namespace="com.buaa.learnforfun.dao.CourseMapper">
   <resultMap id="BaseResultMap" type="com.buaa.learnforfun.entity.Course">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="course_id" jdbcType="VARCHAR" property="courseId" />
     <result column="course_code" jdbcType="VARCHAR" property="courseCode" />
     <result column="course_name" jdbcType="VARCHAR" property="courseName" />
     <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
     <result column="class_info" jdbcType="VARCHAR" property="classInfo" />
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -38,7 +40,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, course_code, course_name, teacher_name, class_info
+    id, course_id, course_code, course_name, teacher_name, class_info, group_id
   </sql>
   <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.CourseExample" resultMap="BaseResultMap">
     select
@@ -66,14 +68,19 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Course" useGeneratedKeys="true">
-    insert into tbl_course_info (course_code, course_name, teacher_name, 
-      class_info)
-    values (#{courseCode,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
-      #{classInfo,jdbcType=VARCHAR})
+    insert into tbl_course_info (course_id, course_code, course_name, 
+      teacher_name, class_info, group_id
+      )
+    values (#{courseId,jdbcType=VARCHAR}, #{courseCode,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, 
+      #{teacherName,jdbcType=VARCHAR}, #{classInfo,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.Course" useGeneratedKeys="true">
     insert into tbl_course_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseId != null">
+        course_id,
+      </if>
       <if test="courseCode != null">
         course_code,
       </if>
@@ -86,8 +93,14 @@
       <if test="classInfo != null">
         class_info,
       </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseId != null">
+        #{courseId,jdbcType=VARCHAR},
+      </if>
       <if test="courseCode != null">
         #{courseCode,jdbcType=VARCHAR},
       </if>
@@ -100,11 +113,17 @@
       <if test="classInfo != null">
         #{classInfo,jdbcType=VARCHAR},
       </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.buaa.learnforfun.entity.Course">
     update tbl_course_info
     <set>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=VARCHAR},
+      </if>
       <if test="courseCode != null">
         course_code = #{courseCode,jdbcType=VARCHAR},
       </if>
@@ -117,15 +136,20 @@
       <if test="classInfo != null">
         class_info = #{classInfo,jdbcType=VARCHAR},
       </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.buaa.learnforfun.entity.Course">
     update tbl_course_info
-    set course_code = #{courseCode,jdbcType=VARCHAR},
+    set course_id = #{courseId,jdbcType=VARCHAR},
+      course_code = #{courseCode,jdbcType=VARCHAR},
       course_name = #{courseName,jdbcType=VARCHAR},
       teacher_name = #{teacherName,jdbcType=VARCHAR},
-      class_info = #{classInfo,jdbcType=VARCHAR}
+      class_info = #{classInfo,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

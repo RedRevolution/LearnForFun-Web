@@ -13,6 +13,10 @@ public class UserCollectMapperService {
     @Autowired
     UserCollectMapper userCollectMapper;
 
+    public void add(UserCollect userCollect){
+        userCollectMapper.insertSelective(userCollect);
+    }
+
     public List<UserCollect> find(UserCollect template) {
         UserCollectExample example = new UserCollectExample();
         if (template.getUserId() != null) {
@@ -30,7 +34,7 @@ public class UserCollectMapperService {
         } else {
             List<UserCollect> temp = find(userCollect);
             for (UserCollect i : temp) {
-                userCollectMapper.deleteByPrimaryKey(i.getId());
+                delete(i);
             }
         }
     }

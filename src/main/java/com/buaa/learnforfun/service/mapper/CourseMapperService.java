@@ -15,7 +15,9 @@ public class CourseMapperService {
 
     public List<Course> find(Course template) {
         CourseExample example = new CourseExample();
-
+        if (template.getCourseId() != null) {
+            example.or().andCourseIdEqualTo(template.getCourseId());
+        }
         if (template.getCourseCode() != null) {
             example.or().andCourseCodeEqualTo(template.getCourseCode());
         }
@@ -27,6 +29,9 @@ public class CourseMapperService {
         }
         if (template.getClassInfo() != null) {
             example.or().andClassInfoEqualTo(template.getClassInfo());
+        }
+        if (template.getGroupId() != null) {
+            example.or().andGroupIdEqualTo(template.getGroupId());
         }
         List<Course> temp = courseMapper.selectByExample(example);
         return temp;

@@ -13,6 +13,10 @@ public class ShareCommentMapperService {
     @Autowired
     ShareCommentMapper shareCommentMapper;
 
+    public void add(ShareComment shareComment) {
+        shareCommentMapper.insertSelective(shareComment);
+    }
+
     public List<ShareComment> find(ShareComment template) {
         ShareCommentExample example = new ShareCommentExample();
         if (template.getShareId() != null) {
@@ -35,8 +39,8 @@ public class ShareCommentMapperService {
             shareCommentMapper.deleteByPrimaryKey(shareComment.getId());
         } else {
             List<ShareComment> temp = find(shareComment);
-            for(ShareComment i : temp) {
-                shareCommentMapper.deleteByPrimaryKey(i.getId());
+            for (ShareComment i : temp) {
+                delete(i);
             }
         }
     }
