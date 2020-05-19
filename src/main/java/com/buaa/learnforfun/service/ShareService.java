@@ -28,6 +28,7 @@ public class ShareService {
     @Autowired
     ShareCommentMapperService shareCommentMapperService;
 
+    //查看群组的分享列表
     public List<Share> listShare(String groupId) {
         Share share = new Share();
         share.setGroupId(groupId);
@@ -42,6 +43,7 @@ public class ShareService {
         return "success";
     }
 
+    //删除一条分享
     public String deleteShare(String shareId) {
         Share share = new Share();
         share.setShareId(shareId);

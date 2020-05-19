@@ -29,6 +29,7 @@ public class GroupService {
     @Autowired
     ShareMapperService shareMapperService;
 
+    //管理台查看所有群组列表
     public List<Group> getAllGroupInfo() {
         return groupMapperService.findAll();
     }
@@ -48,6 +49,7 @@ public class GroupService {
         return "success";
     }
 
+    //查看群成员列表
     public List<UserGroup> getGroupMember(String groupId) {
         UserGroup userGroup = new UserGroup();
         userGroup.setGroupId(groupId);
