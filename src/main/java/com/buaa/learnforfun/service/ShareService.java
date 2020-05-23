@@ -74,10 +74,7 @@ public class ShareService {
         userCollect.setUserId(userId);
         List<UserCollect> temp = userCollectMapperService.find(userCollect);
         if (temp.size() == 0) {
-            UserCollect tmp = new UserCollect();
-            tmp.setUserId(userId);
-            tmp.setShareId(shareId);
-            userCollectMapperService.add(tmp);
+            userCollectMapperService.add(userCollect);
             return "success";
         } else {
             return "exist";
@@ -127,6 +124,11 @@ public class ShareService {
         } else {
             return "collected";
         }
+    }
+
+    public String modifyShare(Share share) {
+        shareMapperService.update(share);
+        return "success";
     }
 
 }

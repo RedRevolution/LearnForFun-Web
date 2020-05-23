@@ -23,6 +23,7 @@ public class TimetableMapperService {
         if (template.getUserId() != null) {
             example.or().andUserIdEqualTo(template.getUserId());
         }
+        example.setOrderByClause("deadline asc");
         return timetableMapper.selectByExample(example);
     }
 

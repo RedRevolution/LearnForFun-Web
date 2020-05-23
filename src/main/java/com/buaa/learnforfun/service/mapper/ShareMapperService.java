@@ -25,27 +25,29 @@ public class ShareMapperService {
 
     public List<Share> find(Share template) {
         ShareExample example = new ShareExample();
+        ShareExample.Criteria criteria = example.createCriteria();
         if (template.getShareId() != null) {
-            example.or().andShareIdEqualTo(template.getShareId());
+            criteria.andShareIdEqualTo(template.getShareId());
         }
         if (template.getGroupId() != null) {
-            example.or().andGroupIdEqualTo(template.getGroupId());
+            criteria.andGroupIdEqualTo(template.getGroupId());
         }
         if (template.getUserId() != null) {
-            example.or().andUserIdEqualTo(template.getUserId());
+            criteria.andUserIdEqualTo(template.getUserId());
         }
         if (template.getUserName() != null) {
-            example.or().andUserNameEqualTo(template.getUserName());
+            criteria.andUserNameEqualTo(template.getUserName());
         }
         if (template.getGroupName() != null) {
-            example.or().andGroupNameEqualTo(template.getGroupName());
+            criteria.andGroupNameEqualTo(template.getGroupName());
         }
         if (template.getTopic() != null) {
-            example.or().andTopicEqualTo(template.getTopic());
+            criteria.andTopicEqualTo(template.getTopic());
         }
         if (template.getContent() != null) {
-            example.or().andContentEqualTo(template.getContent());
+            criteria.andContentEqualTo(template.getContent());
         }
+        example.setOrderByClause("id desc");
         return shareMapper.selectByExample(example);
     }
 

@@ -19,13 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/user")
 public class UserManageController extends BaseController {
+    @GetMapping("hello")
+    public String hello() {
+        return "hello,red";
+    }
 
     /**
      * 获取个人信息
      *
      * @param code
-     * @return
-     * response：
+     * @return response：
      * user.userId!="unbound",用户存在，返回完整的User实例，请将userId,userName作为全局缓存;
      * user.userId=="unbound",用户不存在，请保留openId用于后续绑定;
      */
@@ -47,9 +50,7 @@ public class UserManageController extends BaseController {
      * 绑定个人信息
      *
      * @param user
-     * @return
-     *
-     * pre：绑定时需让用户反复确定输入；
+     * @return pre：绑定时需让用户反复确定输入；
      * need：openId，userId，userName；
      * response：
      * string=="duplicate",学号/工号已存在，请用户重新输入;
@@ -74,9 +75,7 @@ public class UserManageController extends BaseController {
      * 修改个人信息
      *
      * @param user
-     * @return
-     *
-     * pre：修改时需提示"注意：将删除数据库中所有记录！"，前端若实现该功能可以设置一个不起眼的入口，因为不鼓励修改；
+     * @return pre：修改时需提示"注意：将删除数据库中所有记录！"，前端若实现该功能可以设置一个不起眼的入口，因为不鼓励修改；
      * need：openId，userId，userName；
      * response：
      * string=="duplicate",修改的学号/工号已存在，请用户重新输入;
@@ -100,9 +99,7 @@ public class UserManageController extends BaseController {
      * 账号注销
      *
      * @param userId
-     * @return
-     *
-     * pre:出于用户体验而设计，前端可根据进度实现
+     * @return pre:出于用户体验而设计，前端可根据进度实现
      * response:
      * string=="success",注销成功;
      * string=="error"||502,发生错误无法注销;

@@ -1,7 +1,5 @@
 package com.buaa.learnforfun.entity;
 
-import java.util.Date;
-
 public class GroupMessage {
     private Long id;
 
@@ -13,7 +11,7 @@ public class GroupMessage {
 
     private String content;
 
-    private Date createBy;
+    private String createBy;
 
     public Long getId() {
         return id;
@@ -55,11 +53,11 @@ public class GroupMessage {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreateBy() {
+    public String getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Date createBy) {
-        this.createBy = createBy;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
     }
 }

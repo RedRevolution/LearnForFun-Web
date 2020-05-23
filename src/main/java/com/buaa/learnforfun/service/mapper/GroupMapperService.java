@@ -6,6 +6,7 @@ import com.buaa.learnforfun.entity.Group;
 import com.buaa.learnforfun.entity.GroupExample;
 import com.buaa.learnforfun.entity.GroupMessage;
 import com.buaa.learnforfun.entity.GroupNotice;
+import com.buaa.learnforfun.entity.GroupNoticeExample;
 import com.buaa.learnforfun.entity.Share;
 import com.buaa.learnforfun.entity.UserGroup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,23 +33,24 @@ public class GroupMapperService {
 
     public List<Group> find(Group template) {
         GroupExample example = new GroupExample();
+        GroupExample.Criteria criteria = example.createCriteria();
         if (template.getGroupId() != null) {
-            example.or().andGroupIdEqualTo(template.getGroupId());
+            criteria.andGroupIdEqualTo(template.getGroupId());
         }
         if (template.getGroupName() != null) {
-            example.or().andGroupNameEqualTo(template.getGroupName());
+            criteria.andGroupNameEqualTo(template.getGroupName());
         }
         if (template.getGroupOwnerId() != null) {
-            example.or().andGroupOwnerIdEqualTo(template.getGroupOwnerId());
+            criteria.andGroupOwnerIdEqualTo(template.getGroupOwnerId());
         }
         if (template.getGroupOwnerName() != null) {
-            example.or().andGroupOwnerNameEqualTo(template.getGroupOwnerName());
+            criteria.andGroupOwnerNameEqualTo(template.getGroupOwnerName());
         }
         if (template.getGroupIntrod() != null) {
-            example.or().andGroupIntrodEqualTo(template.getGroupIntrod());
+            criteria.andGroupIntrodEqualTo(template.getGroupIntrod());
         }
         if (template.getCourseCode() != null) {
-            example.or().andCourseCodeEqualTo(template.getCourseCode());
+            criteria.andCourseCodeEqualTo(template.getCourseCode());
         }
         return groupMapper.selectByExample(example);
     }

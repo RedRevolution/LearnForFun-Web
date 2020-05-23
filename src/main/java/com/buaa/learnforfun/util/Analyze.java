@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AnalyzeCourseInfo {
+public class Analyze {
 
-    public static String courseNameAnalyze(String courseName) {
+    public static String courseName(String courseName) {
         int len = courseName.length();
         String temp = courseName;
         if (courseName.substring(len - 5).equals("(全汉语)")) {
@@ -16,7 +16,7 @@ public class AnalyzeCourseInfo {
         return temp;
     }
 
-    public static String teacherNameAnalyze(String info) {
+    public static String teacherName(String info) {
         String[] courseInfo = info.split("◇");
         String temp = courseInfo[0].trim();
         int index = 0;
@@ -25,15 +25,11 @@ public class AnalyzeCourseInfo {
             index++;
         }
         temp = temp.substring(index);
-        if (temp.length() > 15) {
-            int index2 = 0;
-            while (temp.charAt(index2) != ',') index2++;
-            temp = temp.substring(0, index2 + 1) + "等";
-        }
+        if (temp.length() > 32) temp = temp.substring(0, 30) + "等";
         return temp;
     }
 
-    public static String classTimeAndLocationAnalyze(String info, String area) {
+    public static String classTimeAndLocation(String info, String area) {
         List<List<String>> courseList = new ArrayList<>();
         String[] courseInfo = info.split("◇");
         boolean hasLocation = false;
@@ -67,7 +63,7 @@ public class AnalyzeCourseInfo {
         }
         int len = courseInfo.length;
         String location = courseInfo[len - 1];
-        if (info.charAt(info.length()-1) == '◇') location = "";
+        if (info.charAt(info.length() - 1) == '◇') location = "";
         if (hasTime == false) return null;
         String ans = "";
         for (List<String> i : courseList) {

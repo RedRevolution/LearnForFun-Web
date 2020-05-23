@@ -43,7 +43,7 @@ create table tbl_user_timetable(
     id bigint(20) NOT NULL AUTO_INCREMENT,
     user_id varchar(16) NOT NULL COMMENT '学号/工号',
 	content varchar(256) NOT NULL COMMENT '日程内容',
-    deadline varchar(16) NOT NULL COMMENT '截止时间',
+    deadline varchar(32) NOT NULL COMMENT '截止时间',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 # 查看日程的操作较为频繁
@@ -100,6 +100,7 @@ create table sys_message(
 	id bigint(20) NOT NULL AUTO_INCREMENT,
     user_id varchar(16) NOT NULL COMMENT '消息源',
     content varchar(256) NOT NULL COMMENT '消息内容',
+   	reply varchar(256) NOT NULL DEFAULT '' COMMENT '回复内容',
     create_by datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -204,7 +205,7 @@ create table tbl_group_message(
 	user_id varchar(16) NOT NULL COMMENT '发言人学号/工号',
     user_name varchar(16) NOT NULL COMMENT '发言人姓名',
 	content varchar(256) NOT NULL COMMENT '发言内容',
-	create_by datetime DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '发言时间',
+	create_by varchar(32) NOT NULL COMMENT '发言时间',
     primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ALTER TABLE tbl_group_message ADD INDEX idx (group_id);
@@ -219,7 +220,7 @@ create table tbl_group_notice(
 	user_id varchar(16) NOT NULL COMMENT '发布公告者学号/工号',
     user_name varchar(16) NOT NULL COMMENT '发布公告者姓名',
 	content varchar(256) NOT NULL COMMENT '公告内容',
-    create_by datetime DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '发布时间',
+    create_by varchar(32) NOT NULL COMMENT '发布时间',
 	primary key(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ALTER TABLE tbl_group_notice ADD INDEX idx (group_id);

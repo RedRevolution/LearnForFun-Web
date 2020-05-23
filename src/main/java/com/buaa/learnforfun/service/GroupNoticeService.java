@@ -5,6 +5,8 @@ import com.buaa.learnforfun.service.mapper.GroupNoticeMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -32,6 +34,8 @@ public class GroupNoticeService {
         if (temp.size() != 0) {
             return temp.get(0);
         } else {
+            groupNotice.setUserId("");
+            groupNotice.setUserName("");
             groupNotice.setContent("");
             announceGroupNotice(groupNotice);
             return getGroupNoticeById(groupId);

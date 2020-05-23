@@ -3,6 +3,7 @@ package com.buaa.learnforfun.service;
 import com.buaa.learnforfun.dao.TimetableMapper;
 import com.buaa.learnforfun.entity.Timetable;
 import com.buaa.learnforfun.entity.TimetableExample;
+import com.buaa.learnforfun.service.mapper.TimetableMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import java.util.List;
 public class TimetableService {
     @Autowired
     TimetableMapper timetableMapper;
+    @Autowired
+    TimetableMapperService timetableMapperService;
 
     public Timetable create(Timetable timetable) {
         timetableMapper.insertSelective(timetable);
@@ -19,10 +22,9 @@ public class TimetableService {
     }
 
     public List<Timetable> findTimetable(String userId) {
-        TimetableExample example = new TimetableExample();
-        example.or().andUserIdEqualTo(userId);
-        List<Timetable> ans = timetableMapper.selectByExample(example);
-        return ans;
+        Timetable timetable = new Timetable();
+        timetable.setUserId(userId);
+        return timetableMapperService.find(timetable);
     }
 
     public String deleteTimetable(long id) {

@@ -19,17 +19,18 @@ public class ShareCommentMapperService {
 
     public List<ShareComment> find(ShareComment template) {
         ShareCommentExample example = new ShareCommentExample();
+        ShareCommentExample.Criteria criteria = example.createCriteria();
         if (template.getShareId() != null) {
-            example.or().andShareIdEqualTo(template.getShareId());
+            criteria.andShareIdEqualTo(template.getShareId());
         }
         if (template.getUserId() != null) {
-            example.or().andUserIdEqualTo(template.getUserId());
+            criteria.andUserIdEqualTo(template.getUserId());
         }
         if (template.getUserName() != null) {
-            example.or().andUserNameEqualTo(template.getUserName());
+            criteria.andUserNameEqualTo(template.getUserName());
         }
         if (template.getContent() != null) {
-            example.or().andContentEqualTo(template.getContent());
+            criteria.andContentEqualTo(template.getContent());
         }
         return shareCommentMapper.selectByExample(example);
     }

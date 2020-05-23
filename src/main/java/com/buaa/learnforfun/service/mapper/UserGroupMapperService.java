@@ -19,14 +19,15 @@ public class UserGroupMapperService {
 
     public List<UserGroup> find(UserGroup template) {
         UserGroupExample example = new UserGroupExample();
+        UserGroupExample.Criteria criteria = example.createCriteria();
         if (template.getUserId() != null) {
-            example.or().andUserIdEqualTo(template.getUserId());
+            criteria.andUserIdEqualTo(template.getUserId());
         }
         if (template.getUserName() != null) {
-            example.or().andUserNameEqualTo(template.getUserName());
+            criteria.andUserNameEqualTo(template.getUserName());
         }
         if (template.getGroupId() != null) {
-            example.or().andGroupIdEqualTo(template.getGroupId());
+            criteria.andGroupIdEqualTo(template.getGroupId());
         }
         return userGroupMapper.selectByExample(example);
     }

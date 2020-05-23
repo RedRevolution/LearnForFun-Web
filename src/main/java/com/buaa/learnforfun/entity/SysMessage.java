@@ -9,6 +9,8 @@ public class SysMessage {
 
     private String content;
 
+    private String reply;
+
     private Date createBy;
 
     public Long getId() {
@@ -33,6 +35,14 @@ public class SysMessage {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply == null ? null : reply.trim();
     }
 
     public Date getCreateBy() {

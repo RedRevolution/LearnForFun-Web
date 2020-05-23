@@ -5,9 +5,7 @@ import com.buaa.learnforfun.entity.GroupMessage;
 import com.buaa.learnforfun.entity.GroupMessageExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.plugin2.message.Message;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,17 +19,18 @@ public class GroupMessageMapperService {
 
     public List<GroupMessage> find(GroupMessage template) {
         GroupMessageExample example = new GroupMessageExample();
+        GroupMessageExample.Criteria criteria = example.createCriteria();
         if (template.getGroupId() != null) {
-            example.or().andGroupIdEqualTo(template.getGroupId());
+            criteria.andGroupIdEqualTo(template.getGroupId());
         }
         if (template.getUserId() != null) {
-            example.or().andUserIdEqualTo(template.getUserId());
+            criteria.andUserIdEqualTo(template.getUserId());
         }
         if (template.getUserName() != null) {
-            example.or().andUserNameEqualTo(template.getUserName());
+            criteria.andUserNameEqualTo(template.getUserName());
         }
         if (template.getContent() != null) {
-            example.or().andContentEqualTo(template.getContent());
+            criteria.andContentEqualTo(template.getContent());
         }
         return groupMessageMapper.selectByExample(example);
     }
@@ -50,30 +49,17 @@ public class GroupMessageMapperService {
     public List<GroupMessage> find(String groupId, int count) {
         GroupMessageExample example = new GroupMessageExample();
         example.or().andGroupIdEqualTo(groupId);
-        example.setOrderByClause("id ASC");
+        example.setOrderByClause("id desc limit " + count);
         List<GroupMessage> temp = groupMessageMapper.selectByExample(example);
-        if (temp.size() > count) {
-            List<GroupMessage> groupMessages = new ArrayList<>();
-            for (int i = 0; i < count; i++) groupMessages.add(temp.get(i));
-            return groupMessages;
-        } else {
-            return temp;
-        }
+        return temp;
     }
 
     public List<GroupMessage> find(String groupId, long messageId, int count) {
         GroupMessageExample example = new GroupMessageExample();
-        example.or().andGroupIdEqualTo(groupId);
-        example.or().andIdLessThan(messageId);
-        example.setOrderByClause("id ASC");
+        example.or().andGroupIdEqualTo(groupId).andIdLessThan(messageId);
+        example.setOrderByClause("id desc limit " + count);
         List<GroupMessage> temp = groupMessageMapper.selectByExample(example);
-        if (temp.size() > count) {
-            List<GroupMessage> groupMessages = new ArrayList<>();
-            for (int i = 0; i < count; i++) groupMessages.add(temp.get(i));
-            return groupMessages;
-        } else {
-            return temp;
-        }
+        return temp;
     }
 
 }

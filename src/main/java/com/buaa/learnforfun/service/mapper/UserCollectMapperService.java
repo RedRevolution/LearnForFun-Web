@@ -19,12 +19,14 @@ public class UserCollectMapperService {
 
     public List<UserCollect> find(UserCollect template) {
         UserCollectExample example = new UserCollectExample();
+        UserCollectExample.Criteria criteria = example.createCriteria();
         if (template.getUserId() != null) {
-            example.or().andUserIdEqualTo(template.getUserId());
+            criteria.andUserIdEqualTo(template.getUserId());
         }
         if (template.getShareId() != null) {
-            example.or().andShareIdEqualTo(template.getShareId());
+            criteria.andShareIdEqualTo(template.getShareId());
         }
+        example.setOrderByClause("id desc");
         return userCollectMapper.selectByExample(example);
     }
 

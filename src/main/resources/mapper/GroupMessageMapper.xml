@@ -7,7 +7,7 @@
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="create_by" jdbcType="TIMESTAMP" property="createBy" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +70,7 @@
     insert into tbl_group_message (group_id, user_id, user_name, 
       content, create_by)
     values (#{groupId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{createBy,jdbcType=TIMESTAMP})
+      #{content,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.GroupMessage" useGeneratedKeys="true">
     insert into tbl_group_message
@@ -105,7 +105,7 @@
         #{content,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null">
-        #{createBy,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -125,7 +125,7 @@
         content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null">
-        create_by = #{createBy,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -136,7 +136,7 @@
       user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=TIMESTAMP}
+      create_by = #{createBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

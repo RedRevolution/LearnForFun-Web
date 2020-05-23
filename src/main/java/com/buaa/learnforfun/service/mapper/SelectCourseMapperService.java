@@ -14,16 +14,18 @@ public class SelectCourseMapperService {
     SelectCourseMapper selectCourseMapper;
 
     public void add(SelectCourse selectCourse) {
-        selectCourseMapper.insertSelective(selectCourse);
+        if (find(selectCourse).size() == 0)
+            selectCourseMapper.insertSelective(selectCourse);
     }
 
     public List<SelectCourse> find(SelectCourse template) {
         SelectCourseExample example = new SelectCourseExample();
+        SelectCourseExample.Criteria criteria = example.createCriteria();
         if (template.getStudentId() != null) {
-            example.or().andStudentIdEqualTo(template.getStudentId());
+            criteria.andStudentIdEqualTo(template.getStudentId());
         }
         if (template.getCourseId() != null) {
-            example.or().andCourseIdEqualTo(template.getCourseId());
+            criteria.andCourseIdEqualTo(template.getCourseId());
         }
         return selectCourseMapper.selectByExample(example);
     }

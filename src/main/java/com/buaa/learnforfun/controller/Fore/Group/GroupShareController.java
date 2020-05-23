@@ -80,7 +80,7 @@ public class GroupShareController extends BaseController {
     )
     @PostMapping("modify")
     public String modifyShare(@RequestBody Share share) {
-        return null;
+        return shareService.modifyShare(share);
     }
 
     /**
@@ -129,7 +129,7 @@ public class GroupShareController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "收藏人ID", required = true, dataType = "string"),
     })
     @GetMapping("collect/{shareId}/{userId}")
-    public String collectShare(@PathVariable String shareId, String userId) {
+    public String collectShare(@PathVariable String shareId, @PathVariable String userId) {
         return shareService.collectShare(shareId, userId);
     }
 
@@ -163,7 +163,7 @@ public class GroupShareController extends BaseController {
      */
     @ApiOperation(value = "查看该分享下的评论列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "shareId", value = "分享Id", required = true, dataType = "long"),
+            @ApiImplicitParam(name = "shareId", value = "分享Id", required = true, dataType = "string"),
     })
     @GetMapping("comment/{shareId}")
     public List<ShareComment> getCommentByshareId(@PathVariable String shareId) {
@@ -235,7 +235,7 @@ public class GroupShareController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "收藏人ID", required = true, dataType = "string"),
     })
     @GetMapping("collect/check/{shareId}/{userId}")
-    public String checkCollect(@PathVariable String shareId, String userId) {
+    public String checkCollect(@PathVariable String shareId, @PathVariable String userId) {
         return shareService.checkCollect(shareId, userId);
     }
 

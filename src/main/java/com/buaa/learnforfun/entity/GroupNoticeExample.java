@@ -1,7 +1,6 @@
 package com.buaa.learnforfun.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GroupNoticeExample {
@@ -455,52 +454,62 @@ public class GroupNoticeExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateByEqualTo(Date value) {
+        public Criteria andCreateByEqualTo(String value) {
             addCriterion("create_by =", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByNotEqualTo(Date value) {
+        public Criteria andCreateByNotEqualTo(String value) {
             addCriterion("create_by <>", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByGreaterThan(Date value) {
+        public Criteria andCreateByGreaterThan(String value) {
             addCriterion("create_by >", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByGreaterThanOrEqualTo(Date value) {
+        public Criteria andCreateByGreaterThanOrEqualTo(String value) {
             addCriterion("create_by >=", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByLessThan(Date value) {
+        public Criteria andCreateByLessThan(String value) {
             addCriterion("create_by <", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByLessThanOrEqualTo(Date value) {
+        public Criteria andCreateByLessThanOrEqualTo(String value) {
             addCriterion("create_by <=", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByIn(List<Date> values) {
+        public Criteria andCreateByLike(String value) {
+            addCriterion("create_by like", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByNotLike(String value) {
+            addCriterion("create_by not like", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByIn(List<String> values) {
             addCriterion("create_by in", values, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByNotIn(List<Date> values) {
+        public Criteria andCreateByNotIn(List<String> values) {
             addCriterion("create_by not in", values, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByBetween(Date value1, Date value2) {
+        public Criteria andCreateByBetween(String value1, String value2) {
             addCriterion("create_by between", value1, value2, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andCreateByNotBetween(Date value1, Date value2) {
+        public Criteria andCreateByNotBetween(String value1, String value2) {
             addCriterion("create_by not between", value1, value2, "createBy");
             return (Criteria) this;
         }

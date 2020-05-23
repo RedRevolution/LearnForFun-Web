@@ -117,7 +117,7 @@ public class UserGroupController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "string"),
     })
     @GetMapping("join/{groupId}/{userId}")
-    public String joinGroupById(@PathVariable String groupId, String userId) {
+    public String joinGroupById(@PathVariable String groupId,@PathVariable String userId) {
         return userGroupService.joinGroup(groupId, userId);
     }
 
@@ -142,7 +142,7 @@ public class UserGroupController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "string"),
     })
     @GetMapping("exit/{groupId}/{userId}")
-    public String exitGroupById(@PathVariable String groupId, String userId) {
+    public String exitGroupById(@PathVariable String groupId,@PathVariable String userId) {
         return userGroupService.exitGroup(groupId, userId);
     }
 

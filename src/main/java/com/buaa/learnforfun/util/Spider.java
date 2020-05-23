@@ -32,7 +32,7 @@ public class Spider {
         System.setProperty("webdriver.chrome.driver", driverPath);
         ChromeOptions options = new ChromeOptions();
         String userAgent = "Chrome/81.0.4044.138";
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--user-agent=" + userAgent);
@@ -137,6 +137,7 @@ public class Spider {
     public String run() {
         try {
             init();
+            //System.out.println("\n\n\n\n\n\n\n init success \n\n\n\n\n\n");
             login();
             //System.out.println("\n\n\n\n\n\n\n login success \n\n\n\n\n\n");
             switchToJiaoWu();

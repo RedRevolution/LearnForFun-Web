@@ -65,7 +65,7 @@ public class UserCollectController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "学号/工号", required = true, dataType = "string"),
     })
     @GetMapping("cancel/{shareId}/{userId}")
-    public String cancelCollectById(@PathVariable String shareId, String userId) {
+    public String cancelCollectById(@PathVariable String shareId,@PathVariable String userId) {
         return shareService.cancelCollectById(shareId, userId);
     }
 

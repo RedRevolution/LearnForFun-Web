@@ -35,7 +35,7 @@ public class GroupMessageController extends BaseController {
             @ApiImplicitParam(name = "count", value = "聊天记录条数", required = true, dataType = "int"),
     })
     @GetMapping("{groupId}/{count}")
-    public List<GroupMessage> getGroupMessageRecord(@PathVariable String groupId, int count) {
+    public List<GroupMessage> getGroupMessageRecord(@PathVariable String groupId,@PathVariable int count) {
         return groupMessageService.getGroupMessageRecord(groupId, count);
     }
 
@@ -61,7 +61,7 @@ public class GroupMessageController extends BaseController {
             @ApiImplicitParam(name = "count", value = "聊天记录条数", required = true, dataType = "int"),
     })
     @GetMapping("{groupId}/{messageId}/{count}")
-    public List<GroupMessage> getRecordByMessageId(@PathVariable String groupId, long messageId, int count) {
+    public List<GroupMessage> getRecordByMessageId(@PathVariable String groupId,@PathVariable long messageId,@PathVariable int count) {
         return groupMessageService.getRecordByMessageId(groupId, messageId, count);
     }
 

@@ -95,7 +95,7 @@ public class GroupManageController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "string"),
     })
     @GetMapping("authority/{groupId}/{userId}")
-    public String isAdministrator(@PathVariable String groupId, String userId) {
+    public String isAdministrator(@PathVariable String groupId,@PathVariable String userId) {
         return groupService.isAdministrator(groupId, userId);
     }
 
@@ -148,7 +148,7 @@ public class GroupManageController extends BaseController {
             @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "string"),
     })
     @GetMapping("member/delete/{groupId}/{userId}")
-    public String delelteGroupMemberById(@PathVariable String groupId, String userId) {
+    public String delelteGroupMemberById(@PathVariable String groupId,@PathVariable String userId) {
         return groupService.delelteGroupMember(groupId, userId);
     }
 

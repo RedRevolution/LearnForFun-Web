@@ -6,6 +6,8 @@ import com.buaa.learnforfun.entity.GroupNoticeExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -14,22 +16,25 @@ public class GroupNoticeMapperService {
     GroupNoticeMapper groupNoticeMapper;
 
     public void add(GroupNotice groupNotice) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        groupNotice.setCreateBy(dtf.format(LocalDateTime.now()));
         groupNoticeMapper.insertSelective(groupNotice);
     }
 
     public List<GroupNotice> find(GroupNotice template) {
         GroupNoticeExample example = new GroupNoticeExample();
+        GroupNoticeExample.Criteria criteria = example.createCriteria();
         if (template.getGroupId() != null) {
-            example.or().andGroupIdEqualTo(template.getGroupId());
+            criteria.andGroupIdEqualTo(template.getGroupId());
         }
         if (template.getUserId() != null) {
-            example.or().andUserIdEqualTo(template.getUserId());
+            criteria.andUserIdEqualTo(template.getUserId());
         }
         if (template.getUserName() != null) {
-            example.or().andUserNameEqualTo(template.getUserName());
+            criteria.andUserNameEqualTo(template.getUserName());
         }
         if (template.getContent() != null) {
-            example.or().andContentEqualTo(template.getContent());
+            criteria.andContentEqualTo(template.getContent());
         }
         return groupNoticeMapper.selectByExample(example);
     }
@@ -46,6 +51,8 @@ public class GroupNoticeMapperService {
     }
 
     public void update(GroupNotice groupNotice) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        groupNotice.setCreateBy(dtf.format(LocalDateTime.now()));
         groupNoticeMapper.updateByPrimaryKeySelective(groupNotice);
     }
 

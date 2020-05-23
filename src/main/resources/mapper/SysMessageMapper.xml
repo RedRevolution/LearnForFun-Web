@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="reply" jdbcType="VARCHAR" property="reply" />
     <result column="create_by" jdbcType="TIMESTAMP" property="createBy" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -37,7 +38,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, content, create_by
+    id, user_id, content, reply, create_by
   </sql>
   <select id="selectByExample" parameterType="com.buaa.learnforfun.entity.SysMessageExample" resultMap="BaseResultMap">
     select
@@ -65,10 +66,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SysMessage" useGeneratedKeys="true">
-    insert into sys_message (user_id, content, create_by
-      )
-    values (#{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createBy,jdbcType=TIMESTAMP}
-      )
+    insert into sys_message (user_id, content, reply, 
+      create_by)
+    values (#{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buaa.learnforfun.entity.SysMessage" useGeneratedKeys="true">
     insert into sys_message
@@ -78,6 +79,9 @@
       </if>
       <if test="content != null">
         content,
+      </if>
+      <if test="reply != null">
+        reply,
       </if>
       <if test="createBy != null">
         create_by,
@@ -89,6 +93,9 @@
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="reply != null">
+        #{reply,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null">
         #{createBy,jdbcType=TIMESTAMP},
@@ -104,6 +111,9 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="reply != null">
+        reply = #{reply,jdbcType=VARCHAR},
+      </if>
       <if test="createBy != null">
         create_by = #{createBy,jdbcType=TIMESTAMP},
       </if>
@@ -114,6 +124,7 @@
     update sys_message
     set user_id = #{userId,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

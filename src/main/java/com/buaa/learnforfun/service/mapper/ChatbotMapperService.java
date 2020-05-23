@@ -17,11 +17,15 @@ public class ChatbotMapperService {
         chatbotMapper.insertSelective(chatbot);
     }
 
-    public List<Chatbot> find(Chatbot template) {
+    public List<Chatbot> find(String question) {
         ChatbotExample example = new ChatbotExample();
-        if (template.getAsk() != null) {
-            example.or().andAskEqualTo(template.getAsk());
-        }
+        example.or().andAskLike("%" + question + "%");
+        return chatbotMapper.selectByExample(example);
+    }
+
+    public List<Chatbot> find() {
+        ChatbotExample example = new ChatbotExample();
+        example.or().andIdIsNotNull();
         return chatbotMapper.selectByExample(example);
     }
 

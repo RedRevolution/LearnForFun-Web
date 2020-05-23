@@ -4,8 +4,12 @@ import com.buaa.learnforfun.dao.GroupMapper;
 import com.buaa.learnforfun.dao.UserGroupMapper;
 import com.buaa.learnforfun.entity.Group;
 import com.buaa.learnforfun.entity.GroupExample;
+import com.buaa.learnforfun.entity.User;
 import com.buaa.learnforfun.entity.UserGroup;
 import com.buaa.learnforfun.entity.UserGroupExample;
+import com.buaa.learnforfun.service.mapper.GroupMapperService;
+import com.buaa.learnforfun.service.mapper.UserGroupMapperService;
+import com.buaa.learnforfun.service.mapper.UserMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,19 +26,26 @@ public class UserGroupService {
     @Autowired
     GroupMapper groupMapper;
     @Autowired
-    UserGroupMapper userGroupMapper;
+    GroupMapperService groupMapperService;
+    @Autowired
+    UserGroupMapperService userGroupMapperService;
+    @Autowired
+    UserMapperService userMapperService;
+    @Autowired
+    GroupService groupService;
 
     public Group createGroup(Group group) {
         if (group.getCourseCode().equals("unofficial")) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
             String groupId = "I" + dtf.format(LocalDateTime.now()) + group.getGroupOwnerId();
             group.setGroupId(groupId);
-            groupMapper.insertSelective(group);
+            groupMapperService.add(group);
             UserGroup userGroup = new UserGroup();
             userGroup.setUserId(group.getGroupOwnerId());
+            userGroup.setUserName(group.getGroupOwnerName());
             userGroup.setGroupId(groupId);
             userGroup.setIsAdministrator(true);
-            userGroupMapper.insertSelective(userGroup);
+            userGroupMapperService.add(userGroup);
             return group;
         } else {
             //要去数据库中查是否有对应的coursecode
@@ -43,40 +54,32 @@ public class UserGroupService {
     }
 
     public List<Group> getUserGroupById(String userId) {
-        UserGroupExample example = new UserGroupExample();
-        example.or().andUserIdEqualTo(userId);
-        List<UserGroup> userGroups = userGroupMapper.selectByExample(example);
+        UserGroup userGroup = new UserGroup();
+        userGroup.setUserId(userId);
+        List<UserGroup> userGroups = userGroupMapperService.find(userGroup);
         List<Group> groups = new ArrayList<>();
         for (UserGroup i : userGroups) {
-            GroupExample groupExample = new GroupExample();
-            groupExample.or().andGroupIdEqualTo(i.getGroupId());
-            groups.addAll(groupMapper.selectByExample(groupExample));
+            Group group = new Group();
+            group.setGroupId(i.getGroupId());
+            groups.addAll(groupMapperService.find(group));
         }
         return groups;
     }
 
     public String joinGroup(String groupId, String userId) {
-        UserGroupExample example = new UserGroupExample();
-        example.or().andGroupIdEqualTo(groupId).andUserIdEqualTo(userId);
-        List<UserGroup> temp = userGroupMapper.selectByExample(example);
-        if (temp.size() == 0) {
-            UserGroup userGroup = new UserGroup();
-            userGroup.setUserId(userId);
-            userGroup.setGroupId(groupId);
-            userGroup.setIsAdministrator(false);
-            userGroupMapper.insertSelective(userGroup);
-            return "success";
-        } else return "exist";
+        User user = new User();
+        user.setUserId(userId);
+        String userName = userMapperService.find(user).get(0).getUserName();
+        UserGroup userGroup = new UserGroup();
+        userGroup.setUserId(userId);
+        userGroup.setGroupId(groupId);
+        userGroup.setUserName(userName);
+        userGroup.setIsAdministrator(false);
+        return groupService.addGroupMember(userGroup);
     }
 
     public String exitGroup(String groupId, String userId) {
-        UserGroupExample example = new UserGroupExample();
-        example.or().andGroupIdEqualTo(groupId).andUserIdEqualTo(userId);
-        List<UserGroup> temp = userGroupMapper.selectByExample(example);
-        if (temp.size() != 0) {
-            userGroupMapper.deleteByPrimaryKey(temp.get(0).getId());
-            return "success";
-        } else return "quit";
+        return groupService.delelteGroupMember(groupId,userId);
     }
 
 
@@ -104,12 +107,4 @@ public class UserGroupService {
         }
         return ans;
     }
-
-    public List<UserGroup> listGroupMember(String groupId) {
-        UserGroupExample example = new UserGroupExample();
-        example.or().andGroupIdEqualTo(groupId);
-        List<UserGroup> userGroups = userGroupMapper.selectByExample(example);
-        return userGroups;
-    }
-
 }

@@ -15,23 +15,24 @@ public class CourseMapperService {
 
     public List<Course> find(Course template) {
         CourseExample example = new CourseExample();
+        CourseExample.Criteria criteria = example.createCriteria();
         if (template.getCourseId() != null) {
-            example.or().andCourseIdEqualTo(template.getCourseId());
+            criteria.andCourseIdEqualTo(template.getCourseId());
         }
         if (template.getCourseCode() != null) {
-            example.or().andCourseCodeEqualTo(template.getCourseCode());
+            criteria.andCourseCodeEqualTo(template.getCourseCode());
         }
         if (template.getCourseName() != null) {
-            example.or().andCourseNameEqualTo(template.getCourseName());
+            criteria.andCourseNameEqualTo(template.getCourseName());
         }
         if (template.getTeacherName() != null) {
-            example.or().andTeacherNameEqualTo(template.getTeacherName());
+            criteria.andTeacherNameEqualTo(template.getTeacherName());
         }
         if (template.getClassInfo() != null) {
-            example.or().andClassInfoEqualTo(template.getClassInfo());
+            criteria.andClassInfoEqualTo(template.getClassInfo());
         }
         if (template.getGroupId() != null) {
-            example.or().andGroupIdEqualTo(template.getGroupId());
+            criteria.andGroupIdEqualTo(template.getGroupId());
         }
         List<Course> temp = courseMapper.selectByExample(example);
         return temp;

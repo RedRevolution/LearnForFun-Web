@@ -7,6 +7,8 @@ import com.buaa.learnforfun.service.mapper.GroupMessageMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -15,6 +17,8 @@ public class GroupMessageService {
     GroupMessageMapperService groupMessageMapperService;
 
     public void addGroupMessage(GroupMessage groupMessage) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        groupMessage.setCreateBy(dtf.format(LocalDateTime.now()));
         groupMessageMapperService.add(groupMessage);
     }
 

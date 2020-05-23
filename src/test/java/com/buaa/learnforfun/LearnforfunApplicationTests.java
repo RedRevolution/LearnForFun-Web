@@ -4,9 +4,11 @@
 //import com.buaa.learnforfun.entity.Course;
 //import com.buaa.learnforfun.entity.GroupMessage;
 //import com.buaa.learnforfun.service.mapper.CourseMapperService;
-//import com.buaa.learnforfun.util.AnalyzeCourseInfo;
+//import com.buaa.learnforfun.util.Analyze;
+//import com.buaa.learnforfun.util.ChineseUtil;
 //import com.buaa.learnforfun.util.DateTimeFormatUtil;
 //import com.buaa.learnforfun.util.Spider;
+//import com.buaa.learnforfun.util.XiaoAi;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
@@ -54,24 +56,35 @@
 //        System.out.println(course.getId());
 //        System.out.println(course.getClassInfo());
 //        System.out.println(course.getCourseCode());
-////        System.out.println(courseMapperService.find(course).size());
+////        System.out.println(courseMapperService.findSysMessage(course).size());
+//    }
+//
+//    @Test
+//    void chineseUtilTest() {
+//        ChineseUtil chineseUtil = new ChineseUtil();
+//        System.out.println(chineseUtil.getAllFirstLetter("欧阳元新，王德庆"));
+//    }
+//
+//    @Test
+//    void XiaoAiUtilTest(){
+//       System.out.println(XiaoAi.filter("重庆今天22℃~29℃ 小雨 0-3级 \\u003c5.4m/s\\r\\n天气热，建议着短裙、短裤、短薄外套、T恤等夏季服装。"));
 //    }
 //
 //    @Test
 //    void AnalyzeCourseInfoTest() {
-////        String ans = AnalyzeCourseInfo.courseNameAnalyze("体育（6）【游泳1】");
-////        String ans1 = AnalyzeCourseInfo.courseNameAnalyze("计算机网络(全汉语)");
+////        String ans = Analyze.courseName("体育（6）【游泳1】");
+////        String ans1 = Analyze.courseName("计算机网络(全汉语)");
 ////        System.out.println(ans);
 ////        System.out.println(ans1);
-////        String ans = AnalyzeCourseInfo.teacherNameAnalyze(" [主任务]单 伟,李亚帅dadadadadadaddadadadadadada◇[1-5周]星期二第3,4节◇F227,[6-8周]星期二第3,4节◇(一)301,[9-16周]星期二第3,节◇(一)301◇选课要求:◇◇");
-////        String ans1 = AnalyzeCourseInfo.teacherNameAnalyze("罗洪斌◇[1-9周]星期二第1,2节◇(一)301,[1-9周]星期四第3,4节◇(一)301");
+////        String ans = Analyze.teacherName(" [主任务]单 伟,李亚帅dadadadadadaddadadadadadada◇[1-5周]星期二第3,4节◇F227,[6-8周]星期二第3,4节◇(一)301,[9-16周]星期二第3,节◇(一)301◇选课要求:◇◇");
+////        String ans1 = Analyze.teacherName("罗洪斌◇[1-9周]星期二第1,2节◇(一)301,[1-9周]星期四第3,4节◇(一)301");
 ////        System.out.println(ans);
-////        String ans = AnalyzeCourseInfo.classTimeAndLocationAnalyze(" [主任务]单 伟,李亚帅◇[1-5周]星期二第3,4节◇F227,[6-8周]星期二第3,4节◇(一)301,[9-16周]星期二第3,4节◇(一)301◇选课要求:◇◇","学院路校区");
-////        String ans = AnalyzeCourseInfo.classTimeAndLocationAnalyze(" [主任务]姚建军◇[1-17周]星期一第6节◇","学院路校区");
-////        String ans = AnalyzeCourseInfo.classTimeAndLocationAnalyze(" 王嘉凯◇[1-16周]◇","学院路校区");
-////        String ans = AnalyzeCourseInfo.classTimeAndLocationAnalyze(" 李 波◇[1-9周]星期四第1,2节◇主M302","学院路校区");
-////        String ans = AnalyzeCourseInfo.classTimeAndLocationAnalyze(" 罗洪斌◇[1-9周]星期二第1,2节◇(一)301,[1-9周]星期四第3,4节◇(一)301","学院路校区");
-//        String ans = AnalyzeCourseInfo.classTimeAndLocationAnalyze(" 杨建磊◇[1-16周]星期一第3,4节◇主319,[11周]星期日第3,4节◇主319,[9周]星期日第3,4节◇主319", "学院路校区");
+////        String ans = Analyze.classTimeAndLocation(" [主任务]单 伟,李亚帅◇[1-5周]星期二第3,4节◇F227,[6-8周]星期二第3,4节◇(一)301,[9-16周]星期二第3,4节◇(一)301◇选课要求:◇◇","学院路校区");
+////        String ans = Analyze.classTimeAndLocation(" [主任务]姚建军◇[1-17周]星期一第6节◇","学院路校区");
+////        String ans = Analyze.classTimeAndLocation(" 王嘉凯◇[1-16周]◇","学院路校区");
+////        String ans = Analyze.classTimeAndLocation(" 李 波◇[1-9周]星期四第1,2节◇主M302","学院路校区");
+////        String ans = Analyze.classTimeAndLocation(" 罗洪斌◇[1-9周]星期二第1,2节◇(一)301,[1-9周]星期四第3,4节◇(一)301","学院路校区");
+//        String ans = Analyze.classTimeAndLocation(" 杨建磊◇[1-16周]星期一第3,4节◇主319,[11周]星期日第3,4节◇主319,[9周]星期日第3,4节◇主319", "学院路校区");
 //        System.out.println(ans);
 //    }
 //

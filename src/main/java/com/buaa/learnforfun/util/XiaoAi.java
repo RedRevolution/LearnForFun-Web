@@ -34,9 +34,10 @@ public class XiaoAi {
             System.out.println(response);
             Pattern p = Pattern.compile("\"fontColor\":0,\"content\":\"(.*?)\"");
             Matcher m = p.matcher(response);
-            m.find();m.find();
+            m.find();
+            m.find();
             String ans = m.group(1);
-            return ans.substring(0,ans.length()-4);
+            return ans.substring(0, ans.length() - 4);
         } catch (Exception e1) {
             throw new RuntimeException(e1);
         } finally {   // 使用finally块来关闭输入流
@@ -48,6 +49,15 @@ public class XiaoAi {
                 e2.printStackTrace();
             }
         }
+    }
+
+    public static String filter(String message) {
+        return message.replaceAll("\\\\u", "")
+                .replaceAll("003c", "")
+                .replaceAll("\\\\r", "")
+                .replaceAll("\\\\n", "")
+                .replaceAll("\\\\t", "")
+                .replaceAll("小i机器人", "小趣");
     }
 
 }

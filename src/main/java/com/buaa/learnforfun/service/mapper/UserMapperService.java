@@ -20,14 +20,15 @@ public class UserMapperService {
 
     public List<User> find(User template) {
         UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
         if (template.getUserId() != null) {
-            example.or().andUserIdEqualTo(template.getUserId());
+            criteria.andUserIdEqualTo(template.getUserId());
         }
         if (template.getUserName() != null) {
-            example.or().andUserNameEqualTo(template.getUserName());
+            criteria.andUserNameEqualTo(template.getUserName());
         }
         if (template.getOpenId() != null) {
-            example.or().andOpenIdEqualTo(template.getOpenId());
+            criteria.andOpenIdEqualTo(template.getOpenId());
         }
         return userMapper.selectByExample(example);
     }
