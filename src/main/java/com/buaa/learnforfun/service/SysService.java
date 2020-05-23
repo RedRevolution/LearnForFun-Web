@@ -85,4 +85,9 @@ public class SysService {
         return chatbotMapperService.find();
     }
 
+    //后台查询机器人预设字段
+    public List<Chatbot> findChatbot(String ask) {
+        return chatbotMapperService.find(ask);
+    }
+
 }
