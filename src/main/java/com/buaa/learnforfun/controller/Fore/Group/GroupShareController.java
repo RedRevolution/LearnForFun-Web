@@ -1,6 +1,8 @@
 package com.buaa.learnforfun.controller.Fore.Group;
 
 import com.buaa.learnforfun.controller.BaseController;
+import com.buaa.learnforfun.dto.JsonData;
+import com.buaa.learnforfun.dto.PageResult;
 import com.buaa.learnforfun.entity.Share;
 import com.buaa.learnforfun.entity.ShareComment;
 import io.swagger.annotations.ApiImplicitParam;
@@ -36,6 +38,13 @@ public class GroupShareController extends BaseController {
     @GetMapping("{groupId}")
     public List<Share> getShareById(@PathVariable String groupId) {
         return shareService.listShare(groupId);
+    }
+
+
+    @GetMapping("/listPage")
+    public PageResult listPage(String groupId){
+        List<Share> shares = shareService.listShare(groupId);
+        return new PageResult(shares.size(),shares);
     }
 
     /**
@@ -105,6 +114,13 @@ public class GroupShareController extends BaseController {
     @GetMapping("delete/{shareId}")
     public String deleteShare(@PathVariable String shareId) {
         return shareService.deleteShare(shareId);
+    }
+
+
+    @PostMapping("/remove")
+    public JsonData removeShare(String shareId){
+        shareService.deleteShare(shareId);
+        return JsonData.success();
     }
 
     /**

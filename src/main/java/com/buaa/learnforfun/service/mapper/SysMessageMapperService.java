@@ -42,4 +42,12 @@ public class SysMessageMapperService {
         sysMessageMapper.updateByPrimaryKeySelective(sysMessage);
     }
 
+//    public List<SysMessage> find(SysMessage template) {
+//        SysMessageExample example = new SysMessageExample();
+//        if (template.getUserId() != null) {
+//            example.or().andUserIdEqualTo(template.getUserId());
+//        }
+//        return sysMessageMapper.selectByExample(example);
+//    }
+
 }

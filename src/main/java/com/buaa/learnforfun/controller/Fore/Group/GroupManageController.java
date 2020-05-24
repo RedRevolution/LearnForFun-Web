@@ -1,6 +1,8 @@
 package com.buaa.learnforfun.controller.Fore.Group;
 
 import com.buaa.learnforfun.controller.BaseController;
+import com.buaa.learnforfun.dto.JsonData;
+import com.buaa.learnforfun.dto.PageResult;
 import com.buaa.learnforfun.entity.Group;
 import com.buaa.learnforfun.entity.UserGroup;
 import io.swagger.annotations.ApiImplicitParam;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +39,12 @@ public class GroupManageController extends BaseController {
     @GetMapping("{groupId}")
     public Group getGroupInfoById(@PathVariable String groupId) {
         return groupService.getGroupInfo(groupId);
+    }
+
+    @GetMapping("/listPage")
+    public PageResult listPage(){
+        List<Group> groups = groupService.getAllGroupInfo();
+        return new PageResult(groups.size(),groups);
     }
 
     /**
@@ -70,6 +79,15 @@ public class GroupManageController extends BaseController {
         return groupService.getGroupMember(groupId);
     }
 
+    @GetMapping("/member")
+    public PageResult listPage(String groupId){
+        List<UserGroup> userGroups =new ArrayList<>();
+        if(!"".equals(groupId)){
+            userGroups = groupService.getGroupMember(groupId);
+        }
+        return new PageResult(userGroups.size(),userGroups);
+    }
+
     /**
      * 查询群组成员权限
      *
@@ -99,6 +117,12 @@ public class GroupManageController extends BaseController {
         return groupService.isAdministrator(groupId, userId);
     }
 
+    @PostMapping("/authority")
+    public JsonData authority(String groupId,String userId,Boolean isAdmin){
+        groupService.modifyPri(groupId, userId,isAdmin);
+        return JsonData.success();
+    }
+
     /**
      * 添加群成员*
      *
@@ -123,6 +147,15 @@ public class GroupManageController extends BaseController {
     @PostMapping("member/add")
     public String addGroupMemberById(@RequestBody UserGroup userGroup) {
         return groupService.addGroupMember(userGroup);
+    }
+
+    @PostMapping("/memberAdd")
+    public JsonData memberAdd(UserGroup userGroup){
+        String result = groupService.addGroupMember(userGroup);
+        if("exist".equals(result)){
+            return JsonData.fail("该群组成员已存在");
+        }
+        return JsonData.success();
     }
 
     /**
@@ -152,6 +185,13 @@ public class GroupManageController extends BaseController {
         return groupService.delelteGroupMember(groupId, userId);
     }
 
+
+    @PostMapping("/member/remove")
+    public JsonData removMember(String groupId,String userId){
+        groupService.delelteGroupMember(groupId, userId);
+        return JsonData.success();
+    }
+
     /**
      * 解散群组
      *
@@ -178,4 +218,9 @@ public class GroupManageController extends BaseController {
         return groupService.dismissGroup(groupId);
     }
 
+    @PostMapping("/dismiss")
+    public JsonData dismissGroup(String groupId){
+        groupService.dismissGroup(groupId);
+        return JsonData.success();
+    }
 }

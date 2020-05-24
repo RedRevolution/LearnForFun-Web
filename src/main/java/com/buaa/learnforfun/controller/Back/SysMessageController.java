@@ -1,46 +1,57 @@
-//package com.buaa.learnforfun.controller.Back;
-//
-//import com.buaa.learnforfun.controller.BaseController;
-//import com.buaa.learnforfun.entity.SysMessage;
-//import io.swagger.annotations.ApiImplicitParam;
-//import io.swagger.annotations.ApiImplicitParams;
-//import io.swagger.annotations.ApiOperation;
-//import org.springframework.web.bind.annotation.*;
-//
-///**
-// * 系统消息推送控制器
-// */
-//@RestController
-//@RequestMapping("/admin/sysmessage")
-//public class SysMessageController extends BaseController {
-//
-//    /**
-//     * 查看系统消息
-//     *
-//     * @param sysMessageId
-//     * @return
-//     */
-//    @ApiOperation(
-//            value = "查看系统消息")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "sysMessageId", value = "系统消息ID", required = true, dataType = "string"),
-//    })
-//    @GetMapping("{sysMessageId}")
-//    public SysMessage getSysMessageById(@PathVariable String sysMessageId) {
-//        return null;
-//    }
-//
-//    /**
-//     * 发布/修改系统消息
-//     *
-//     * @param sysMessage
-//     * @return
-//     */
-//    @ApiOperation(
-//            value = "发布/修改系统消息")
-//    @PostMapping("")
-//    public String announceSysMessage(@RequestBody SysMessage sysMessage) {
-//        return null;
-//    }
-//
-//}
+package com.buaa.learnforfun.controller.Back;
+
+import com.buaa.learnforfun.controller.BaseController;
+import com.buaa.learnforfun.dto.JsonData;
+import com.buaa.learnforfun.dto.PageResult;
+import com.buaa.learnforfun.entity.SysMessage;
+import com.buaa.learnforfun.service.SysService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/admin/sysmessage")
+public class SysMessageController extends BaseController {
+
+
+    @Autowired
+    private SysService sysService;
+
+    /**
+     * 查看系统消息
+     *
+     * @param
+     * @return
+     */
+    @GetMapping
+    @ResponseBody
+    public PageResult listPage() {
+        List<SysMessage> sysMessages = sysService.getAllUsrMessage();
+        return new PageResult(sysMessages.size(), sysMessages);
+    }
+
+    /**
+     * 发布/修改系统消息
+     *
+     * @param
+     * @return
+     */
+    @PostMapping
+    @ResponseBody
+    public JsonData save(String content) {
+        sysService.releaseMessage(content);
+        return JsonData.success();
+    }
+
+    @PostMapping("/replyToUser")
+    @ResponseBody
+    public JsonData replyToUser(String userId,String reply){
+        sysService.replyToUser(userId,reply);
+        return JsonData.success();
+    }
+}

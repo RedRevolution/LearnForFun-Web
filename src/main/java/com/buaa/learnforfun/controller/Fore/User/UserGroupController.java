@@ -1,6 +1,8 @@
 package com.buaa.learnforfun.controller.Fore.User;
 
 import com.buaa.learnforfun.controller.BaseController;
+import com.buaa.learnforfun.dto.JsonData;
+import com.buaa.learnforfun.dto.PageResult;
 import com.buaa.learnforfun.entity.Group;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -46,6 +48,12 @@ public class UserGroupController extends BaseController {
         return userGroupService.getUserGroupById(userId);
     }
 
+    @GetMapping("/listPage")
+    public PageResult listPage(String userId){
+        List<Group> groups = userGroupService.getUserGroupById(userId);
+        return new PageResult(groups.size(),groups);
+    }
+
     /**
      * 用户创建群组
      *
@@ -72,6 +80,12 @@ public class UserGroupController extends BaseController {
     public String createGroup(@RequestBody Group group) {
         Group temp = userGroupService.createGroup(group);
         return temp == null ? "failure" : "success";
+    }
+
+    @PostMapping("/save")
+    public JsonData save(Group group){
+        userGroupService.createGroup(group);
+        return JsonData.success();
     }
 
     /**
@@ -121,6 +135,15 @@ public class UserGroupController extends BaseController {
         return userGroupService.joinGroup(groupId, userId);
     }
 
+    @PostMapping("/join")
+    public JsonData join(String groupId, String userId){
+        String result = userGroupService.joinGroup(groupId, userId);
+        if("exist".equals(result)){
+            return JsonData.fail("该群组成员已存在");
+        }
+        return JsonData.success();
+    }
+
     /**
      * 用户退出群组
      *
@@ -147,4 +170,9 @@ public class UserGroupController extends BaseController {
     }
 
 
+    @PostMapping("/exit")
+    public JsonData exit(String groupId, String userId){
+        userGroupService.exitGroup(groupId, userId);
+        return JsonData.success();
+    }
 }

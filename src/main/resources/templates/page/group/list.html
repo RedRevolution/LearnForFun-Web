@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-warning icon"></i>群组管理</div>
+                            <div class="layui-card-body">
+<!--                                <button id="addGroup" type="button" class="layui-btn layui-btn-normal"><i-->
+<!--                                        class="layui-icon layui-icon-addition"></i> 创建群组-->
+<!--                                </button>-->
+                                <table class="layui-hide" id="groupTable" lay-filter="groupTable"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>群组成员</div>
+                            <div class="layui-card-body">
+                                <table class="layui-hide" id="groupUserTable" lay-filter="groupUserTable"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>群组分享</div>
+                            <div class="layui-card-body">
+                                <table class="layui-hide" id="groupShareTable" lay-filter="groupShareTable"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/html" id="groupBar">
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="addUser">添加成员</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="dismissGroup">解散群组</a>
+        </script>
+
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="authority">设为管理</a>
+        </script>
+
+        <script type="text/html" id="shareTableBar">
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+    </div>
+</div>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        var userId = 1;
+        table.render({
+            elem: '#groupTable',
+            url: '/api/group/listPage',
+            where: {
+                userId: userId
+            },
+            height: 'full-552',
+            cols: [
+                [
+                    {field: 'groupId', title: '群组ID'},
+                    {field: 'groupName', title: '群组名称'},
+                    {field: 'courseCode', title: '课程号'},
+                    {field: 'groupOwnerName', title: '群主'},
+                    {title: '操作', minWidth: 150, toolbar: '#groupBar', align: "center"}
+                ]
+            ],
+            page: false,
+            skin: 'line'
+        });
+
+        var groupId = '';
+        console.info("1111");
+        table.on('row(groupTable)', function (obj) {
+            this.groupId = obj.data.groupId;
+            table.reload('groupUserTable', {
+                where: {
+                    groupId: obj.data.groupId
+                }
+            });
+
+            table.reload('groupShareTable', {
+                where: {
+                    groupId: obj.data.groupId
+                }
+            });
+        });
+
+        table.on('tool(groupTable)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'dismissGroup') {
+                layer.confirm('确定解散群组吗？', function (index) {
+                    $.post('/api/group/dismiss',
+                        {
+                            groupId: data.groupId
+                        },
+                        function (result) {
+                            if (result.ret) {
+                                layer.close(index);
+                                table.reload('groupTable', {}, 'data');
+                                table.reload('groupUserTable', {
+                                    where: {
+                                        groupId: this.groupId
+                                    }
+                                });
+                            }
+                        });
+
+                });
+            }
+            if (obj.event === 'addUser') {
+                var index = layer.open({
+                    title: '添加群组成员',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: '/page/groupUserAdd?groupId=' + data.groupId,
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            }
+        });
+
+
+        table.render({
+            elem: '#groupUserTable',
+            url: '/api/group/member',
+            where: {
+                groupId: groupId
+            },
+            height: 'full-552',
+            cols: [
+                [
+                    {
+                        field: 'userId', title: '群成员ID'
+                    },
+                    {
+                        field: 'userName', title: '姓名'
+                    },
+                    {
+                        field: 'isAdministrator', title: '是否为管理员', templet: function (data) {
+                            if (data.isAdministrator) {
+                                return '是';
+                            } else {
+                                return '否';
+                            }
+                        }
+                    },
+                    {
+                        title: '操作', minWidth: 150, align: "center", templet: function (data) {
+                            var html = '<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>';
+                            if (!data.isAdministrator) {
+                                html += '<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="authority">设为管理员</a>';
+                            }else{
+                                html += '<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="cancelAuthority">取消管理员</a>';
+                            }
+                            return html;
+                        }
+                    }
+                ]
+            ],
+            page: false,
+            skin: 'line'
+        });
+
+        table.on('tool(groupUserTable)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'delete') {
+                layer.confirm('确定删除群成员吗？', function (index) {
+                    $.post('/api/group/member/remove',
+                        {
+                            groupId: data.groupId,
+                            userId: data.userId
+                        }, function (result) {
+                            if (result.ret) {
+                                layer.close(index);
+                                table.reload('groupUserTable', {
+                                    where: {
+                                        groupId: this.groupId
+                                    }
+                                });
+                            }
+                        });
+
+                });
+            }
+            if (obj.event === 'authority') {
+                layer.confirm('确定设为管理员吗？', function (index) {
+                    $.post('/api/group/authority',
+                        {
+                            groupId: data.groupId,
+                            userId: data.userId,
+                            isAdmin :true
+                        }, function (result) {
+                            if (result.ret) {
+                                layer.close(index);
+                                table.reload('groupUserTable', {
+                                    where: {
+                                        groupId: this.groupId
+                                    }
+                                });
+                            }
+                        });
+
+                });
+            }
+            if (obj.event === 'cancelAuthority') {
+                layer.confirm('确定取消管理员吗？', function (index) {
+                    $.post('/api/group/authority',
+                        {
+                            groupId: data.groupId,
+                            userId: data.userId,
+                            isAdmin :false
+                        }, function (result) {
+                            if (result.ret) {
+                                layer.close(index);
+                                table.reload('groupUserTable', {
+                                    where: {
+                                        groupId: this.groupId
+                                    }
+                                });
+                            }
+                        });
+
+                });
+            }
+        });
+
+        // $("#addGroup").click(function () {
+        //     var index = layer.open({
+        //         title: '创建群组',
+        //         type: 2,
+        //         shade: 0.2,
+        //         maxmin: true,
+        //         shadeClose: true,
+        //         area: ['100%', '100%'],
+        //         content: '/page/groupAdd',
+        //     });
+        //     $(window).on("resize", function () {
+        //         layer.full(index);
+        //     });
+        // });
+
+        table.render({
+            elem: '#groupShareTable',
+            url: '/api/group/share/listPage',
+            where: {
+                groupId: groupId
+            },
+            height: 'full-552',
+            cols: [
+                [
+                    {
+                        field: 'userId', title: '分享人ID'
+                    },{
+                        field: 'userName', title: '分享人姓名'
+                    },
+                    {
+                        field: 'topic', title: '分享主题'
+                    },
+                    {title: '操作', minWidth: 150, toolbar: '#shareTableBar', align: "center"}
+                ]
+            ],
+            page: false,
+            skin: 'line'
+        });
+
+        table.on('tool(groupShareTable)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'delete') {
+                layer.confirm('确定删除群分享吗？', function (index) {
+                    $.post('/api/group/share/remove',
+                        {
+                            groupId: data.groupId
+                        }, function (result) {
+                            if (result.ret) {
+                                layer.close(index);
+                                table.reload('groupShareTable', {
+                                    where: {
+                                        groupId: this.groupId
+                                    }
+                                });
+                            }
+                        });
+
+                });
+            }
+        });
+
+
+        window.refresh = function () {
+            table.reload('groupTable', {}, 'data');
+        }
+
+        window.refreshUser = function () {
+            table.reload('groupUserTable', {
+                where: {
+                    groupId: this.groupId
+                }
+            });
+        }
+
+    });
+</script>
+
+</body>
+</html>

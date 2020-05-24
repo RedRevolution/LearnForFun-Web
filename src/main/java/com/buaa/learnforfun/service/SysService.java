@@ -1,6 +1,7 @@
 package com.buaa.learnforfun.service;
 
 import com.buaa.learnforfun.entity.Chatbot;
+import com.buaa.learnforfun.entity.Share;
 import com.buaa.learnforfun.entity.SysMessage;
 import com.buaa.learnforfun.service.mapper.ChatbotMapperService;
 import com.buaa.learnforfun.service.mapper.SysMessageMapperService;
@@ -39,7 +40,7 @@ public class SysService {
     }
 
     //后台发布系统消息
-    public void releaseSysMessage(String content) {
+    public void releaseMessage(String content) {
         SysMessage sysMessage = new SysMessage();
         sysMessage.setUserId("00000000");
         sysMessage.setContent(content);
@@ -88,6 +89,14 @@ public class SysService {
     //后台查询机器人预设字段
     public List<Chatbot> findChatbot(String ask) {
         return chatbotMapperService.find(ask);
+    }
+
+    //删除一条预设字段
+    public String deleteChatbot(Long chatbotId) {
+        Chatbot chatbot = new Chatbot();
+        chatbot.setId(chatbotId);
+        chatbotMapperService.delete(chatbot);
+        return "success";
     }
 
 }

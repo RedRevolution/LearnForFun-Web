@@ -1,0 +1,31 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/home"
+  },
+  "logoInfo": {
+    "title": "趣学管理端",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "群组管理",
+      "icon": "fa fa-lemon-o",
+      "href": "page/group",
+      "target": "_self"
+    },
+    {
+      "title": "消息管理",
+      "icon": "fa fa-lemon-o",
+      "href": "page/message",
+      "target": "_self"
+    },
+    {
+      "title": "预设字段",
+      "icon": "fa fa-lemon-o",
+      "href": "page/chatbot",
+      "target": "_self"
+    }
+  ]
+}
